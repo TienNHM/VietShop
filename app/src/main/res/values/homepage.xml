@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btnMarket" translatable="true">Đi chợ</string>
+    <string name="btnHotDeal" translatable="true">Hot deal</string>
+    <string name="btnCombo" translatable="true">Combo</string>
+    <string name="btnBestSale" translatable="true">15k</string>
+    <string name="btnVagetable" translatable="true">Hữu cơ</string>
+    <string name="btnTakeAway" translatable="true">Nhập khẩu</string>
+    <string name="btnFreshFood" translatable="true">Đồ tươi</string>
+    <string name="btnFruit" translatable="true">Trái cây</string>
+    <string name="btnChild" translatable="true">Trẻ em</string>
+    <string name="btnDrink" translatable="true">Nước uống</string>
+    <string name="btnVideo" translatable="true">Video</string>
+    <string name="btnNews" translatable="true">Tin tức</string>
+    <string name="txtSearch">Tìm sản phẩm, công thức...</string>
+</resources>

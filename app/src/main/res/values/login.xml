@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txtPassword">Password</string>
+    <string name="txtUsername">Username</string>
+    <string name="txtLoginForm">Login</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnForgotPassword">Forgot password?</string>
+    <string name="txtSignup">Sign up</string>
+    <string name="btnFacebook" translatable="false">Facebook</string>
+    <string name="btnGoogle" translatable="false">Google</string>
+    <string name="btnZalo" translatable="false">Zalo</string>
+    <string name="btnSMS">Login via SMS</string>
+    <string name="txtOr">Or</string>
+    <string name="txtDontHaveAccount">Don\'t have an account yet?</string>
+    <string name="txtLoginWith">Login with</string>
+    <string name="txtForgotPassword">Forgot password</string>
+    <string name="btnGetPassword">Get a password</string>
+</resources>
