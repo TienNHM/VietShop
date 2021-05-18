@@ -23,7 +23,7 @@
         android:layout_width="148dp"
         android:layout_height="148dp"
         android:layout_gravity="center"
-        android:background="@drawable/ic_baseline_person_24"
+        android:background="@drawable/account"
         android:scaleType="matrix" />
 
     <Button

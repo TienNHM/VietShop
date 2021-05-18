@@ -21,12 +21,9 @@
     <string name="txtForgotPassword">Quên mật khẩu</string>
     <string name="btnGetPassword">Lấy lại mật khẩu</string>
     <string name="notifications">Thông báo</string>
-    <string name="notificationsDescription">Thông báo gần đây</string>
     <string name="account">Tài khoản</string>
-    <string name="accountDescription">Quản lý tài khoản</string>
     <string name="home">Trang chủ</string>
     <string name="search">Tìm kiếm</string>
-    <string name="searchDescription">Tìm kiếm</string>
     <string name="prompt_password">Mật khẩu</string>
     <string name="action_sign_in">Đăng nhập hoặc đăng ký</string>
     <string name="action_sign_in_short">Đăng nhập</string>
