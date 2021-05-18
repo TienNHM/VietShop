@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
@@ -21,17 +21,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_toStartOf="@+id/expanded_menu_item"
-        android:layout_toEndOf="@+id/menu_item_img"
         android:gravity="center_vertical"
+        android:layout_weight="10"
         android:textSize="18sp" />
-
-    <ImageButton
-        android:id="@+id/expanded_menu_item"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/chevron_right"
-        android:textSize="10sp" />
-</RelativeLayout>
+</LinearLayout>

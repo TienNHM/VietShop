@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,9 +38,6 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ItemMenu itemMenu = lstItemMenu.get(position);
 
-        ImageButton expanded_menu_item = holder.expanded_menu_item;
-        expanded_menu_item.setBackground(itemMenu.getBackground());
-
         TextView menu_item_title = holder.menu_item_title;
         menu_item_title.setText(itemMenu.getTitle());
 
@@ -60,7 +56,6 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageButton expanded_menu_item;
         public TextView menu_item_title;
         public ImageView menu_item_img;
 
@@ -69,7 +64,6 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
 
             menu_item_img = itemView.findViewById(R.id.menu_item_img);
             menu_item_title = itemView.findViewById(R.id.menu_item_title);
-            expanded_menu_item = itemView.findViewById(R.id.expanded_menu_item);
         }
     }
 

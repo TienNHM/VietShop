@@ -77,14 +77,14 @@ public class AccountFragment extends Fragment {
         ArrayList<Drawable> lstItemMenuImg = new ArrayList<>();
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.shopping_cart));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.discount));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.account));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.eye));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.facebook));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.wallet));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.history));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.add));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.resource_new));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.gmail));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.vagetable));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.cancel));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.translation));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.messaging));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.settings));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.shutdown));
 
         List<ItemMenu> lstItemMenu = ItemMenu.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
 
