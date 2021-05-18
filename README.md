@@ -1,6 +1,5 @@
 # VIETSHOP
 
-[![HitCount](http://hits.dwyl.com/TienNHM/VietShop.svg)](http://hits.dwyl.com/TienNHM/VietShop)
 [![GitHub contributors](https://img.shields.io/github/contributors/TienNHM/VietShop)](https://github.com/TienNHM/VietShop/graphs/contributors)
 [![GitHub issues](https://img.shields.io/github/issues/TienNHM/VietShop?color=red)](https://github.com/TienNHM/VietShop/issues)
 ![GitHub top language](https://img.shields.io/github/languages/top/TienNHM/VietShop?color=cyan)
