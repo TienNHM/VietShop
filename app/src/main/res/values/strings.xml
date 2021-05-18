@@ -14,5 +14,49 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
-    <string name="pay">Pay</string>
+    <string name="cart">Cart</string>
+
+    <!-- Login -->
+    <string name="txtPassword">Password</string>
+    <string name="txtUsername">Username</string>
+    <string name="txtLoginForm">Login</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnForgotPassword">Forgot password?</string>
+    <string name="txtSignup">Sign up</string>
+    <string name="btnFacebook" translatable="false">Facebook</string>
+    <string name="btnGoogle" translatable="false">Google</string>
+    <string name="btnZalo" translatable="false">Zalo</string>
+    <string name="btnSMS">Login via SMS</string>
+    <string name="txtOr">Or</string>
+    <string name="txtDontHaveAccount">Don\'t have an account yet?</string>
+    <string name="txtLoginWith">Login with</string>
+    <string name="txtForgotPassword">Forgot password</string>
+    <string name="btnGetPassword">Get a password</string>
+
+    <!-- Homepage -->
+    <string name="btnMarket" translatable="true">Đi chợ</string>
+    <string name="btnHotDeal" translatable="true">Hot deal</string>
+    <string name="btnCombo" translatable="true">Combo</string>
+    <string name="btnBestSale" translatable="true">15k</string>
+    <string name="btnVagetable" translatable="true">Hữu cơ</string>
+    <string name="btnTakeAway" translatable="true">Nhập khẩu</string>
+    <string name="btnFreshFood" translatable="true">Đồ tươi</string>
+    <string name="btnFruit" translatable="true">Trái cây</string>
+    <string name="btnChild" translatable="true">Trẻ em</string>
+    <string name="btnDrink" translatable="true">Nước uống</string>
+    <string name="btnVideo" translatable="true">Video</string>
+    <string name="btnNews" translatable="true">Tin tức</string>
+    <string name="txtSearch">Tìm sản phẩm, công thức...</string>
+
+    <!-- Sign up -->
+    <string name="txtSignupForm">Sign up</string>
+    <string name="txtFullname">Fullname</string>
+    <string name="txtEmail" translatable="false">Email</string>
+    <string name="txtPhone">Phone number</string>
+    <string name="btnSignup">Sign up</string>
+    <string name="txtSignin">Sign in</string>
+    <string name="txtHaveAccount">Already have an account?</string>
+    <string name="txtConfirmPassword">Confirm password</string>
+    <string name="txtChooseImage">Choose image</string>
+
 </resources>

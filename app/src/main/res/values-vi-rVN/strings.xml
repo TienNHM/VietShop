@@ -31,5 +31,5 @@
     <string name="invalid_username">Tên người dùng không hợp lệ</string>
     <string name="invalid_password">Mật khẩu phải trên 5 kí tự</string>
     <string name="login_failed">Đăng nhập thất bại</string>
-    <string name="pay">Thanh toán</string>
+    <string name="cart">Giỏ hàng</string>
 </resources>
