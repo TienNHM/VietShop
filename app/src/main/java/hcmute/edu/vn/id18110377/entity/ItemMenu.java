@@ -3,6 +3,7 @@ package hcmute.edu.vn.id18110377.entity;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemMenu {
     private String title;
@@ -23,10 +24,8 @@ public class ItemMenu {
         new ItemMenu(title, img);
     }
 
-    public static ArrayList<ItemMenu> createListMenuItem(ArrayList<String> lstTitle, ArrayList<Drawable> lstImg, int num) {
-        if (num <= 0) {
-            num = lstImg.size() < lstTitle.size() ? lstImg.size() : lstTitle.size();
-        }
+    public static ArrayList<ItemMenu> createListMenuItem(List<String> lstTitle, List<Drawable> lstImg) {
+        int num = lstImg.size() < lstTitle.size() ? lstImg.size() : lstTitle.size();
         ArrayList<ItemMenu> menu = new ArrayList<ItemMenu>();
         for (int i = 0; i < num; i++) {
             menu.add(new ItemMenu(lstTitle.get(i), lstImg.get(i)));

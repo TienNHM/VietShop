@@ -1,6 +1,7 @@
 package hcmute.edu.vn.id18110377.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.ItemMenu;
 
 public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHolder> {
-    private ArrayList<ItemMenu> lstItemMenu;
+    private List<ItemMenu> lstItemMenu;
 
-    public ItemMenuAdapter(ArrayList<ItemMenu> lstItemMenu) {
+    public ItemMenuAdapter(List<ItemMenu> lstItemMenu) {
         this.lstItemMenu = lstItemMenu;
     }
 
-    public ArrayList<ItemMenu> getLstItemMenu() {
+    public List<ItemMenu> getLstItemMenu() {
         return lstItemMenu;
     }
 
@@ -54,6 +56,7 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
 
     @Override
     public int getItemCount() {
+        Log.i("menu size", Integer.toString(lstItemMenu.size()));
         return lstItemMenu.size();
     }
 
