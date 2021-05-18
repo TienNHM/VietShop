@@ -25,13 +25,25 @@ public class MainActivity extends AppCompatActivity {
             onNavItemSelectedListener = item -> {
         Fragment fragment;
         switch (item.getItemId()) {
+            case R.id.home:
+                fragment = new HomeFragment();
+                loadFragment(fragment);
+                return true;
+            case R.id.cart:
+                fragment = new CartFragment();
+                loadFragment(fragment);
+                return true;
             case R.id.account:
                 fragment = new AccountFragment();
                 loadFragment(fragment);
                 return true;
             case R.id.notifications:
+                fragment = new NotificationFragment();
+                loadFragment(fragment);
                 return true;
             case R.id.search:
+                fragment = new SearchFragment();
+                loadFragment(fragment);
                 return true;
         }
         return false;
