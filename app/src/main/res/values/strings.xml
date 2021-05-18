@@ -69,10 +69,10 @@
         <item>Số dư tài khoản</item>
         <item>Lịch sử hóa đơn</item>
         <item>Giới thiệu bạn bè</item>
-        <item>Cài đặt tài khoản</item>
-        <item>Đăng xuất</item>
         <item>Chọn ngôn ngữ</item>
         <item>Liên hệ hỗ trợ</item>
+        <item>Cài đặt tài khoản</item>
+        <item>Đăng xuất</item>
     </string-array>
 
 </resources>
