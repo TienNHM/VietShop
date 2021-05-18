@@ -24,12 +24,13 @@ public class ItemMenu {
         new ItemMenu(title, img);
     }
 
-    public static ArrayList<ItemMenu> createListMenuItem(List<String> lstTitle, List<Drawable> lstImg) {
+    public static List<ItemMenu> createListMenuItem(List<String> lstTitle, List<Drawable> lstImg) {
         int num = lstImg.size() < lstTitle.size() ? lstImg.size() : lstTitle.size();
-        ArrayList<ItemMenu> menu = new ArrayList<ItemMenu>();
+        List<ItemMenu> menu = new ArrayList<ItemMenu>();
         for (int i = 0; i < num; i++) {
             menu.add(new ItemMenu(lstTitle.get(i), lstImg.get(i)));
         }
+
         return menu;
     }
 
@@ -55,5 +56,14 @@ public class ItemMenu {
 
     public void setBackground(Drawable background) {
         this.background = background;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemMenu{" +
+                "title='" + title + '\'' +
+                ", img=" + img +
+                ", background=" + background +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,6 +64,7 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,13 +75,19 @@ public class AccountFragment extends Fragment {
         List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
 
         ArrayList<Drawable> lstItemMenuImg = new ArrayList<>();
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.shopping_cart));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.discount));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.account));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.eye));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.facebook));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.add));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.resource_new));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.gmail));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.vagetable));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.cancel));
 
         List<ItemMenu> lstItemMenu = ItemMenu.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
+
         ItemMenuAdapter adapter = new ItemMenuAdapter(lstItemMenu);
 
         RecyclerView rv_account = view.findViewById(R.id.rv_account);
