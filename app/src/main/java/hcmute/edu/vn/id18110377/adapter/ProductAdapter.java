@@ -2,12 +2,15 @@ package hcmute.edu.vn.id18110377.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -42,10 +45,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageButton ibtnItem;
+        TextView tvTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            ibtnItem = itemView.findViewById(R.id.ibtnItem);
         }
     }
 }
