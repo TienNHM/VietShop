@@ -6,7 +6,7 @@
     android:background="@color/light_mode"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context="hcmute.edu.vn.id18110377.MainActivity">
+    tools:context=".SignUp">
 
     <TextView
         android:id="@+id/textView"
@@ -27,6 +27,7 @@
         android:scaleType="matrix" />
 
     <Button
+        android:id="@+id/btnTakePhoto"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
