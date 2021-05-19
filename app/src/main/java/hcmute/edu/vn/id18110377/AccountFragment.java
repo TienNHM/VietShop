@@ -1,11 +1,22 @@
 package hcmute.edu.vn.id18110377;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import hcmute.edu.vn.id18110377.adapter.ItemMenuAdapter;
+import hcmute.edu.vn.id18110377.entity.ItemMenu;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -13,7 +24,6 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class AccountFragment extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -54,10 +64,37 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
+
+        List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
+
+        ArrayList<Drawable> lstItemMenuImg = new ArrayList<>();
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.shopping_cart));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.discount));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.wallet));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.history));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.add));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.translation));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.messaging));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.settings));
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.shutdown));
+
+        List<ItemMenu> lstItemMenu = ItemMenu.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
+
+        ItemMenuAdapter adapter = new ItemMenuAdapter(lstItemMenu);
+
+        RecyclerView rv_account = view.findViewById(R.id.rv_account);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rv_account.setLayoutManager(layoutManager);
+        rv_account.setAdapter(adapter);
+
+        return view;
     }
 }
