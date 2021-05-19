@@ -3,9 +3,6 @@ package hcmute.edu.vn.id18110377;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -48,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     };
-    Spinner spinner;
-    String[] location = new String[]{"TP.HCM", "Bình Dương", "Đồng Nai", "Long An", "BR-VT"};
-    ArrayAdapter<String> adapter;
+
     WormDotsIndicator wormDotsIndicator;
     ViewPager2 viewPager;
     FragmentStateAdapter fragmentStateAdapter;
@@ -65,25 +60,13 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView = this.findViewById(R.id.bottom_navbar);
         navigationView.setOnNavigationItemSelectedListener(onNavItemSelectedListener);
 
-        spinner = this.findViewById(R.id.spiner);
-        adapter = new ArrayAdapter<>(this, R.layout.dropdown_spinner, location);
-        spinner.setAdapter(adapter);
 
-        ImageButton acc = this.findViewById(R.id.account);
-        acc.setOnClickListener(v -> {
-            Fragment fragment = new AccountFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_activity, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        });
         /*img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_food, null));
         img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg, null));
         img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.food_background, null));
-         */
 
-        //wormDotsIndicator = (WormDotsIndicator) findViewById(R.id.worm_dots_indicator);
-        /*viewPager = findViewById(R.id.view_pager);
+        wormDotsIndicator = (WormDotsIndicator) findViewById(R.id.worm_dots_indicator);
+        viewPager = findViewById(R.id.view_pager);
         fragmentStateAdapter = new FragmentStateAdapter(this) {
             @Override
             public int getItemCount() {

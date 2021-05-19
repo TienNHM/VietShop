@@ -5,9 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
+import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
 
 public class GridViewProductAdapter extends BaseAdapter {
@@ -52,6 +56,36 @@ public class GridViewProductAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        ProductView productView;
+
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.product_item, parent, false);
+
+            productView = new ProductView();
+            productView.ibtnProduct = convertView.findViewById(R.id.ibtnProduct);
+            productView.tv_product_name = convertView.findViewById(R.id.tv_product_name);
+            productView.iv_special_image = convertView.findViewById(R.id.iv_special_image);
+
+            convertView.setTag(productView);
+        } else {
+            productView = (ProductView) convertView.getTag();
+        }
+
+        Product product = productList.get(position);
+        String productName = product.getProductName();
+        int mainImageID = product.getMainImageID();
+        int imgSpecialID = product.getImgSpecialID();
+
+        productView.ibtnProduct.setImageResource(mainImageID);
+        productView.iv_special_image.setImageResource(imgSpecialID);
+        productView.tv_product_name.setText(productName);
+
+        return convertView;
+    }
+
+    private class ProductView {
+        private ImageButton ibtnProduct;
+        private TextView tv_product_name;
+        private ImageView iv_special_image;
     }
 }

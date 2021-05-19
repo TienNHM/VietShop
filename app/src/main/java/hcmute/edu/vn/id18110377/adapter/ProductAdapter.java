@@ -51,7 +51,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ibtnItem = itemView.findViewById(R.id.ibtnItem);
+            ibtnItem = itemView.findViewById(R.id.ibtnProduct);
         }
     }
 }

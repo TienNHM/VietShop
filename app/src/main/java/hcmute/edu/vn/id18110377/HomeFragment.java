@@ -4,8 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import hcmute.edu.vn.id18110377.adapter.GridViewProductAdapter;
+import hcmute.edu.vn.id18110377.entity.Product;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,12 +61,30 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        String[] location = new String[]{"TP.HCM", "Bình Dương", "Đồng Nai", "Long An", "BR-VT"};
+        Spinner spinner = view.findViewById(R.id.spiner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_spinner, location);
+        spinner.setAdapter(adapter);
+
+        List<Product> productList = new ArrayList<>();
+        productList.add(new Product(0, "Beer", R.drawable.beer, R.drawable.sale));
+        productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
+        productList.add(new Product(2, "Juice", R.drawable.orange_juice));
+        productList.add(new Product(3, "", R.drawable.cocktail, R.drawable.sale));
+
+        GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
+        GridView gv_product = view.findViewById(R.id.gv_product);
+        gv_product.setAdapter(gv_adapter);
+
+        return view;
     }
 }
