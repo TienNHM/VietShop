@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="40dp"
             android:background="@color/teal_200" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_width="48dp"
             android:layout_height="36sp"
             android:layout_gravity="right"
-            android:background="@color/theme_color" />
+            android:background="@drawable/sale" />
 
     </FrameLayout>
 

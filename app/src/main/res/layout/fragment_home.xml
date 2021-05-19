@@ -64,6 +64,13 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <GridView
+            android:id="@+id/gv_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </GridView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_item"
             android:layout_width="match_parent"
