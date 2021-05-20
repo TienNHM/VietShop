@@ -21,12 +21,12 @@
 
             <Spinner
                 android:id="@+id/spiner"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_margin="10dp"
                 android:dropDownSelector="@color/light_mode"
                 android:gravity="center"
-                android:popupBackground="#EDCA9999"
+                android:popupBackground="#DCC18A2C"
                 android:spinnerMode="dropdown"
                 android:textAlignment="center"
                 android:tooltipText="Địa chỉ"
