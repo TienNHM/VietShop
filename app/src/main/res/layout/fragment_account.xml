@@ -5,7 +5,7 @@
     android:id="@+id/account_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccountFragment">
+    tools:context=".fragment.AccountFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:text="@string/fullname"
+                    android:text="@string/action_sign_in"
                     android:textColor="@color/light_mode"
                     android:textSize="20sp"
                     android:textStyle="bold" />

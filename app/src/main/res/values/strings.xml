@@ -63,6 +63,7 @@
 
     <!-- account menu item -->
     <string-array name="account_menu_items">
+        <item>Đăng nhập</item>
         <item>Đơn hàng</item>
         <item>Nhập mã khuyến mãi</item>
         <item>Tài khoản liên kết</item>

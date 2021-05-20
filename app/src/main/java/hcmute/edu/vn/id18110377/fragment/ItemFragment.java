@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377;
+package hcmute.edu.vn.id18110377.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
+
+import hcmute.edu.vn.id18110377.R;
 
 public class ItemFragment extends Fragment {
 
