@@ -56,10 +56,11 @@
     <string name="txtSignin">Sign in</string>
     <string name="txtHaveAccount">Already have an account?</string>
     <string name="txtConfirmPassword">Confirm password</string>
-    <string name="txtChooseImage">Choose image</string>
+    <string name="btnChooseImage">Choose image</string>
     <string name="fullname">Fullname</string>
     <string name="username" translatable="false">\@Username</string>
     <string name="txtSearch">Search</string>
+    <string name="btnTakePhoto">Take a photo</string>
 
     <!-- account menu item -->
     <string-array name="account_menu_items">

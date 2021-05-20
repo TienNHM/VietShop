@@ -26,18 +26,41 @@
         android:background="@drawable/account"
         android:scaleType="matrix" />
 
-    <Button
-        android:id="@+id/btnTakePhoto"
-        android:layout_width="148dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:background="#E64A19"
-        android:gravity="center"
-        android:text="@string/txtChooseImage"
-        android:textColor="#ffffff"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:layout_marginTop="5dp">
+
+        <Button
+            android:id="@+id/btnTakePhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="#E64A19"
+            android:gravity="center"
+            android:text="@string/btnTakePhoto"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnChoosePhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="#D32F2F"
+            android:gravity="center"
+            android:text="@string/btnChooseImage"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/txtFullname"
