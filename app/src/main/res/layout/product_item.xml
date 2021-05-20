@@ -19,6 +19,7 @@
             android:layout_marginHorizontal="4dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
+            android:forceHasOverlappingRendering="true"
             android:scaleType="fitCenter" />
 
         <TextView
@@ -36,7 +37,8 @@
             android:id="@+id/iv_special_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="right" />
+            android:layout_gravity="right"
+            android:alpha="0.5" />
 
     </FrameLayout>
 

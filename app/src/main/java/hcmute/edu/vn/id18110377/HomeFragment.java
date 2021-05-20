@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product(0, "Beer", R.drawable.beer, R.drawable.sale));
+        productList.add(new Product(0, "Beer", R.drawable.milk_bottle, R.drawable.sale));
         productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
         productList.add(new Product(2, "Juice", R.drawable.orange_juice));
         productList.add(new Product(3, "", R.drawable.cocktail, R.drawable.sale));

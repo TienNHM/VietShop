@@ -22,23 +22,23 @@ public class MainActivity extends AppCompatActivity {
             onNavItemSelectedListener = item -> {
         Fragment fragment;
         switch (item.getItemId()) {
-            case R.id.home:
+            case R.id.menuHome:
                 fragment = new HomeFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.cart:
+            case R.id.menuCart:
                 fragment = new CartFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.account:
+            case R.id.menuAccount:
                 fragment = new AccountFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.notifications:
+            case R.id.menuNotifications:
                 fragment = new NotificationFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.search:
+            case R.id.menuSearch:
                 fragment = new SearchFragment();
                 loadFragment(fragment);
                 return true;
@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView = this.findViewById(R.id.bottom_navbar);
         navigationView.setOnNavigationItemSelectedListener(onNavItemSelectedListener);
 
+        if (savedInstanceState == null) {
+            navigationView.setSelectedItemId(R.id.menuHome);
+        }
 
         /*img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_food, null));
         img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg, null));
