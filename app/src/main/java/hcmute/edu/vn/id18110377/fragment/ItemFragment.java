@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377.homepage;
+package hcmute.edu.vn.id18110377.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

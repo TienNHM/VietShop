@@ -16,11 +16,11 @@ import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-import hcmute.edu.vn.id18110377.homepage.AccountFragment;
-import hcmute.edu.vn.id18110377.homepage.CartFragment;
-import hcmute.edu.vn.id18110377.homepage.HomeFragment;
-import hcmute.edu.vn.id18110377.homepage.NotificationFragment;
-import hcmute.edu.vn.id18110377.homepage.SearchFragment;
+import hcmute.edu.vn.id18110377.fragment.AccountFragment;
+import hcmute.edu.vn.id18110377.fragment.CartFragment;
+import hcmute.edu.vn.id18110377.fragment.HomeFragment;
+import hcmute.edu.vn.id18110377.fragment.NotificationFragment;
+import hcmute.edu.vn.id18110377.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
