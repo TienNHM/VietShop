@@ -71,7 +71,7 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
 
             menu_item_img = itemView.findViewById(R.id.menu_item_img);
             menu_item_title = itemView.findViewById(R.id.menu_item_title);
-            menu_item_title.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.i("Click", menu_item_title.getText().toString());
