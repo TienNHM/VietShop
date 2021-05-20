@@ -75,6 +75,7 @@ public class AccountFragment extends Fragment {
         List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
 
         ArrayList<Drawable> lstItemMenuImg = new ArrayList<>();
+        lstItemMenuImg.add(getResources().getDrawable(R.drawable.key));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.shopping_cart));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.discount));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
