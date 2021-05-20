@@ -5,7 +5,7 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
@@ -33,6 +33,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".layout.SignUp"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.Discount"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.Logout"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.SettingsAccount"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.Help"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.ChooseLanguage"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.Cart"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.Wallet"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.BillHistory"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.ShareApp"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".layout.ConnectAccount"
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

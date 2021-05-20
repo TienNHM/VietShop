@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import hcmute.edu.vn.id18110377.R;
 
-public class Discount extends AppCompatActivity {
+public class Cart extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.discount);
+        setContentView(R.layout.fragment_cart);
     }
 }

@@ -5,12 +5,22 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.layout.BillHistory;
+import hcmute.edu.vn.id18110377.layout.Cart;
+import hcmute.edu.vn.id18110377.layout.ChooseLanguage;
+import hcmute.edu.vn.id18110377.layout.ConnectAccount;
+import hcmute.edu.vn.id18110377.layout.Discount;
+import hcmute.edu.vn.id18110377.layout.Help;
+import hcmute.edu.vn.id18110377.layout.Logout;
+import hcmute.edu.vn.id18110377.layout.SettingsAccount;
+import hcmute.edu.vn.id18110377.layout.ShareApp;
+import hcmute.edu.vn.id18110377.layout.SignUp;
+import hcmute.edu.vn.id18110377.layout.Wallet;
 
 public class ItemMenu {
     private String title;
     public static List<String> lstItemMenuTitle;
-    public static HashMap<String, Integer> menuItem;
+    public static HashMap<String, Class> menuItem;
 
     static {
         lstItemMenuTitle = Arrays.asList(
@@ -18,17 +28,17 @@ public class ItemMenu {
                 "Lịch sử hóa đơn", "Giới thiệu bạn bè", "Chọn ngôn ngữ", "Liên hệ hỗ trợ", "Cài đặt tài khoản", "Đăng xuất"
         );
         menuItem = new HashMap<>();
-        menuItem.put("Đăng nhập", R.layout.login);
-        menuItem.put("Đơn hàng", R.layout.fragment_cart);
-        menuItem.put("Nhập mã khuyến mãi", R.layout.discount);
-        menuItem.put("Tài khoản liên kết", R.layout.connect_account);
-        menuItem.put("Số dư tài khoản", R.layout.wallet);
-        menuItem.put("Lịch sử hóa đơn", R.layout.bill_history);
-        menuItem.put("Giới thiệu bạn bè", R.layout.share_app);
-        menuItem.put("Chọn ngôn ngữ", R.layout.choose_language);
-        menuItem.put("Liên hệ hỗ trợ", R.layout.help);
-        menuItem.put("Cài đặt tài khoản", R.layout.settings_account);
-        menuItem.put("Đăng xuất", R.layout.logout);
+        menuItem.put("Đăng nhập", SignUp.class);
+        menuItem.put("Đơn hàng", Cart.class);
+        menuItem.put("Nhập mã khuyến mãi", Discount.class);
+        menuItem.put("Tài khoản liên kết", ConnectAccount.class);
+        menuItem.put("Số dư tài khoản", Wallet.class);
+        menuItem.put("Lịch sử hóa đơn", BillHistory.class);
+        menuItem.put("Giới thiệu bạn bè", ShareApp.class);
+        menuItem.put("Chọn ngôn ngữ", ChooseLanguage.class);
+        menuItem.put("Liên hệ hỗ trợ", Help.class);
+        menuItem.put("Cài đặt tài khoản", SettingsAccount.class);
+        menuItem.put("Đăng xuất", Logout.class);
     }
 
     private Integer leftImageID;
@@ -82,7 +92,7 @@ public class ItemMenu {
         this.bgImageID = bgImageID;
     }
 
-    public static Integer getLayout(String title) {
+    public static Class getLayout(String title) {
         return menuItem.get(title);
     }
 }
