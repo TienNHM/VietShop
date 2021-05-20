@@ -82,7 +82,7 @@ public class ItemMenu {
         this.bgImageID = bgImageID;
     }
 
-    public Integer getLayout(String title) {
+    public static Integer getLayout(String title) {
         return menuItem.get(title);
     }
 }

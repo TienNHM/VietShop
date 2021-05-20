@@ -2,6 +2,7 @@ package hcmute.edu.vn.id18110377.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.ItemMenu;
+import hcmute.edu.vn.id18110377.layout.SignUp;
 
 public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHolder> {
     private List<ItemMenu> lstItemMenu;
@@ -75,7 +77,8 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     Log.i("Click", menu_item_title.getText().toString());
-
+                    int layoutID = ItemMenu.getLayout(menu_item_title.getText().toString());
+                    Intent intent = new Intent(v.getContext(), SignUp.class);
                 }
             });
         }

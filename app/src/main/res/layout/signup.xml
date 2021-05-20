@@ -6,7 +6,7 @@
     android:background="@color/light_mode"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".SignUp">
+    tools:context=".layout.SignUp">
 
     <TextView
         android:id="@+id/textView"
