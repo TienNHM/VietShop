@@ -64,16 +64,7 @@ public class AccountFragment extends Fragment {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
-
-        List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
-
+    private ArrayList<Drawable> createMenuItemImage() {
         ArrayList<Drawable> lstItemMenuImg = new ArrayList<>();
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.key));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.shopping_cart));
@@ -86,9 +77,20 @@ public class AccountFragment extends Fragment {
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.messaging));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.settings));
         lstItemMenuImg.add(getResources().getDrawable(R.drawable.shutdown));
+        return lstItemMenuImg;
+    }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
+
+        List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
+        ArrayList<Drawable> lstItemMenuImg = createMenuItemImage();
         List<ItemMenu> lstItemMenu = ItemMenu.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
-
         ItemMenuAdapter adapter = new ItemMenuAdapter(lstItemMenu);
 
         RecyclerView rv_account = view.findViewById(R.id.rv_account);

@@ -2,6 +2,7 @@ package hcmute.edu.vn.id18110377.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,13 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
         return viewHolder;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemCount() {
+
+        return lstItemMenu == null ? 0 : lstItemMenu.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView menu_item_title;
         public ImageView menu_item_img;
 
@@ -64,11 +71,13 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
 
             menu_item_img = itemView.findViewById(R.id.menu_item_img);
             menu_item_title = itemView.findViewById(R.id.menu_item_title);
-        }
-    }
+            menu_item_title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("Click", menu_item_title.getText().toString());
 
-    @Override
-    public int getItemCount() {
-        return lstItemMenu.size();
+                }
+            });
+        }
     }
 }
