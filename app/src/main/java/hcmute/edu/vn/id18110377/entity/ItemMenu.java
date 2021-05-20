@@ -1,30 +1,64 @@
 package hcmute.edu.vn.id18110377.entity;
 
-import android.graphics.drawable.Drawable;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+
+import hcmute.edu.vn.id18110377.layout.BillHistory;
+import hcmute.edu.vn.id18110377.layout.Cart;
+import hcmute.edu.vn.id18110377.layout.ChooseLanguage;
+import hcmute.edu.vn.id18110377.layout.ConnectAccount;
+import hcmute.edu.vn.id18110377.layout.Discount;
+import hcmute.edu.vn.id18110377.layout.Help;
+import hcmute.edu.vn.id18110377.layout.Logout;
+import hcmute.edu.vn.id18110377.layout.SettingsAccount;
+import hcmute.edu.vn.id18110377.layout.ShareApp;
+import hcmute.edu.vn.id18110377.layout.SignUp;
+import hcmute.edu.vn.id18110377.layout.Wallet;
 
 public class ItemMenu {
     private String title;
-    private Drawable img;
-    private Drawable background;
+    public static List<String> lstItemMenuTitle;
+    public static HashMap<String, Class> menuItem;
+
+    static {
+        lstItemMenuTitle = Arrays.asList(
+                "Đăng nhập", "Đơn hàng", "Nhập mã khuyến mãi", "Tài khoản liên kết", "Số dư tài khoản",
+                "Lịch sử hóa đơn", "Giới thiệu bạn bè", "Chọn ngôn ngữ", "Liên hệ hỗ trợ", "Cài đặt tài khoản", "Đăng xuất"
+        );
+        menuItem = new HashMap<>();
+        menuItem.put("Đăng nhập", SignUp.class);
+        menuItem.put("Đơn hàng", Cart.class);
+        menuItem.put("Nhập mã khuyến mãi", Discount.class);
+        menuItem.put("Tài khoản liên kết", ConnectAccount.class);
+        menuItem.put("Số dư tài khoản", Wallet.class);
+        menuItem.put("Lịch sử hóa đơn", BillHistory.class);
+        menuItem.put("Giới thiệu bạn bè", ShareApp.class);
+        menuItem.put("Chọn ngôn ngữ", ChooseLanguage.class);
+        menuItem.put("Liên hệ hỗ trợ", Help.class);
+        menuItem.put("Cài đặt tài khoản", SettingsAccount.class);
+        menuItem.put("Đăng xuất", Logout.class);
+    }
+
+    private Integer leftImageID;
+    private Integer bgImageID;
 
     public ItemMenu() {
 
     }
 
-    public ItemMenu(String title, Drawable img) {
+    public ItemMenu(String title, Integer leftImageID) {
         this.title = title;
-        this.img = img;
+        this.leftImageID = leftImageID;
     }
 
-    public ItemMenu(String title, Drawable img, Drawable background) {
-        this.background = background;
-        new ItemMenu(title, img);
+    public ItemMenu(String title, Integer leftImageID, Integer bgImageID) {
+        this.bgImageID = bgImageID;
+        new ItemMenu(title, leftImageID);
     }
 
-    public static List<ItemMenu> createListMenuItem(List<String> lstTitle, List<Drawable> lstImg) {
+    public static List<ItemMenu> createListMenuItem(List<String> lstTitle, List<Integer> lstImg) {
         int num = lstImg.size() < lstTitle.size() ? lstImg.size() : lstTitle.size();
         List<ItemMenu> menu = new ArrayList<ItemMenu>();
         for (int i = 0; i < num; i++) {
@@ -42,28 +76,23 @@ public class ItemMenu {
         this.title = title;
     }
 
-    public Drawable getImg() {
-        return img;
+    public Integer getLeftImageID() {
+        return leftImageID;
     }
 
-    public void setImg(Drawable img) {
-        this.img = img;
+    public void setLeftImageID(Integer leftImageID) {
+        this.leftImageID = leftImageID;
     }
 
-    public Drawable getBackground() {
-        return background;
+    public Integer getBgImageID() {
+        return bgImageID;
     }
 
-    public void setBackground(Drawable background) {
-        this.background = background;
+    public void setBgImageID(Integer bgImageID) {
+        this.bgImageID = bgImageID;
     }
 
-    @Override
-    public String toString() {
-        return "ItemMenu{" +
-                "title='" + title + '\'' +
-                ", img=" + img +
-                ", background=" + background +
-                '}';
+    public static Class getLayout(String title) {
+        return menuItem.get(title);
     }
 }

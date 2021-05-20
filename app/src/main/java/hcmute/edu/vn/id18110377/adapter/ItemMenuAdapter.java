@@ -2,6 +2,8 @@ package hcmute.edu.vn.id18110377.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +44,7 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
         menu_item_title.setText(itemMenu.getTitle());
 
         ImageView menu_item_img = holder.menu_item_img;
-        menu_item_img.setImageDrawable(itemMenu.getImg());
+        menu_item_img.setImageResource(itemMenu.getLeftImageID());
     }
 
     @NonNull
@@ -55,7 +57,13 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
         return viewHolder;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemCount() {
+
+        return lstItemMenu == null ? 0 : lstItemMenu.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView menu_item_title;
         public ImageView menu_item_img;
 
@@ -64,11 +72,15 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
 
             menu_item_img = itemView.findViewById(R.id.menu_item_img);
             menu_item_title = itemView.findViewById(R.id.menu_item_title);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("Click", menu_item_title.getText().toString());
+                    Class cls = ItemMenu.getLayout(menu_item_title.getText().toString());
+                    Intent intent = new Intent(v.getContext(), cls);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return lstItemMenu.size();
     }
 }

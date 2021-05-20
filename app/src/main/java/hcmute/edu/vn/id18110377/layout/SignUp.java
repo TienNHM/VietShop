@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377;
+package hcmute.edu.vn.id18110377.layout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
+
+import hcmute.edu.vn.id18110377.R;
 
 public class SignUp extends AppCompatActivity {
     Button btnTakePhoto;
