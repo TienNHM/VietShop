@@ -43,7 +43,7 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
         menu_item_title.setText(itemMenu.getTitle());
 
         ImageView menu_item_img = holder.menu_item_img;
-        menu_item_img.setImageDrawable(itemMenu.getImg());
+        menu_item_img.setImageResource(itemMenu.getLeftImageID());
     }
 
     @NonNull

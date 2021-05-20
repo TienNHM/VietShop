@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377;
+package hcmute.edu.vn.id18110377.homepage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.GridViewProductAdapter;
 import hcmute.edu.vn.id18110377.entity.Product;
 

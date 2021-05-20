@@ -1,7 +1,6 @@
-package hcmute.edu.vn.id18110377;
+package hcmute.edu.vn.id18110377.homepage;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.ItemMenuAdapter;
 import hcmute.edu.vn.id18110377.entity.ItemMenu;
 
@@ -64,19 +64,19 @@ public class AccountFragment extends Fragment {
         }
     }
 
-    private ArrayList<Drawable> createMenuItemImage() {
-        ArrayList<Drawable> lstItemMenuImg = new ArrayList<>();
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.key));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.shopping_cart));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.discount));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.user_folder));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.wallet));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.history));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.add));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.translation));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.messaging));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.settings));
-        lstItemMenuImg.add(getResources().getDrawable(R.drawable.shutdown));
+    private ArrayList<Integer> createMenuItemImage() {
+        ArrayList<Integer> lstItemMenuImg = new ArrayList<>();
+        lstItemMenuImg.add(R.drawable.key);
+        lstItemMenuImg.add(R.drawable.shopping_cart);
+        lstItemMenuImg.add(R.drawable.discount);
+        lstItemMenuImg.add(R.drawable.user_folder);
+        lstItemMenuImg.add(R.drawable.wallet);
+        lstItemMenuImg.add(R.drawable.history);
+        lstItemMenuImg.add(R.drawable.add);
+        lstItemMenuImg.add(R.drawable.translation);
+        lstItemMenuImg.add(R.drawable.messaging);
+        lstItemMenuImg.add(R.drawable.settings);
+        lstItemMenuImg.add(R.drawable.shutdown);
         return lstItemMenuImg;
     }
 
@@ -89,7 +89,7 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
-        ArrayList<Drawable> lstItemMenuImg = createMenuItemImage();
+        ArrayList<Integer> lstItemMenuImg = createMenuItemImage();
         List<ItemMenu> lstItemMenu = ItemMenu.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
         ItemMenuAdapter adapter = new ItemMenuAdapter(lstItemMenu);
 

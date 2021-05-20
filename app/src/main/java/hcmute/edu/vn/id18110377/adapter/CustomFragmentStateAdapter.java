@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377;
+package hcmute.edu.vn.id18110377.adapter;
 
 import android.graphics.drawable.Drawable;
 
