@@ -3,9 +3,6 @@ package hcmute.edu.vn.id18110377;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -25,32 +22,30 @@ public class MainActivity extends AppCompatActivity {
             onNavItemSelectedListener = item -> {
         Fragment fragment;
         switch (item.getItemId()) {
-            case R.id.home:
+            case R.id.menuHome:
                 fragment = new HomeFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.cart:
+            case R.id.menuCart:
                 fragment = new CartFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.account:
+            case R.id.menuAccount:
                 fragment = new AccountFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.notifications:
+            case R.id.menuNotifications:
                 fragment = new NotificationFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.search:
+            case R.id.menuSearch:
                 fragment = new SearchFragment();
                 loadFragment(fragment);
                 return true;
         }
         return false;
     };
-    Spinner spinner;
-    String[] location = new String[]{"TP.HCM", "Bình Dương", "Đồng Nai", "Long An", "BR-VT"};
-    ArrayAdapter<String> adapter;
+
     WormDotsIndicator wormDotsIndicator;
     ViewPager2 viewPager;
     FragmentStateAdapter fragmentStateAdapter;
@@ -65,25 +60,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView = this.findViewById(R.id.bottom_navbar);
         navigationView.setOnNavigationItemSelectedListener(onNavItemSelectedListener);
 
-        spinner = this.findViewById(R.id.spiner);
-        adapter = new ArrayAdapter<>(this, R.layout.dropdown_spinner, location);
-        spinner.setAdapter(adapter);
+        if (savedInstanceState == null) {
+            navigationView.setSelectedItemId(R.id.menuHome);
+        }
 
-        ImageButton acc = this.findViewById(R.id.account);
-        acc.setOnClickListener(v -> {
-            Fragment fragment = new AccountFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_activity, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        });
         /*img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_food, null));
         img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg, null));
         img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.food_background, null));
-         */
 
-        //wormDotsIndicator = (WormDotsIndicator) findViewById(R.id.worm_dots_indicator);
-        /*viewPager = findViewById(R.id.view_pager);
+        wormDotsIndicator = (WormDotsIndicator) findViewById(R.id.worm_dots_indicator);
+        viewPager = findViewById(R.id.view_pager);
         fragmentStateAdapter = new FragmentStateAdapter(this) {
             @Override
             public int getItemCount() {
