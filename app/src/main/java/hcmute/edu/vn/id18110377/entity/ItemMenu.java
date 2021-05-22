@@ -48,14 +48,14 @@ public class ItemMenu {
 
     }
 
-    public ItemMenu(String title, Integer leftImageID) {
+    public ItemMenu(String title, Integer leftImageID, Integer bgImageID) {
         this.title = title;
         this.leftImageID = leftImageID;
+        this.bgImageID = bgImageID;
     }
 
-    public ItemMenu(String title, Integer leftImageID, Integer bgImageID) {
-        this.bgImageID = bgImageID;
-        new ItemMenu(title, leftImageID);
+    public ItemMenu(String title, Integer leftImageID) {
+        this(title, leftImageID, null);
     }
 
     public static List<ItemMenu> createListMenuItem(List<String> lstTitle, List<Integer> lstImg) {

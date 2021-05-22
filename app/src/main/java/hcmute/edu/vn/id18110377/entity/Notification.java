@@ -5,16 +5,18 @@ public class Notification {
     private String shortDetail;
     private String detail;
     private String type;
+    private String status;
 
-    public Notification(Integer id, String type, String detail) {
+    public Notification(Integer id, String type, String status, String detail, String shortDetail) {
         this.id = id;
         this.type = type;
         this.detail = detail;
+        this.status = status;
+        this.shortDetail = shortDetail;
     }
 
-    public Notification(Integer id, String type, String detail, String shortDetail) {
-        this.shortDetail = shortDetail;
-        new Notification(id, type, detail);
+    public Notification(Integer id, String type, String status, String detail) {
+        this(id, type, status, detail, null);
     }
 
     public Integer getId() {
@@ -47,5 +49,24 @@ public class Notification {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "id=" + id +
+                ", shortDetail='" + shortDetail + '\'' +
+                ", detail='" + detail + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
