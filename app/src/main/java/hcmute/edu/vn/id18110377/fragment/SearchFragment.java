@@ -1,6 +1,7 @@
 package hcmute.edu.vn.id18110377.fragment;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,9 @@ public class SearchFragment extends Fragment {
 
     @BindView(R.id.gvSponsor)
     GridView gvSponsor;
+
+    @BindView(R.id.gvSearchResult)
+    GridView gvSearchResult;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,10 +82,24 @@ public class SearchFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
+        // List Product Sponsor
         List<Product> productList = createListSponsor();
         GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
         gvSponsor.setAdapter(gv_adapter);
 
+        //txtSearch
+        txtSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    List<Product> lstSearchResult = getSearchResult();
+                    GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), lstSearchResult);
+                    gvSearchResult.setAdapter(gv_adapter);
+                    return true;
+                }
+                return false;
+            }
+        });
         return view;
     }
 
@@ -91,6 +109,19 @@ public class SearchFragment extends Fragment {
         productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
         productList.add(new Product(2, "Juice", R.drawable.orange_juice));
         productList.add(new Product(3, "Fast food", R.drawable.fast_food));
+        return productList;
+    }
+
+    private List<Product> getSearchResult() {
+        List<Product> productList = new ArrayList<>();
+        productList.add(new Product(0, "Beer", R.drawable.beer));
+        productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
+        productList.add(new Product(2, "Juice", R.drawable.orange_juice));
+        productList.add(new Product(3, "Fast food", R.drawable.fast_food));
+        productList.add(new Product(4, "Soda", R.drawable.soda));
+        productList.add(new Product(5, "Apple", R.drawable.apple));
+        productList.add(new Product(6, "Paprika", R.drawable.paprika));
+        productList.add(new Product(7, "Pineaple", R.drawable.pineapple));
         return productList;
     }
 }
