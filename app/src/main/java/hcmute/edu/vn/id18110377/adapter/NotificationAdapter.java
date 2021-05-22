@@ -26,7 +26,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         mapNotify_Image.put("cart", R.drawable.shopping_cart);
         mapNotify_Image.put("sale", R.drawable.land_sales);
         mapNotify_Image.put("guide", R.drawable.guide);
-        mapNotify_Image.put("account", R.drawable.account);
+        mapNotify_Image.put("account", R.drawable.person);
     }
 
     private List<Notification> notifications;
