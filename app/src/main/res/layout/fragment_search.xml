@@ -57,6 +57,25 @@
             android:id="@+id/gvSponsor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:numColumns="4">
+
+        </GridView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="10dp"
+            android:text="Kết quả tìm kiếm"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <GridView
+            android:id="@+id/gvSearchResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:numColumns="4">
 
         </GridView>
