@@ -11,7 +11,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/TienNHM/VietShop)](https://github.com/TienNHM/VietShop/releases)
 
 ## Overview
-<img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo.png"/>
+<img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo.png"/><img src="https://img.icons8.com/color/48/000000/android-os.png"/>
 
 
 ## Project Structure
