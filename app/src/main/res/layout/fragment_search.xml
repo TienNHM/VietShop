@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/menuAccount"
+                android:id="@+id/btnBack"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginVertical="10dp"
@@ -28,7 +28,7 @@
                 android:background="@drawable/arrow_back" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/txtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_margin="10dp"
@@ -43,6 +43,15 @@
                 android:textColorHint="#ffffff" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="10dp"
+            android:text="Đề xuất"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <GridView
             android:id="@+id/gv_product"
             android:layout_width="match_parent"
@@ -51,11 +60,5 @@
 
         </GridView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </FrameLayout>
