@@ -6,15 +6,15 @@ public class Product {
     private int mainImageID;
     private int imgSpecialID;
 
-    public Product(int id, String productName, int mainImageID) {
+    public Product(int id, String productName, int mainImageID, int imgSpecialID) {
         this.id = id;
         this.productName = productName;
         this.mainImageID = mainImageID;
+        this.imgSpecialID = imgSpecialID;
     }
 
-    public Product(int id, String productName, int mainImageID, int imgSpecialID) {
-        this.imgSpecialID = imgSpecialID;
-        new Product(id, productName, mainImageID);
+    public Product(int id, String productName, int mainImageID) {
+        this(id, productName, mainImageID, 0);
     }
 
     public int getId() {

@@ -1,13 +1,23 @@
 package hcmute.edu.vn.id18110377.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.adapter.NotificationAdapter;
+import hcmute.edu.vn.id18110377.entity.Notification;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +25,9 @@ import hcmute.edu.vn.id18110377.R;
  * create an instance of this fragment.
  */
 public class NotificationFragment extends Fragment {
+
+    @BindView(R.id.rvNotifications)
+    RecyclerView rvNotifications;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,6 +73,29 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+
+        ButterKnife.bind(this, view);
+
+        List<Notification> notificationList = getAllNotifications();
+        NotificationAdapter adapter = new NotificationAdapter(notificationList);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        rvNotifications.setLayoutManager(manager);
+        rvNotifications.setAdapter(adapter);
+
+        return view;
+    }
+
+    private List<Notification> getAllNotifications() {
+        List<Notification> notifications = new ArrayList<>();
+        notifications.add(new Notification(0, "account", "Read", "Đăng nhập ngay để trải nghiệm những tiện ích dành riêng cho bạn.", "Đăng nhập"));
+        notifications.add(new Notification(1, "guide", "Read", "Hướng dẫn sử dụng ứng dụng cho người dùng lần đầu đăng ký tài khoản.", "Hướng dẫn"));
+        notifications.add(new Notification(2, "sale", "Unread", "Chào Lễ lớn, Đón khuyến mãi to cùng VietShop", "Khuyến mãi"));
+        notifications.add(new Notification(3, "cart", "Unread", "Bạn có đơn hàng chưa thanh toán.", "Thanh toán"));
+        for (Notification x :
+                notifications) {
+            Log.i("=====", x.toString());
+        }
+        return notifications;
     }
 }
