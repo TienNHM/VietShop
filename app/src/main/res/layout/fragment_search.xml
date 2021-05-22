@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/btnBack"
+                android:id="@+id/btnBack_search"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginVertical="10dp"
@@ -28,10 +28,11 @@
                 android:background="@drawable/arrow_back" />
 
             <EditText
-                android:id="@+id/txtSearch"
+                android:id="@+id/txtSearch_search"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
-                android:layout_margin="10dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="20"
                 android:background="#C6DDCEA7"
                 android:drawableStart="@drawable/search"
@@ -53,7 +54,7 @@
             android:textStyle="bold" />
 
         <GridView
-            android:id="@+id/gv_product"
+            android:id="@+id/gvSponsor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="4">
