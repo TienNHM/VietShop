@@ -13,7 +13,7 @@
         android:background="#65DF9313">
 
         <ImageView
-            android:id="@+id/notify_img"
+            android:id="@+id/cart_img"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_gravity="center"
@@ -38,7 +38,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/cart_status"
+            android:id="@+id/cart_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
@@ -55,7 +55,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnChckout"
+                android:id="@+id/btnCheckout"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
