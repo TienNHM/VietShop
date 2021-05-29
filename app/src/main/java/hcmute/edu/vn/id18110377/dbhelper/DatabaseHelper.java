@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377.utilities;
+package hcmute.edu.vn.id18110377.dbhelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -69,27 +69,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             navigationView.setSelectedItemId(R.id.menuHome);
         }
-
-        /*img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_food, null));
-        img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.bg, null));
-        img_list.add(ResourcesCompat.getDrawable(getResources(), R.drawable.food_background, null));
-
-        wormDotsIndicator = (WormDotsIndicator) findViewById(R.id.worm_dots_indicator);
-        viewPager = findViewById(R.id.view_pager);
-        fragmentStateAdapter = new FragmentStateAdapter(this) {
-            @Override
-            public int getItemCount() {
-                return img_list.size();
-            }
-
-            @NonNull
-            @Override
-            public Fragment createFragment(int position) {
-                return new ItemFragment(img_list.get(position));
-            }
-        };
-        viewPager.setAdapter(fragmentStateAdapter);*/
-        //wormDotsIndicator.setViewPager2(viewPager);
     }
 
     @Override

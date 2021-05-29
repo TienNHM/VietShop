@@ -2,22 +2,10 @@ package hcmute.edu.vn.id18110377.entity;
 
 public class Notification {
     private Integer id;
-    private String shortDetail;
-    private String detail;
     private String type;
+    private String detail;
+    private String title;
     private String status;
-
-    public Notification(Integer id, String type, String status, String detail, String shortDetail) {
-        this.id = id;
-        this.type = type;
-        this.detail = detail;
-        this.status = status;
-        this.shortDetail = shortDetail;
-    }
-
-    public Notification(Integer id, String type, String status, String detail) {
-        this(id, type, status, detail, null);
-    }
 
     public Integer getId() {
         return id;
@@ -25,22 +13,6 @@ public class Notification {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getShortDetail() {
-        return shortDetail;
-    }
-
-    public void setShortDetail(String shortDetail) {
-        this.shortDetail = shortDetail;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
     }
 
     public String getType() {
@@ -51,6 +23,26 @@ public class Notification {
         this.type = type;
     }
 
+    public Notification(Integer id, String type, String title, String detail, String status) {
+        this.id = id;
+        this.type = type;
+        this.detail = detail;
+        this.status = status;
+        this.title = title;
+    }
+
+    public Notification(Integer id, String type, String title) {
+        this(id, type, title, null, null);
+    }
+
+    public Notification(String type, String title) {
+        this(-1, type, title, null, null);
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -59,14 +51,15 @@ public class Notification {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Notification{" +
-                "id=" + id +
-                ", shortDetail='" + shortDetail + '\'' +
-                ", detail='" + detail + '\'' +
-                ", type='" + type + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
