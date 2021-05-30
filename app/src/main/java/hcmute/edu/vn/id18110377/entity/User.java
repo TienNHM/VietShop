@@ -73,7 +73,8 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (email.contains("@"))
+            this.email = email;
     }
 
     public String getPhone() {

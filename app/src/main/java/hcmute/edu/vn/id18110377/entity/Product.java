@@ -8,11 +8,13 @@ public class Product {
     private String name;
     private Double price;
     private Bitmap image;
+    private int defaultImage;
     private String detail;
     private Float star;
     private String status;
 
-    public Product(Integer id, Integer type, String name, Double price, Bitmap image, String detail, Float star, String status) {
+    public Product(Integer id, Integer type, String name, Double price,
+                   Bitmap image, String detail, Float star, String status) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -23,8 +25,28 @@ public class Product {
         this.status = status;
     }
 
+    public Product(Integer id, Integer type, String name, Double price,
+                   int defaultImage, String detail, Float star, String status) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.price = price;
+        this.defaultImage = defaultImage;
+        this.detail = detail;
+        this.star = star;
+        this.status = status;
+    }
+
     public Product(Integer id, Integer type, String name, Double price) {
         this(id, type, name, price, null, null, 0.0f, null);
+    }
+
+    public Product(Integer type, String name, int defaultImage) {
+        this(-1, type, name, 0.0, defaultImage, null, 0.0f, null);
+    }
+
+    public Product(Integer type, String name, Bitmap image) {
+        this(-1, type, name, 0.0, image, null, 0.0f, null);
     }
 
     public Product(Integer type, String name, Double price) {
@@ -44,7 +66,8 @@ public class Product {
     }
 
     public void setType(Integer type) {
-        this.type = type;
+        if (type > 0 && type < 8)
+            this.type = type;
     }
 
     public String getName() {
@@ -60,10 +83,14 @@ public class Product {
     }
 
     public void setPrice(Double price) {
-        this.price = price;
+        if (price >= 0)
+            this.price = price;
     }
 
     public Bitmap getImage() {
+        if (null == image) {
+            //TODO
+        }
         return image;
     }
 
@@ -84,7 +111,8 @@ public class Product {
     }
 
     public void setStar(Float star) {
-        this.star = star;
+        if (star >= 0)
+            this.star = star;
     }
 
     public String getStatus() {
@@ -93,5 +121,9 @@ public class Product {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public static class ProductType {
+
     }
 }

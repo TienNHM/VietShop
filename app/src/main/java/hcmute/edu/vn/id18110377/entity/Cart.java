@@ -54,7 +54,8 @@ public class Cart {
     }
 
     public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+        if (quantity >= 0)
+            this.quantity = quantity;
     }
 
     public String getAddress() {

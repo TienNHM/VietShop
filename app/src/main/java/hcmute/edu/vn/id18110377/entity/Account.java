@@ -40,6 +40,7 @@ public class Account {
     }
 
     public void setPassword(String password) {
+
         this.password = password;
     }
 
@@ -48,7 +49,8 @@ public class Account {
     }
 
     public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
+        if (roleID > 0)
+            this.roleID = roleID;
     }
 
     public String getStatus() {

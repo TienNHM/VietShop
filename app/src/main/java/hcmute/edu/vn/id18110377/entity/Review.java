@@ -1,5 +1,7 @@
 package hcmute.edu.vn.id18110377.entity;
 
+import java.time.LocalDateTime;
+
 public class Review {
     private Integer id;
     private Integer userId;
@@ -18,7 +20,7 @@ public class Review {
     }
 
     public Review(Integer userId, Integer productId, String content) {
-        this(-1, userId, productId, content, null, null);
+        this(-1, userId, productId, content, LocalDateTime.now().toString(), null);
     }
 
     public Integer getId() {

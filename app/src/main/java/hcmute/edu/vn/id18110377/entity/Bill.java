@@ -54,7 +54,8 @@ public class Bill {
     }
 
     public void setTotal(Double total) {
-        this.total = total;
+        if (total >= 0)
+            this.total = total;
     }
 
     public String getDate() {
