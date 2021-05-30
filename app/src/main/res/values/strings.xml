@@ -61,6 +61,7 @@
     <string name="username" translatable="false">\@Username</string>
     <string name="txtSearch">Search</string>
     <string name="btnTakePhoto">Take a photo</string>
+    <string name="help">Hỗ trợ</string>
 
     <!-- account menu item -->
     <string-array name="account_menu_items">
