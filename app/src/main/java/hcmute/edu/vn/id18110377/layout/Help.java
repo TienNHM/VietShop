@@ -23,7 +23,9 @@ public class Help extends AppCompatActivity {
 
             }
         });
+
         WebView webView = findViewById(R.id.webHelp);
-        webView.loadUrl("https://github.com/tiennhm");
+        String url = getResources().getString(R.string.help_url);
+        webView.loadUrl(url);
     }
 }

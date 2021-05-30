@@ -35,4 +35,5 @@
     <string name="fullname">Họ tên</string>
     <string name="txtSearch">Tìm sản phẩm, công thức...</string>
     <string name="btnTakePhoto">Chụp ảnh</string>
+    <string name="help">Hỗ trợ</string>
 </resources>
