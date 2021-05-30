@@ -52,7 +52,7 @@
             android:name=".layout.Help"
             android:windowSoftInputMode="adjustPan"></activity>
         <activity
-            android:name=".layout.ChooseLanguage"
+            android:name=".layout.ChangeLanguage"
             android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".layout.Cart"

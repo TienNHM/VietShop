@@ -7,7 +7,7 @@ import java.util.List;
 
 import hcmute.edu.vn.id18110377.layout.BillHistory;
 import hcmute.edu.vn.id18110377.layout.Cart;
-import hcmute.edu.vn.id18110377.layout.ChooseLanguage;
+import hcmute.edu.vn.id18110377.layout.ChangeLanguage;
 import hcmute.edu.vn.id18110377.layout.ConnectAccount;
 import hcmute.edu.vn.id18110377.layout.Discount;
 import hcmute.edu.vn.id18110377.layout.Help;
@@ -35,7 +35,7 @@ public class ItemMenu {
         menuItem.put("Số dư tài khoản", Wallet.class);
         menuItem.put("Lịch sử hóa đơn", BillHistory.class);
         menuItem.put("Giới thiệu bạn bè", ShareApp.class);
-        menuItem.put("Chọn ngôn ngữ", ChooseLanguage.class);
+        menuItem.put("Chọn ngôn ngữ", ChangeLanguage.class);
         menuItem.put("Liên hệ hỗ trợ", Help.class);
         menuItem.put("Cài đặt tài khoản", SettingsAccount.class);
         menuItem.put("Đăng xuất", Logout.class);
