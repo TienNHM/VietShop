@@ -1,8 +1,16 @@
 package hcmute.edu.vn.id18110377.entity;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import hcmute.edu.vn.id18110377.MainActivity;
+import hcmute.edu.vn.id18110377.R;
 
 public class User {
+    private static final int DEFAUL_AVT_FEMALE = R.drawable.female_profile;
+    private static final int DEFAUL_AVT_MALE = R.drawable.male_profile;
+    private static final int DEFAUL_AVT_UNDEFINED = R.drawable.cat_profile;
+
     private Integer id;
     private Integer accountID;
     private String fullname;
@@ -28,12 +36,26 @@ public class User {
         this.status = status;
     }
 
+    public User(Integer id, Integer accountID, String fullname, String sex, String email,
+                String phone, String facebook, String zalo, String status) {
+        this.id = id;
+        this.accountID = accountID;
+        this.fullname = fullname;
+        this.sex = sex;
+        this.email = email;
+        this.phone = phone;
+        this.setAvatar(sex);
+        this.facebook = facebook;
+        this.zalo = zalo;
+        this.status = status;
+    }
+
     public User(Integer id, Integer accountID, String fullname, String sex, String email) {
-        this(id, accountID, fullname, sex, email, null, null, null, null, null);
+        this(id, accountID, fullname, sex, email, null, null, null, null);
     }
 
     public User(Integer accountID, String fullname, String sex, String email) {
-        this(-1, accountID, fullname, sex, email, null, null, null, null, null);
+        this(-1, accountID, fullname, sex, email, null, null, null, null);
     }
 
     public Integer getId() {
@@ -91,6 +113,15 @@ public class User {
 
     public void setAvatar(Bitmap avatar) {
         this.avatar = avatar;
+    }
+
+    public void setAvatar(String sex) {
+        int avatar = DEFAUL_AVT_UNDEFINED;
+        if (sex.startsWith("F"))
+            avatar = DEFAUL_AVT_FEMALE;
+        else if (sex.startsWith("M"))
+            avatar = DEFAUL_AVT_MALE;
+        this.avatar = BitmapFactory.decodeResource(MainActivity.mainResources, avatar);
     }
 
     public String getFacebook() {
