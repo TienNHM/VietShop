@@ -1,6 +1,9 @@
 package hcmute.edu.vn.id18110377.entity;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import hcmute.edu.vn.id18110377.MainActivity;
 
 public class Product {
     private Integer id;
@@ -32,6 +35,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.defaultImage = defaultImage;
+        this.image = BitmapFactory.decodeResource(MainActivity.mainResources, defaultImage);
         this.detail = detail;
         this.star = star;
         this.status = status;

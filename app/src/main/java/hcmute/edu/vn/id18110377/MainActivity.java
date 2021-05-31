@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +24,8 @@ import hcmute.edu.vn.id18110377.fragment.NotificationFragment;
 import hcmute.edu.vn.id18110377.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static Resources mainResources;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener
             onNavItemSelectedListener = item -> {
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             navigationView.setSelectedItemId(R.id.menuHome);
         }
+        mainResources = getResources();
     }
 
     @Override
