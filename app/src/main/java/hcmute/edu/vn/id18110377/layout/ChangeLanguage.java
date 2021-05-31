@@ -15,6 +15,7 @@ public class ChangeLanguage extends AppCompatActivity {
         setContentView(R.layout.feature_change_language);
 
         RadioGroup groupLanguage = findViewById(R.id.groupLanguage);
+        groupLanguage.check(R.id.rbtn_vietnamese);
 
     }
 }
