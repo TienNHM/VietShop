@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import hcmute.edu.vn.id18110377.R;
  */
 public class MessageBoxFragment extends DialogFragment {
 
+    private String selectedLanguage;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +30,10 @@ public class MessageBoxFragment extends DialogFragment {
 
     public MessageBoxFragment() {
         // Required empty public constructor
+    }
+
+    public MessageBoxFragment(String selectedLanguage) {
+        this.selectedLanguage = selectedLanguage;
     }
 
     /**
@@ -61,6 +67,21 @@ public class MessageBoxFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message_box, container, false);
+        View view = inflater.inflate(R.layout.fragment_message_box, container, false);
+        view.findViewById(R.id.btnCloseMsg).setOnClickListener(v -> {
+            this.dismiss();
+        });
+        view.findViewById(R.id.btnCancelMsg).setOnClickListener(v -> {
+            this.dismiss();
+        });
+        view.findViewById(R.id.btnOkMsg).setOnClickListener(v -> {
+            ChangeLanguage();
+            this.dismiss();
+        });
+        return view;
+    }
+
+    private void ChangeLanguage() {
+        Toast.makeText(getContext(), this.selectedLanguage, Toast.LENGTH_SHORT).show();
     }
 }
