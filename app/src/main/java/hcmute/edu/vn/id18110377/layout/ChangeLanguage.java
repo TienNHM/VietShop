@@ -2,7 +2,6 @@ package hcmute.edu.vn.id18110377.layout;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +16,9 @@ public class ChangeLanguage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feature_change_language);
 
-        RadioGroup groupLanguage = findViewById(R.id.groupLanguage);
+        findViewById(R.id.btnBack_ChangeLanguage).setOnClickListener(v -> {
+            this.moveTaskToBack(true);
+        });
     }
 
     public void chooseLanguage(View view) {
