@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import hcmute.edu.vn.id18110377.R;
@@ -14,7 +15,7 @@ import hcmute.edu.vn.id18110377.R;
  * Use the {@link MessageBoxFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MessageBoxFragment extends Fragment {
+public class MessageBoxFragment extends DialogFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

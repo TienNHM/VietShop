@@ -1,12 +1,15 @@
 package hcmute.edu.vn.id18110377.layout;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.fragment.MessageBoxFragment;
 
 public class ChangeLanguage extends AppCompatActivity {
     @Override
@@ -15,7 +18,11 @@ public class ChangeLanguage extends AppCompatActivity {
         setContentView(R.layout.feature_change_language);
 
         RadioGroup groupLanguage = findViewById(R.id.groupLanguage);
-        groupLanguage.check(R.id.rbtn_vietnamese);
+    }
 
+    public void chooseLanguage(View view) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        MessageBoxFragment msg = new MessageBoxFragment();
+        msg.show(transaction, "msg");
     }
 }

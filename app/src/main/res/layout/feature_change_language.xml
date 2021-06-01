@@ -64,7 +64,8 @@
                 android:gravity="center"
                 android:text="Tiếng Việt"
                 android:textSize="18sp"
-                android:textStyle="bold"></RadioButton>
+                android:onClick="chooseLanguage"
+                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/english"
@@ -79,7 +80,8 @@
                 android:gravity="center"
                 android:text="English"
                 android:textSize="18sp"
-                android:textStyle="bold"></RadioButton>
+                android:onClick="chooseLanguage"
+                android:textStyle="bold" />
         </RadioGroup>
     </LinearLayout>
 </LinearLayout>
