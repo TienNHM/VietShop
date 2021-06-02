@@ -90,4 +90,8 @@ public class Account {
         Account account = accountDbHelper.login(this.getUsername(), this.getPassword());
         return account == null ? -1 : account.getUserId();
     }
+
+    public void logout() {
+
+    }
 }

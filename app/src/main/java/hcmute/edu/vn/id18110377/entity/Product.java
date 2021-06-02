@@ -1,9 +1,8 @@
 package hcmute.edu.vn.id18110377.entity;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
-import hcmute.edu.vn.id18110377.MainActivity;
+import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class Product {
     private Integer id;
@@ -35,7 +34,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.defaultImage = defaultImage;
-        this.image = BitmapFactory.decodeResource(MainActivity.mainResources, defaultImage);
+        this.image = ImageConverter.resource2Bitmap(defaultImage);
         this.detail = detail;
         this.star = star;
         this.status = status;
@@ -92,10 +91,11 @@ public class Product {
     }
 
     public Bitmap getImage() {
-        if (null == image) {
-            //TODO
-        }
         return image;
+    }
+
+    public byte[] getRawImage() {
+        return ImageConverter.bitmap2Byte(this.getImage());
     }
 
     public void setImage(Bitmap image) {

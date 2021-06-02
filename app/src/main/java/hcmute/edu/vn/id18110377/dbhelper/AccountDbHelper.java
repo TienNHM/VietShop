@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.dbhelper;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +12,12 @@ import hcmute.edu.vn.id18110377.entity.Account;
 
 public class AccountDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Account";
+    private static final String ACCOUNT_ID = "id";
+    private static final String ACCOUNT_USERID = "userId";
+    private static final String ACCOUNT_USERNAME = "username";
+    private static final String ACCOUNT_PASSWORD = "password";
+    private static final String ACCOUNT_ROLEID = "roleId";
+    private static final String ACCOUNT_STATUS = "status";
 
     public AccountDbHelper(@Nullable Context context) {
         super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
@@ -71,5 +78,32 @@ public class AccountDbHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return account;
+    }
+
+    private ContentValues createContentValues(Account account) {
+        ContentValues values = new ContentValues();
+        values.put(ACCOUNT_USERID, account.getUserId());
+        values.put(ACCOUNT_USERNAME, account.getUsername());
+        values.put(ACCOUNT_PASSWORD, account.getPassword());
+        values.put(ACCOUNT_ROLEID, account.getRoleID());
+        values.put(ACCOUNT_STATUS, account.getStatus());
+        return values;
+    }
+
+    public long insert(Account account) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = createContentValues(account);
+        return db.insert(TABLE_NAME, null, values);
+    }
+
+    public int update(Account account) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = createContentValues(account);
+        return db.update(TABLE_NAME, values, ACCOUNT_ID + " = ?", new String[]{String.valueOf(account.getId())});
+    }
+
+    public int delete(Account account) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(TABLE_NAME, ACCOUNT_ID + " = ?", new String[]{String.valueOf(account.getId())});
     }
 }

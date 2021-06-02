@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 
 import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class User {
     private static final int DEFAUL_AVT_FEMALE = R.drawable.female_profile;
@@ -98,6 +99,10 @@ public class User {
 
     public Bitmap getAvatar() {
         return avatar;
+    }
+
+    public byte[] getRawAvatar() {
+        return ImageConverter.bitmap2Byte(this.getAvatar());
     }
 
     public void setAvatar(Bitmap avatar) {

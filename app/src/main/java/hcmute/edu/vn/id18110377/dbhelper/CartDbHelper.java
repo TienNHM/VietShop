@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.dbhelper;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,12 @@ import hcmute.edu.vn.id18110377.entity.Cart;
 
 public class CartDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Cart";
+    private static final String CART_ID = "id";
+    private static final String CART_USERID = "userId";
+    private static final String CART_PRODUCTID = "productId";
+    private static final String CART_QUANTITY = "quantity";
+    private static final String CART_ADDRESS = "address";
+    private static final String CART_STATUS = "status";
 
     public CartDbHelper(@Nullable Context context) {
         super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
@@ -59,5 +66,32 @@ public class CartDbHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return carts;
+    }
+
+    private ContentValues createContentValues(Cart cart) {
+        ContentValues values = new ContentValues();
+        values.put(CART_USERID, cart.getUserId());
+        values.put(CART_PRODUCTID, cart.getProductId());
+        values.put(CART_QUANTITY, cart.getQuantity());
+        values.put(CART_ADDRESS, cart.getAddress());
+        values.put(CART_STATUS, cart.getStatus());
+        return values;
+    }
+
+    public long insert(Cart cart) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = createContentValues(cart);
+        return db.insert(TABLE_NAME, null, values);
+    }
+
+    public int update(Cart cart) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = createContentValues(cart);
+        return db.update(TABLE_NAME, values, CART_ID + " = ?", new String[]{String.valueOf(cart.getId())});
+    }
+
+    public int delete(Cart cart) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(TABLE_NAME, CART_ID + " = ?", new String[]{String.valueOf(cart.getId())});
     }
 }
