@@ -1,10 +1,13 @@
 package hcmute.edu.vn.id18110377.dbhelper;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import hcmute.edu.vn.id18110377.entity.User;
 
 public class UserDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "User";
@@ -36,5 +39,51 @@ public class UserDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+    }
+
+    public User getUser(Integer id) {
+        User user = null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?", new String[]{id.toString()});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            user = new User(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    DbHelper.convertToBitmap(cursor.getBlob(6)),
+                    cursor.getString(7),
+                    cursor.getString(8),
+                    cursor.getString(9)
+            );
+        }
+        cursor.close();
+        return user;
+    }
+
+    public User getUserByAccount(Integer accountId) {
+        User user = null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE accountId = ?", new String[]{accountId.toString()});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            user = new User(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    DbHelper.convertToBitmap(cursor.getBlob(6)),
+                    cursor.getString(7),
+                    cursor.getString(8),
+                    cursor.getString(9)
+            );
+        }
+        cursor.close();
+        return user;
     }
 }
