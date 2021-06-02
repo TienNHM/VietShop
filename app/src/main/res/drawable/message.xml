@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/light_mode" />
-    <corners android:radius="20dp" />
+    <solid android:color="#D1D39E" />
+    <corners android:radius="25dp" />
+    <padding
+        android:bottom="10dp"
+        android:left="20dp"
+        android:right="20dp"
+        android:top="10dp" />
+    <stroke
+        android:width="3dp"
+        android:color="@color/theme_color"
+        android:dashWidth="16dp"
+        android:dashGap="8dp" />
 </shape>

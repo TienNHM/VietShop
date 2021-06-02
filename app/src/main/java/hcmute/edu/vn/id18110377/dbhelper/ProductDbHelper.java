@@ -31,7 +31,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE Product ( " +
+                "CREATE TABLE IF NOT EXISTS Product ( " +
                         "    id    INTEGER NOT NULL, " +
                         "    type    INTEGER NOT NULL, " +
                         "    name    TEXT NOT NULL, " +

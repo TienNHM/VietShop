@@ -9,6 +9,8 @@ import hcmute.edu.vn.id18110377.MainActivity;
 
 public class ImageConverter {
     public static Bitmap byte2Bitmap(byte[] img) {
+        if (img == null)
+            return null;
         return BitmapFactory.decodeByteArray(img, 0, img.length);
     }
 

@@ -37,4 +37,5 @@
     <string name="btnTakePhoto">Chụp ảnh</string>
     <string name="help">Hỗ trợ</string>
     <string name="change_language">Đổi ngôn ngữ</string>
+    <string name="details">Chi tiết sản phẩm</string>
 </resources>
