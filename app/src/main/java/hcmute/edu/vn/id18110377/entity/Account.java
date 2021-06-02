@@ -1,22 +1,38 @@
 package hcmute.edu.vn.id18110377.entity;
 
+import android.content.Context;
+
+import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
+
 public class Account {
     private Integer id;
+    private Integer userId;
     private String username;
     private String password;
     private Integer roleID;
     private String status;
 
-    public Account(Integer id, String username, String password, Integer roleID, String status) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.roleID = roleID;
-        this.status = status;
+    public Account(Integer id, Integer userId, String username, String password, Integer roleID, String status) {
+        this.setId(id);
+        this.setUserId(userId);
+        this.setUsername(username);
+        this.setPassword(password);
+        this.setRoleID(roleID);
+        this.setStatus(status);
     }
 
+    public Account(Integer userId, String username, String password) {
+        this(-1, userId, username, password, 2, null);
+    }
+
+    /**
+     * Dùng cho Login
+     *
+     * @param username
+     * @param password
+     */
     public Account(String username, String password) {
-        this(-1, username, password, 2, null);
+        this(-1, -1, username, password, 2, null);
     }
 
     public Integer getId() {
@@ -25,6 +41,14 @@ public class Account {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -59,5 +83,11 @@ public class Account {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer login(Context context) {
+        AccountDbHelper accountDbHelper = new AccountDbHelper(context);
+        Account account = accountDbHelper.login(this.getUsername(), this.getPassword());
+        return account == null ? -1 : account.getUserId();
     }
 }

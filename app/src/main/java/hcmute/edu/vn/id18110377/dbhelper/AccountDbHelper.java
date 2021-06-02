@@ -21,6 +21,7 @@ public class AccountDbHelper extends SQLiteOpenHelper {
         String query =
                 "CREATE TABLE Account ( " +
                         "    id    INTEGER NOT NULL, " +
+                        "    userId    INTEGER NOT NULL, " +
                         "    username    TEXT NOT NULL, " +
                         "    password    TEXT NOT NULL, " +
                         "    roleId    INTEGER NOT NULL, " +
@@ -35,19 +36,38 @@ public class AccountDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
+    private Account cursorToAccount(Cursor cursor) {
+        return new Account(
+                cursor.getInt(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getInt(4),
+                cursor.getString(5)
+        );
+    }
+
     public Account getAccount(Integer id) {
         Account account = null;
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?", new String[]{id.toString()});
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-            account = new Account(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getInt(3),
-                    cursor.getString(4)
-            );
+            account = cursorToAccount(cursor);
+        }
+        cursor.close();
+        return account;
+    }
+
+    public Account login(String username, String password) {
+        Account account = null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE username = ? AND password = ?",
+                new String[]{username, password});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            account = cursorToAccount(cursor);
         }
         cursor.close();
         return account;

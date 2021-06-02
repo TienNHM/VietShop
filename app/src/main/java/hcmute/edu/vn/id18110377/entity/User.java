@@ -12,7 +12,6 @@ public class User {
     private static final int DEFAUL_AVT_UNDEFINED = R.drawable.cat_profile;
 
     private Integer id;
-    private Integer accountID;
     private String fullname;
     private String sex;
     private String email;
@@ -22,10 +21,9 @@ public class User {
     private String zalo;
     private String status;
 
-    public User(Integer id, Integer accountID, String fullname, String sex, String email,
+    public User(Integer id, String fullname, String sex, String email,
                 String phone, Bitmap avatar, String facebook, String zalo, String status) {
         this.id = id;
-        this.accountID = accountID;
         this.fullname = fullname;
         this.sex = sex;
         this.email = email;
@@ -36,10 +34,9 @@ public class User {
         this.status = status;
     }
 
-    public User(Integer id, Integer accountID, String fullname, String sex, String email,
+    public User(Integer id, String fullname, String sex, String email,
                 String phone, String facebook, String zalo, String status) {
         this.id = id;
-        this.accountID = accountID;
         this.fullname = fullname;
         this.sex = sex;
         this.email = email;
@@ -50,12 +47,12 @@ public class User {
         this.status = status;
     }
 
-    public User(Integer id, Integer accountID, String fullname, String sex, String email) {
-        this(id, accountID, fullname, sex, email, null, null, null, null);
+    public User(Integer id, String fullname, String sex, String email) {
+        this(id, fullname, sex, email, null, null, null, null);
     }
 
-    public User(Integer accountID, String fullname, String sex, String email) {
-        this(-1, accountID, fullname, sex, email, null, null, null, null);
+    public User(String fullname, String sex, String email) {
+        this(-1, fullname, sex, email, null, null, null, null);
     }
 
     public Integer getId() {
@@ -64,14 +61,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getAccountID() {
-        return accountID;
-    }
-
-    public void setAccountID(Integer accountID) {
-        this.accountID = accountID;
     }
 
     public String getFullname() {

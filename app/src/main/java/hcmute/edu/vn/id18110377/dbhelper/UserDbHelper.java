@@ -21,7 +21,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
         String query =
                 "CREATE TABLE User ( " +
                         "    id    INTEGER NOT NULL, " +
-                        "    accountID    INTEGER NOT NULL, " +
                         "    fullname    TEXT NOT NULL, " +
                         "    sex    TEXT NOT NULL, " +
                         "    email    TEXT NOT NULL, " +
@@ -30,7 +29,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
                         "    facebook    TEXT, " +
                         "    zalo    TEXT, " +
                         "    status    TEXT, " +
-                        "    FOREIGN KEY(accountID) REFERENCES Account(id), " +
                         "    PRIMARY KEY(id)" +
                         ")";
         db.execSQL(query);
@@ -49,30 +47,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             user = new User(
                     cursor.getInt(0),
-                    cursor.getInt(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getString(5),
-                    DbHelper.convertToBitmap(cursor.getBlob(6)),
-                    cursor.getString(7),
-                    cursor.getString(8),
-                    cursor.getString(9)
-            );
-        }
-        cursor.close();
-        return user;
-    }
-
-    public User getUserByAccount(Integer accountId) {
-        User user = null;
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE accountId = ?", new String[]{accountId.toString()});
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            user = new User(
-                    cursor.getInt(0),
-                    cursor.getInt(1),
                     cursor.getString(2),
                     cursor.getString(3),
                     cursor.getString(4),
