@@ -127,7 +127,5 @@ public class Product {
         this.status = status;
     }
 
-    public static class ProductType {
 
-    }
 }

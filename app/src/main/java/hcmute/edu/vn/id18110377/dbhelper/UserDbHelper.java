@@ -10,7 +10,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "User";
 
     public UserDbHelper(@Nullable Context context) {
-        super(context, TABLE_NAME, null, DbManager.DATABASE_VERSION);
+        super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
     }
 
     @Override

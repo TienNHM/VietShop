@@ -1,16 +1,21 @@
 package hcmute.edu.vn.id18110377.dbhelper;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
+import hcmute.edu.vn.id18110377.entity.Bill;
+
 public class BillDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Bill";
 
     public BillDbHelper(@Nullable Context context) {
-        super(context, TABLE_NAME, null, DbManager.DATABASE_VERSION);
+        super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
     }
 
     @Override
@@ -33,5 +38,27 @@ public class BillDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+    }
+
+    public ArrayList<Bill> getAllBills(Integer userID) {
+        ArrayList<Bill> bills = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE userId = ?", new String[]{userID.toString()});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            bills.add(
+                    new Bill(
+                            cursor.getInt(0),
+                            cursor.getInt(1),
+                            cursor.getInt(2),
+                            cursor.getDouble(3),
+                            cursor.getString(4),
+                            cursor.getString(5)
+                    )
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return bills;
     }
 }
