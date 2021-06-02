@@ -1,7 +1,6 @@
 package hcmute.edu.vn.id18110377.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,17 +55,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Notification item = notifications.get(position);
-        Log.i("=================notification: ===================", item.toString());
 
         ImageView ivNotitfyImg = holder.ivNotitfyImg;
-
         ivNotitfyImg.setImageResource(mapNotify_Image.get(item.getType()).intValue());
 
         TextView txtNotifyTitle = holder.txtNotifyTitle;
         txtNotifyTitle.setText(item.getType());
 
-        TextView txtNotifyShortDetail = holder.txtNotifyShortDetail;
-        txtNotifyShortDetail.setText(item.getShortDetail());
+        TextView txtNotifyDetail = holder.txtNotifyDetail;
+        txtNotifyDetail.setText(item.getDetail());
     }
 
     @Override
@@ -78,13 +75,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivNotitfyImg;
         TextView txtNotifyTitle;
-        TextView txtNotifyShortDetail;
+        TextView txtNotifyDetail;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             ivNotitfyImg = itemView.findViewById(R.id.notify_img);
-            txtNotifyShortDetail = itemView.findViewById(R.id.notify_shortdetail);
+            txtNotifyDetail = itemView.findViewById(R.id.notify_detail);
             txtNotifyTitle = itemView.findViewById(R.id.notify_title);
         }
     }
