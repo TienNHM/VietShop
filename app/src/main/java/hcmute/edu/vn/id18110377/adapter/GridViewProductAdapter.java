@@ -72,13 +72,11 @@ public class GridViewProductAdapter extends BaseAdapter {
         }
 
         Product product = productList.get(position);
-        String productName = product.getProductName();
-        int mainImageID = product.getMainImageID();
-        int imgSpecialID = product.getImgSpecialID();
 
-        productView.ibtnProduct.setImageResource(mainImageID);
-        productView.iv_special_image.setImageResource(imgSpecialID);
-        productView.tv_product_name.setText(productName);
+        productView.ibtnProduct.setImageBitmap(product.getImage());
+        //TODO Set Special image
+        productView.iv_special_image.setImageBitmap(null);
+        productView.tv_product_name.setText(product.getName());
 
         return convertView;
     }

@@ -77,10 +77,10 @@ public class HomeFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product(0, "Beer", R.drawable.milk_bottle, R.drawable.sale));
+        productList.add(new Product(0, "Apple", R.drawable.apple));
         productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
         productList.add(new Product(2, "Juice", R.drawable.orange_juice));
-        productList.add(new Product(3, "", R.drawable.cocktail, R.drawable.sale));
+        productList.add(new Product(3, "Cocktail", R.drawable.cocktail));
 
         GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
         GridView gv_product = view.findViewById(R.id.gv_product);
