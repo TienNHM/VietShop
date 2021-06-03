@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
@@ -149,5 +150,32 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     public int delete(Product product) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(TABLE_NAME, PRODUCT_ID + " = ?", new String[]{String.valueOf(product.getId())});
+    }
+
+    public int updateDefaultImage(Product product) {
+        switch (product.getType()) {
+            case 1:
+                product.setImage(R.drawable.clothes);
+                break;
+            case 2:
+                product.setImage(R.drawable.bread);
+                break;
+            case 3:
+                product.setImage(R.drawable.group_of_fruits);
+                break;
+            case 4:
+                product.setImage(R.drawable.drink);
+                break;
+            case 5:
+                product.setImage(R.drawable.laptop);
+                break;
+            case 6:
+                product.setImage(R.drawable.fish);
+                break;
+            case 7:
+                product.setImage(R.drawable.hatchet);
+                break;
+        }
+        return update(product);
     }
 }

@@ -102,6 +102,11 @@ public class Product {
         this.image = image;
     }
 
+    public void setImage(int defaultImage) {
+        this.image = ImageConverter.resource2Bitmap(defaultImage);
+        this.defaultImage = defaultImage;
+    }
+
     public String getDetail() {
         return detail;
     }
