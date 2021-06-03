@@ -42,7 +42,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                         "    star    REAL, " +
                         "    status    TEXT, " +
                         "    PRIMARY KEY(id), " +
-                        "    FOREIGN KEY(type) REFERENCES ProductType(id) " +
+                        "    FOREIGN KEY(type) REFERENCES ProductType(id)" +
                         ")";
         db.execSQL(query);
     }
@@ -93,6 +93,24 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public ArrayList<Product> getProductByPrice(Double price) {
         return getProductByField(PRODUCT_STAR, price);
+    }
+
+    public ArrayList<Product> getTopProducts(Integer type, int limit) {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_NAME, null, PRODUCT_TYPE + " = ?",
+                new String[]{String.valueOf(type)}, PRODUCT_TYPE,
+                null, null, String.valueOf(limit));
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            products.add(
+                    cursorToProduct(cursor)
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return products;
     }
 
     private Cursor getCursorWithStringValue(SQLiteDatabase db, String field, String value) {

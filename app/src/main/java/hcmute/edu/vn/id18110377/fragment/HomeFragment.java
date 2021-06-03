@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         ProductDbHelper productDbHelper = new ProductDbHelper(this.getContext());
-        List<Product> productList = productDbHelper.getProductByType(1);
+        List<Product> productList = productDbHelper.getTopProducts(1, 4);
 
         GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
 
