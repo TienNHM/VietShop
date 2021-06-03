@@ -1,5 +1,7 @@
 package hcmute.edu.vn.id18110377.adapter;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.layout.ProductDetail;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private List<Product> lstProduct;
@@ -63,6 +66,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             ibtnItem = itemView.findViewById(R.id.ibtnProduct);
             tvTitle = itemView.findViewById(R.id.tv_product_name);
             ivSpecialImage = itemView.findViewById(R.id.iv_special_image);
+            Log.i("===============", (String) tvTitle.getText());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("========ClickCLICKClick=======", (String) tvTitle.getText());
+                    Intent intent = new Intent(v.getContext(), ProductDetail.class);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
+
 }

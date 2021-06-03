@@ -1,21 +1,14 @@
 package hcmute.edu.vn.id18110377;
 
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import hcmute.edu.vn.id18110377.fragment.AccountFragment;
 import hcmute.edu.vn.id18110377.fragment.CartFragment;
@@ -53,12 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return false;
-    };
-
-    WormDotsIndicator wormDotsIndicator;
-    ViewPager2 viewPager;
-    FragmentStateAdapter fragmentStateAdapter;
-    List<Drawable> img_list = new ArrayList<Drawable>() {
     };
 
     @Override

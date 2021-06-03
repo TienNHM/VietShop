@@ -80,6 +80,7 @@ public class HomeFragment extends Fragment {
         List<Product> productList = productDbHelper.getAllProducts();
 
         GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
+
         GridView gv_product = view.findViewById(R.id.gv_product);
         gv_product.setAdapter(gv_adapter);
 

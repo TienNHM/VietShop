@@ -3,7 +3,6 @@ package hcmute.edu.vn.id18110377.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +74,6 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i("Click", menu_item_title.getText().toString());
                     Class cls = ItemMenu.getLayout(menu_item_title.getText().toString());
                     Intent intent = new Intent(v.getContext(), cls);
                     itemView.getContext().startActivity(intent);
