@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.adapter.GridViewProductAdapter;
+import hcmute.edu.vn.id18110377.adapter.ProductAdapter;
 import hcmute.edu.vn.id18110377.adapter.ProductTypeAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.ProductTypeDbHelper;
@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
         ProductDbHelper productDbHelper = new ProductDbHelper(this.getContext());
         //Promos
         List<Product> promoProducts = productDbHelper.getPromoProducts(4);
-        GridViewProductAdapter productAdapter = new GridViewProductAdapter(getContext(), promoProducts);
+        ProductAdapter productAdapter = new ProductAdapter(getContext(), promoProducts);
         GridView gv_promo = view.findViewById(R.id.homePromo);
         gv_promo.setAdapter(productAdapter);
 
