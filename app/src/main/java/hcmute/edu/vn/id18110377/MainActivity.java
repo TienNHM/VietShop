@@ -10,9 +10,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import hcmute.edu.vn.id18110377.fragment.AccountFragment;
 import hcmute.edu.vn.id18110377.fragment.CartFragment;
 import hcmute.edu.vn.id18110377.fragment.HomeFragment;
+import hcmute.edu.vn.id18110377.fragment.MenuFragment;
 import hcmute.edu.vn.id18110377.fragment.NotificationFragment;
 import hcmute.edu.vn.id18110377.fragment.SearchFragment;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(fragment);
                 return true;
             case R.id.menuMain:
-                fragment = new AccountFragment();
+                fragment = new MenuFragment();
                 loadFragment(fragment);
                 return true;
             case R.id.menuNotifications:

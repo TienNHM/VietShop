@@ -1,24 +1,17 @@
 package hcmute.edu.vn.id18110377.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.core.app.ActivityCompat;
 
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
-import hcmute.edu.vn.id18110377.layout.ProductDetail;
 
 public class GridViewProductAdapter extends BaseAdapter {
     private List<Product> productList;
@@ -88,18 +81,9 @@ public class GridViewProductAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ProductView implements View.OnClickListener {
-        private ImageButton ibtnProduct;
+    private class ProductView {
+        private ImageView ibtnProduct;
         private TextView tv_product_name;
         private ImageView iv_special_image;
-
-        @Override
-        public void onClick(View v) {
-            Log.i("...................", "hahah");
-            Intent intent = new Intent(v.getContext(), ProductDetail.class);
-            v.getContext().startActivity(intent);
-            ActivityCompat.startActivityForResult(new ProductDetail(), intent, 200, new Bundle());
-
-        }
     }
 }

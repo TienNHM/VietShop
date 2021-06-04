@@ -1,6 +1,7 @@
 package hcmute.edu.vn.id18110377.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,8 +91,11 @@ public class HomeFragment extends Fragment {
         ProductTypeDbHelper productTypeDbHelper = new ProductTypeDbHelper(this.getContext());
         List<ProductType> productTypes = productTypeDbHelper.getAllProductTypes();
 
-        ProductTypeAdapter productTypeAdapter = new ProductTypeAdapter(this.getContext(), productTypes);
+        ProductTypeAdapter productTypeAdapter = new ProductTypeAdapter(getContext(), productTypes);
         GridView gv_product = view.findViewById(R.id.homeProduct);
+        gv_product.setOnItemClickListener((parent, view1, position, id) -> {
+            Log.i("%%%%%%%%%%%%%%%%%%%%%%%%", "##########################");
+        });
         gv_product.setAdapter(productTypeAdapter);
 
         return view;
