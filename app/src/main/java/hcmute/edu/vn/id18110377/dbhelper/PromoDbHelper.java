@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import hcmute.edu.vn.id18110377.entity.Promo;
 
 public class PromoDbHelper extends SQLiteOpenHelper {
-    private static final String TABLE_NAME = "Promo";
+    public static final String TABLE_NAME = "Promo";
 
     public PromoDbHelper(@Nullable Context context) {
         super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);

@@ -36,7 +36,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
-                android:id="@+id/menuAccount"
+                android:id="@+id/menuMain"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_margin="10dp"
@@ -78,12 +78,14 @@
                 android:textStyle="bold|italic" />
 
             <TextView
+                android:id="@+id/tv_view_more_promo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:text="Xem thêm..."
-                android:textSize="18sp"
+                android:textColor="@color/theme_color"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -106,17 +108,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Thức ăn"
+                android:text="@string/product"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
             <TextView
+                android:id="@+id/tv_view_more_product"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:text="Xem thêm..."
-                android:textSize="18sp"
+                android:textColor="@color/theme_color"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -147,28 +151,10 @@
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:text="Xem thêm..."
-                android:textSize="18sp"
+                android:textColor="@color/theme_color"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
-
-        <GridView
-            android:id="@+id/homeClothes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:numColumns="4"></GridView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:background="@color/theme_color"
-            android:text="Tìm kiếm sản phẩm"
-            android:textAlignment="center"
-            android:textColor="@color/light_mode"
-            android:textSize="20sp" />
     </LinearLayout>
 </FrameLayout>

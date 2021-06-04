@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new CartFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.menuAccount:
+            case R.id.menuMain:
                 fragment = new AccountFragment();
                 loadFragment(fragment);
                 return true;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new NotificationFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.menuSearch:
+            case R.id.menuDiscount:
                 fragment = new SearchFragment();
                 loadFragment(fragment);
                 return true;

@@ -99,9 +99,14 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         ArrayList<Product> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
-                TABLE_NAME, null, PRODUCT_TYPE + " = ?",
-                new String[]{String.valueOf(type)}, PRODUCT_TYPE,
-                null, null, String.valueOf(limit));
+                TABLE_NAME,
+                null,
+                PRODUCT_TYPE + " = ?",
+                new String[]{String.valueOf(type)},
+                null,
+                null,
+                null,
+                String.valueOf(limit));
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             products.add(
@@ -195,5 +200,27 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                 break;
         }
         return update(product);
+    }
+
+    public ArrayList<Product> getAllPromoProducts() {
+        ArrayList<Integer> promoId = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + PromoDbHelper.TABLE_NAME, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            promoId.add(
+                    cursor.getInt(1)
+            );
+            cursor.moveToNext();
+        }
+
+        ArrayList<Product> products = new ArrayList<>();
+        promoId.forEach(id -> {
+            products.addAll(
+                    getProductByField(PRODUCT_ID, id)
+            );
+        });
+        cursor.close();
+        return products;
     }
 }
