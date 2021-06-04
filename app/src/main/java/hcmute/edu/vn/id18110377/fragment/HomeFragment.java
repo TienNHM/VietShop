@@ -1,7 +1,7 @@
 package hcmute.edu.vn.id18110377.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.ProductTypeDbHelper;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.ProductType;
+import hcmute.edu.vn.id18110377.layout.ProductDetail;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,7 +95,8 @@ public class HomeFragment extends Fragment {
         ProductTypeAdapter productTypeAdapter = new ProductTypeAdapter(getContext(), productTypes);
         GridView gv_product = view.findViewById(R.id.homeProduct);
         gv_product.setOnItemClickListener((parent, view1, position, id) -> {
-            Log.i("%%%%%%%%%%%%%%%%%%%%%%%%", "##########################");
+            Intent intent = new Intent(this.getContext(), ProductDetail.class);
+            startActivity(intent);
         });
         gv_product.setAdapter(productTypeAdapter);
 

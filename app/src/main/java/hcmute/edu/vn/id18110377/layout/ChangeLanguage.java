@@ -17,7 +17,7 @@ public class ChangeLanguage extends AppCompatActivity {
         setContentView(R.layout.feature_change_language);
 
         findViewById(R.id.btnBack_ChangeLanguage).setOnClickListener(v -> {
-            this.moveTaskToBack(true);
+            finish();
         });
     }
 

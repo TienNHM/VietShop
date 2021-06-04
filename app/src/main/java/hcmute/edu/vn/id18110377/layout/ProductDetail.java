@@ -12,6 +12,10 @@ public class ProductDetail extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_detail);
+
+        findViewById(R.id.btnBack_detail).setOnClickListener(v -> {
+            finish();
+        });
     }
 
 }
