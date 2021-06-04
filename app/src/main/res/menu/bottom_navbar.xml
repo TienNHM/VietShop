@@ -10,17 +10,10 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menuNotifications"
-        android:contentDescription="@string/notifications"
-        android:icon="@drawable/notifications"
-        android:title="@string/notifications"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/menuSearch"
-        android:contentDescription="@string/search"
-        android:icon="@drawable/search"
-        android:title="@string/search"
+        android:id="@+id/menuDiscount"
+        android:contentDescription="@string/discount"
+        android:icon="@drawable/pricing"
+        android:title="@string/discount"
         app:showAsAction="ifRoom" />
 
     <item
@@ -31,10 +24,17 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menuAccount"
-        android:contentDescription="@string/account"
-        android:icon="@drawable/account"
-        android:title="@string/account"
+        android:id="@+id/menuNotifications"
+        android:contentDescription="@string/notifications"
+        android:icon="@drawable/notifications"
+        android:title="@string/notifications"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menuMain"
+        android:contentDescription="Menu"
+        android:icon="@drawable/menu"
+        android:title="Menu"
         app:showAsAction="ifRoom" />
 
 </menu>
