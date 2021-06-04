@@ -202,10 +202,22 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return update(product);
     }
 
+    private Cursor getCursorPromoProduct(SQLiteDatabase db, int limit) {
+        if (limit <= 0)
+            return db.rawQuery("SELECT * FROM " + PromoDbHelper.TABLE_NAME, null);
+        else
+            return db.rawQuery("SELECT * FROM " + PromoDbHelper.TABLE_NAME + " LIMIT ?", new String[]{String.valueOf((limit))});
+    }
+
     public ArrayList<Product> getAllPromoProducts() {
+        return getPromoProducts(-1);
+    }
+
+    public ArrayList<Product> getPromoProducts(int limit) {
         ArrayList<Integer> promoId = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PromoDbHelper.TABLE_NAME, null);
+        Cursor cursor = getCursorPromoProduct(db, limit);
+
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             promoId.add(

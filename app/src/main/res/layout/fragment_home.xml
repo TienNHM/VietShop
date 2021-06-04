@@ -64,97 +64,92 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_weight="200">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Đề xuất"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_view_more_promo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="Xem thêm..."
-                android:textColor="@color/theme_color"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/bg_food" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp">
 
-        <GridView
-            android:id="@+id/homePromo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:numColumns="4">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Đề xuất"
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
 
-        </GridView>
+                    <TextView
+                        android:id="@+id/tv_view_more_promo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:text="Xem thêm..."
+                        android:textColor="@color/theme_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/product"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                <GridView
+                    android:id="@+id/homePromo"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:numColumns="4">
 
-            <TextView
-                android:id="@+id/tv_view_more_product"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="Xem thêm..."
-                android:textColor="@color/theme_color"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                </GridView>
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp">
 
-        <GridView
-            android:id="@+id/homeFood"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:numColumns="4"></GridView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/product"
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+                    <TextView
+                        android:id="@+id/tv_view_more_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:text="Xem thêm..."
+                        android:textColor="@color/theme_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Thời trang"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="Xem thêm..."
-                android:textColor="@color/theme_color"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <GridView
+                    android:id="@+id/homeProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="10"
+                    android:numColumns="4" />
 
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </FrameLayout>

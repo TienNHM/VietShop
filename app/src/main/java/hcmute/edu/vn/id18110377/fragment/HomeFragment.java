@@ -14,8 +14,11 @@ import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.GridViewProductAdapter;
+import hcmute.edu.vn.id18110377.adapter.ProductTypeAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
+import hcmute.edu.vn.id18110377.dbhelper.ProductTypeDbHelper;
 import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.entity.ProductType;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,12 +80,19 @@ public class HomeFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         ProductDbHelper productDbHelper = new ProductDbHelper(this.getContext());
-        List<Product> productList = productDbHelper.getTopProducts(1, 4);
+        //Promos
+        List<Product> promoProducts = productDbHelper.getPromoProducts(4);
+        GridViewProductAdapter productAdapter = new GridViewProductAdapter(getContext(), promoProducts);
+        GridView gv_promo = view.findViewById(R.id.homePromo);
+        gv_promo.setAdapter(productAdapter);
 
-        GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
+        //Products
+        ProductTypeDbHelper productTypeDbHelper = new ProductTypeDbHelper(this.getContext());
+        List<ProductType> productTypes = productTypeDbHelper.getAllProductTypes();
 
-        GridView gv_product = view.findViewById(R.id.homePromo);
-        gv_product.setAdapter(gv_adapter);
+        ProductTypeAdapter productTypeAdapter = new ProductTypeAdapter(this.getContext(), productTypes);
+        GridView gv_product = view.findViewById(R.id.homeProduct);
+        gv_product.setAdapter(productTypeAdapter);
 
         return view;
     }
