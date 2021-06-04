@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,16 @@ import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.adapter.GridViewProductAdapter;
+import hcmute.edu.vn.id18110377.adapter.ProductAdapter;
+import hcmute.edu.vn.id18110377.adapter.ProductTypeAdapter;
+import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
+import hcmute.edu.vn.id18110377.dbhelper.ProductTypeDbHelper;
 import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.entity.ProductType;
+import hcmute.edu.vn.id18110377.layout.ProductDetail;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,15 +81,24 @@ public class HomeFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_spinner, location);
         spinner.setAdapter(adapter);
 
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product(0, "Apple", R.drawable.apple));
-        productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
-        productList.add(new Product(2, "Juice", R.drawable.orange_juice));
-        productList.add(new Product(3, "Cocktail", R.drawable.cocktail));
+        ProductDbHelper productDbHelper = new ProductDbHelper(this.getContext());
+        //Promos
+        List<Product> promoProducts = productDbHelper.getPromoProducts(4);
+        ProductAdapter productAdapter = new ProductAdapter(getContext(), promoProducts);
+        GridView gv_promo = view.findViewById(R.id.homePromo);
+        gv_promo.setAdapter(productAdapter);
 
-        GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
-        GridView gv_product = view.findViewById(R.id.gv_product);
-        gv_product.setAdapter(gv_adapter);
+        //Products
+        ProductTypeDbHelper productTypeDbHelper = new ProductTypeDbHelper(this.getContext());
+        List<ProductType> productTypes = productTypeDbHelper.getAllProductTypes();
+
+        ProductTypeAdapter productTypeAdapter = new ProductTypeAdapter(getContext(), productTypes);
+        GridView gv_product = view.findViewById(R.id.homeProduct);
+        gv_product.setOnItemClickListener((parent, view1, position, id) -> {
+            Intent intent = new Intent(this.getContext(), ProductDetail.class);
+            startActivity(intent);
+        });
+        gv_product.setAdapter(productTypeAdapter);
 
         return view;
     }

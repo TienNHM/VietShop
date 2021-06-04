@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
@@ -31,7 +32,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE Product ( " +
+                "CREATE TABLE IF NOT EXISTS Product ( " +
                         "    id    INTEGER NOT NULL, " +
                         "    type    INTEGER NOT NULL, " +
                         "    name    TEXT NOT NULL, " +
@@ -41,7 +42,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                         "    star    REAL, " +
                         "    status    TEXT, " +
                         "    PRIMARY KEY(id), " +
-                        "    FOREIGN KEY(type) REFERENCES ProductType(id) " +
+                        "    FOREIGN KEY(type) REFERENCES ProductType(id)" +
                         ")";
         db.execSQL(query);
     }
@@ -92,6 +93,29 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public ArrayList<Product> getProductByPrice(Double price) {
         return getProductByField(PRODUCT_STAR, price);
+    }
+
+    public ArrayList<Product> getTopProducts(Integer type, int limit) {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                null,
+                PRODUCT_TYPE + " = ?",
+                new String[]{String.valueOf(type)},
+                null,
+                null,
+                null,
+                String.valueOf(limit));
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            products.add(
+                    cursorToProduct(cursor)
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return products;
     }
 
     private Cursor getCursorWithStringValue(SQLiteDatabase db, String field, String value) {
@@ -149,5 +173,66 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     public int delete(Product product) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(TABLE_NAME, PRODUCT_ID + " = ?", new String[]{String.valueOf(product.getId())});
+    }
+
+    public int updateDefaultImage(Product product) {
+        switch (product.getType()) {
+            case 1:
+                product.setImage(R.drawable.clothes);
+                break;
+            case 2:
+                product.setImage(R.drawable.bread);
+                break;
+            case 3:
+                product.setImage(R.drawable.group_of_fruits);
+                break;
+            case 4:
+                product.setImage(R.drawable.drink);
+                break;
+            case 5:
+                product.setImage(R.drawable.laptop);
+                break;
+            case 6:
+                product.setImage(R.drawable.fish);
+                break;
+            case 7:
+                product.setImage(R.drawable.hatchet);
+                break;
+        }
+        return update(product);
+    }
+
+    private Cursor getCursorPromoProduct(SQLiteDatabase db, int limit) {
+        if (limit <= 0)
+            return db.rawQuery("SELECT * FROM " + PromoDbHelper.TABLE_NAME, null);
+        else
+            return db.rawQuery("SELECT * FROM " + PromoDbHelper.TABLE_NAME + " LIMIT ?", new String[]{String.valueOf((limit))});
+    }
+
+    public ArrayList<Product> getAllPromoProducts() {
+        return getPromoProducts(-1);
+    }
+
+    public ArrayList<Product> getPromoProducts(int limit) {
+        ArrayList<Integer> promoId = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = getCursorPromoProduct(db, limit);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            promoId.add(
+                    cursor.getInt(1)
+            );
+            cursor.moveToNext();
+        }
+
+        ArrayList<Product> products = new ArrayList<>();
+        promoId.forEach(id -> {
+            products.addAll(
+                    getProductByField(PRODUCT_ID, id)
+            );
+        });
+        cursor.close();
+        return products;
     }
 }

@@ -9,26 +9,25 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import hcmute.edu.vn.id18110377.entity.Promo;
+import hcmute.edu.vn.id18110377.entity.ProductType;
 
-public class PromoDbHelper extends SQLiteOpenHelper {
-    public static final String TABLE_NAME = "Promo";
+public class ProductTypeDbHelper extends SQLiteOpenHelper {
+    private static final String TABLE_NAME = "ProductType";
 
-    public PromoDbHelper(@Nullable Context context) {
-        super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
+    public ProductTypeDbHelper(@Nullable Context context) {
+        super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE Promo ( " +
+                "CREATE TABLE IF NOT EXISTS ProductType ( " +
                         "    id    INTEGER NOT NULL, " +
-                        "    productId    INTEGER NOT NULL, " +
-                        "    type    TEXT NOT NULL, " +
-                        "    expirationDate    TEXT NOT NULL, " +
+                        "    name    TEXT NOT NULL, " +
+                        "    image    BLOB, " +
                         "    status    TEXT, " +
                         "    PRIMARY KEY(id) " +
-                        ")";
+                        ");";
         db.execSQL(query);
     }
 
@@ -37,24 +36,25 @@ public class PromoDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
-    public ArrayList<Promo> getAllPromos() {
-        ArrayList<Promo> promos = new ArrayList<>();
+    public ArrayList<ProductType> getAllProductTypes() {
+        ArrayList<ProductType> productTypes = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            promos.add(
-                    new Promo(
+            productTypes.add(
+                    new ProductType(
                             cursor.getInt(0),
-                            cursor.getInt(1),
-                            cursor.getString(2),
-                            cursor.getString(3),
-                            cursor.getString(4)
+                            cursor.getString(1),
+                            cursor.getBlob(2),
+                            cursor.getString(3)
                     )
             );
             cursor.moveToNext();
         }
         cursor.close();
-        return promos;
+
+        return productTypes;
     }
 }

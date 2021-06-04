@@ -5,22 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.entity.ProductType;
 
-public class GridViewProductAdapter extends BaseAdapter {
-    private List<Product> productList;
+public class ProductTypeAdapter extends BaseAdapter {
+    private List<ProductType> productTypes;
     private LayoutInflater inflater;
 
-    public GridViewProductAdapter(Context context, List<Product> productList) {
+    public ProductTypeAdapter(Context context, List<ProductType> productTypes) {
         inflater = LayoutInflater.from(context);
-        this.productList = productList;
+        this.productTypes = productTypes;
     }
 
     public LayoutInflater getInflater() {
@@ -31,58 +30,59 @@ public class GridViewProductAdapter extends BaseAdapter {
         this.inflater = inflater;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public List<ProductType> getProductTypes() {
+        return productTypes;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setProductTypes(List<ProductType> productTypes) {
+        this.productTypes = productTypes;
     }
 
     @Override
     public int getCount() {
-        return productList == null ? 0 : productList.size();
+        return productTypes == null ? 0 : productTypes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return productList.get(position);
+        return productTypes.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return productList.get(position).getId();
+        return productTypes.get(position).getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ProductView productView;
+        ProductTypeAdapter.ProductTypeView productView;
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.product_item, parent, false);
 
-            productView = new ProductView();
+            productView = new ProductTypeAdapter.ProductTypeView();
             productView.ibtnProduct = convertView.findViewById(R.id.ibtnProduct);
             productView.tv_product_name = convertView.findViewById(R.id.tv_product_name);
             productView.iv_special_image = convertView.findViewById(R.id.iv_special_image);
 
             convertView.setTag(productView);
         } else {
-            productView = (ProductView) convertView.getTag();
+            productView = (ProductTypeAdapter.ProductTypeView) convertView.getTag();
         }
 
-        Product product = productList.get(position);
 
-        productView.ibtnProduct.setImageBitmap(product.getImage());
+        ProductType productType = productTypes.get(position);
+
+        productView.ibtnProduct.setImageBitmap(productType.getImage());
         //TODO Set Special image
         productView.iv_special_image.setImageBitmap(null);
-        productView.tv_product_name.setText(product.getName());
+        productView.tv_product_name.setText(productType.getName());
 
         return convertView;
     }
 
-    private class ProductView {
-        private ImageButton ibtnProduct;
+    private class ProductTypeView {
+        private ImageView ibtnProduct;
         private TextView tv_product_name;
         private ImageView iv_special_image;
     }

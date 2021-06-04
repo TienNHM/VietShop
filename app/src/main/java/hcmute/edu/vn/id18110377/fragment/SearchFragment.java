@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.adapter.GridViewProductAdapter;
+import hcmute.edu.vn.id18110377.adapter.ProductAdapter;
 import hcmute.edu.vn.id18110377.entity.Product;
 
 public class SearchFragment extends Fragment {
@@ -84,7 +84,7 @@ public class SearchFragment extends Fragment {
 
         // List Product Sponsor
         List<Product> productList = createListSponsor();
-        GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), productList);
+        ProductAdapter gv_adapter = new ProductAdapter(getContext(), productList);
         gvSponsor.setAdapter(gv_adapter);
 
         //txtSearch
@@ -93,7 +93,7 @@ public class SearchFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     List<Product> lstSearchResult = getSearchResult();
-                    GridViewProductAdapter gv_adapter = new GridViewProductAdapter(getContext(), lstSearchResult);
+                    ProductAdapter gv_adapter = new ProductAdapter(getContext(), lstSearchResult);
                     gvSearchResult.setAdapter(gv_adapter);
                     return true;
                 }

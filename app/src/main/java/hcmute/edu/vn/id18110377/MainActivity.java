@@ -1,25 +1,18 @@
 package hcmute.edu.vn.id18110377;
 
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import hcmute.edu.vn.id18110377.fragment.AccountFragment;
 import hcmute.edu.vn.id18110377.fragment.CartFragment;
 import hcmute.edu.vn.id18110377.fragment.HomeFragment;
+import hcmute.edu.vn.id18110377.fragment.MenuFragment;
 import hcmute.edu.vn.id18110377.fragment.NotificationFragment;
 import hcmute.edu.vn.id18110377.fragment.SearchFragment;
 
@@ -39,26 +32,20 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new CartFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.menuAccount:
-                fragment = new AccountFragment();
+            case R.id.menuMain:
+                fragment = new MenuFragment();
                 loadFragment(fragment);
                 return true;
             case R.id.menuNotifications:
                 fragment = new NotificationFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.menuSearch:
+            case R.id.menuDiscount:
                 fragment = new SearchFragment();
                 loadFragment(fragment);
                 return true;
         }
         return false;
-    };
-
-    WormDotsIndicator wormDotsIndicator;
-    ViewPager2 viewPager;
-    FragmentStateAdapter fragmentStateAdapter;
-    List<Drawable> img_list = new ArrayList<Drawable>() {
     };
 
     @Override
