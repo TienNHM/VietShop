@@ -6,146 +6,148 @@
     android:layout_height="match_parent"
     tools:context=".layout.ProductDetail">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardProduct"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:scrollbars="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/topNavbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFA000"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:id="@+id/btnBack_detail"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/arrow_back" />
-
-            <TextView
-                android:id="@+id/txtSearch_notification"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="20"
-                android:ems="10"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="@string/details"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/topNavbar">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_food" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/topNavbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/message"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:background="#FFA000">
+
+                <ImageButton
+                    android:id="@+id/btnBack_detail"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/arrow_back" />
 
                 <TextView
-                    android:id="@+id/product_title"
+                    android:id="@+id/txtSearch_notification"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="20"
+                    android:ems="10"
                     android:gravity="center"
-                    android:text="Gà rán"
-                    android:textColor="#000000"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
+                    android:padding="5dp"
+                    android:text="@string/details"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/product_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="10000 ₫"
-                    android:textColor="@color/light_mode"
-                    android:textSize="36sp"
-                    android:textStyle="bold" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="30dp"
-                    android:gravity="center">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/review" />
+                        android:id="@+id/productImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_food"
+                        android:scaleType="matrix" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/productTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/product"
+                                android:textColor="@color/theme_color"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/productStore"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Store"
+                                android:textColor="#0288D1"
+                                android:textSize="18sp"
+                                android:textStyle="bold|italic" />
+                        </LinearLayout>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipBuyNow"
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="40dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/bungee"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="@string/buyNow"
+                            android:textAlignment="center"
+                            android:textAllCaps="true"
+                            android:textColor="#E64A19"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:chipBackgroundColor="#B5F1B4A1"
+                            app:chipIconSize="32dp"
+                            app:chipMinHeight="48dp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/product_star"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/productDescription"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:text="10"
-                        android:textColor="@color/light_mode"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="15dp"
+                        android:text="Description"
+                        android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/product_review"
-                        android:layout_width="wrap_content"
+                    <ScrollView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|right"
-                        android:padding="5dp"
-                        android:text="5"
-                        android:textColor="@color/light_mode"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:layout_margin="15dp">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/star_filled" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Review"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/productReview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </ScrollView>
                 </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium."
-                android:textSize="16sp" />
+            </ScrollView>
         </LinearLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addToCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="20dp"
-            android:backgroundTint="@color/theme_color"
-            android:src="@drawable/ic_add"
-            app:borderWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

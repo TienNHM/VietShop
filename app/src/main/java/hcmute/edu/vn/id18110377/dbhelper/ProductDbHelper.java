@@ -225,6 +225,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
             );
             cursor.moveToNext();
         }
+        cursor.close();
 
         ArrayList<Product> products = new ArrayList<>();
         promoId.forEach(id -> {
@@ -232,7 +233,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     getProductByField(PRODUCT_ID, id)
             );
         });
-        cursor.close();
+
         return products;
     }
 }
