@@ -6,6 +6,7 @@ import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class Product {
     private Integer id;
+    private Integer storeId;
     private Integer type;
     private String name;
     private Double price;
@@ -15,45 +16,48 @@ public class Product {
     private Float star;
     private String status;
 
-    public Product(Integer id, Integer type, String name, Double price,
+    public Product(Integer id, Integer storeId, Integer type, String name, Double price,
                    Bitmap image, String detail, Float star, String status) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.price = price;
-        this.image = image;
-        this.detail = detail;
-        this.star = star;
-        this.status = status;
+        this.setId(id);
+        this.setStoreId(storeId);
+        this.setType(type);
+        this.setName(name);
+        this.setPrice(price);
+        this.setImage(image);
+        this.setDetail(detail);
+        this.setStar(star);
+        this.setStatus(status);
     }
 
-    public Product(Integer id, Integer type, String name, Double price,
+    public Product(Integer id, Integer storeId, Integer type, String name, Double price,
                    int defaultImage, String detail, Float star, String status) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.price = price;
+        this.setId(id);
+        this.setStoreId(storeId);
+        this.setType(type);
+        this.setName(name);
+        this.setPrice(price);
+        this.setImage(image);
+        this.setDetail(detail);
+        this.setStar(star);
+        this.setStatus(status);
         this.defaultImage = defaultImage;
         this.image = ImageConverter.resource2Bitmap(defaultImage);
-        this.detail = detail;
-        this.star = star;
-        this.status = status;
     }
 
-    public Product(Integer id, Integer type, String name, Double price) {
-        this(id, type, name, price, null, null, 0.0f, null);
+    public Product(Integer id, Integer storeId, Integer type, String name, Double price) {
+        this(id, storeId, type, name, price, null, null, 0.0f, null);
     }
 
-    public Product(Integer type, String name, int defaultImage) {
-        this(-1, type, name, 0.0, defaultImage, null, 0.0f, null);
+    public Product(Integer storeId, Integer type, String name, int defaultImage) {
+        this(-1, storeId, type, name, 0.0, defaultImage, null, 0.0f, null);
     }
 
-    public Product(Integer type, String name, Bitmap image) {
-        this(-1, type, name, 0.0, image, null, 0.0f, null);
+    public Product(Integer storeId, Integer type, String name, Bitmap image) {
+        this(-1, storeId, type, name, 0.0, image, null, 0.0f, null);
     }
 
-    public Product(Integer type, String name, Double price) {
-        this(-1, type, name, price, null, null, 0.0f, null);
+    public Product(Integer storeId, Integer type, String name, Double price) {
+        this(-1, storeId, type, name, price, null, null, 0.0f, null);
     }
 
     public Integer getId() {
@@ -62,6 +66,14 @@ public class Product {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
     public Integer getType() {
@@ -131,6 +143,4 @@ public class Product {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
 }

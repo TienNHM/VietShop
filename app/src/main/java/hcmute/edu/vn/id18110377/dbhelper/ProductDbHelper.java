@@ -17,6 +17,7 @@ import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 public class ProductDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Product";
     private static final String PRODUCT_ID = "id";
+    private static final String PRODUCT_STORE_ID = "storeId";
     private static final String PRODUCT_TYPE = "type";
     private static final String PRODUCT_NAME = "name";
     private static final String PRODUCT_PRICE = "price";
@@ -32,17 +33,19 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE IF NOT EXISTS Product ( " +
+                "CREATE TABLE Product ( " +
                         "    id    INTEGER NOT NULL, " +
+                        "    storeId    INTEGER, " +
                         "    type    INTEGER NOT NULL, " +
-                        "    name    TEXT NOT NULL, " +
+                        "    name    INTEGER NOT NULL, " +
                         "    price    REAL, " +
                         "    image    BLOB, " +
                         "    detail    TEXT, " +
                         "    star    REAL, " +
                         "    status    TEXT, " +
                         "    PRIMARY KEY(id), " +
-                        "    FOREIGN KEY(type) REFERENCES ProductType(id)" +
+                        "    FOREIGN KEY(type) REFERENCES ProductType(id), " +
+                        "    FOREIGN KEY(storeId) REFERENCES Store(id) " +
                         ")";
         db.execSQL(query);
     }
@@ -56,12 +59,13 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return new Product(
                 cursor.getInt(0),
                 cursor.getInt(1),
-                cursor.getString(2),
-                cursor.getDouble(3),
-                ImageConverter.byte2Bitmap(cursor.getBlob(4)),
-                cursor.getString(5),
-                cursor.getFloat(6),
-                cursor.getString(7));
+                cursor.getInt(2),
+                cursor.getString(3),
+                cursor.getDouble(4),
+                ImageConverter.byte2Bitmap(cursor.getBlob(5)),
+                cursor.getString(6),
+                cursor.getFloat(7),
+                cursor.getString(8));
     }
 
     public ArrayList<Product> getAllProducts() {
@@ -77,6 +81,10 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return products;
+    }
+
+    public ArrayList<Product> getProductById(Integer id) {
+        return getProductByField(PRODUCT_ID, id);
     }
 
     public ArrayList<Product> getProductByName(String name) {

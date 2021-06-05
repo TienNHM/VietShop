@@ -105,23 +105,23 @@ public class SearchFragment extends Fragment {
 
     private List<Product> createListSponsor() {
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product(0, "Soda", R.drawable.soda));
-        productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
-        productList.add(new Product(2, "Juice", R.drawable.orange_juice));
-        productList.add(new Product(3, "Fast food", R.drawable.fast_food));
+        productList.add(new Product(1, 0, "Soda", R.drawable.soda));
+        productList.add(new Product(2, 1, "Milk", R.drawable.milk_bottle));
+        productList.add(new Product(1, 2, "Juice", R.drawable.orange_juice));
+        productList.add(new Product(3, 3, "Fast food", R.drawable.fast_food));
         return productList;
     }
 
     private List<Product> getSearchResult() {
         List<Product> productList = new ArrayList<>();
-        productList.add(new Product(0, "Beer", R.drawable.beer));
-        productList.add(new Product(1, "Milk", R.drawable.milk_bottle));
-        productList.add(new Product(2, "Juice", R.drawable.orange_juice));
-        productList.add(new Product(3, "Fast food", R.drawable.fast_food));
-        productList.add(new Product(4, "Soda", R.drawable.soda));
-        productList.add(new Product(5, "Apple", R.drawable.apple));
-        productList.add(new Product(6, "Paprika", R.drawable.paprika));
-        productList.add(new Product(7, "Pineaple", R.drawable.pineapple));
+        productList.add(new Product(1, 1, "Beer", R.drawable.beer));
+        productList.add(new Product(2, 1, "Milk", R.drawable.milk_bottle));
+        productList.add(new Product(3, 2, "Juice", R.drawable.orange_juice));
+        productList.add(new Product(4, 3, "Fast food", R.drawable.fast_food));
+        productList.add(new Product(5, 4, "Soda", R.drawable.soda));
+        productList.add(new Product(6, 5, "Apple", R.drawable.apple));
+        productList.add(new Product(7, 6, "Paprika", R.drawable.paprika));
+        productList.add(new Product(8, 4, "Pineaple", R.drawable.pineapple));
         return productList;
     }
 }
