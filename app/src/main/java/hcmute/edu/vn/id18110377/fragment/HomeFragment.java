@@ -2,6 +2,7 @@ package hcmute.edu.vn.id18110377.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,9 @@ import hcmute.edu.vn.id18110377.layout.ProductDetail;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    public static final String PROMO_PRODUCT_ID = "productId";
+    public static final String PRODUCT_TYPE_ID = "productType";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,6 +101,8 @@ public class HomeFragment extends Fragment {
         GridView gv_promo = view.findViewById(R.id.homePromo);
         gv_promo.setOnItemClickListener((parent, view1, position, id) -> {
             Intent intent = new Intent(this.getContext(), ProductDetail.class);
+            Log.i("%%%%%%%%%%%%%%", (String.valueOf(productAdapter.getItemId(position))));
+            intent.putExtra(PROMO_PRODUCT_ID, productAdapter.getItemId(position));
             startActivity(intent);
         });
         gv_promo.setAdapter(productAdapter);
@@ -109,6 +115,7 @@ public class HomeFragment extends Fragment {
         GridView gv_product = view.findViewById(R.id.homeProduct);
         gv_product.setOnItemClickListener((parent, view1, position, id) -> {
             Intent intent = new Intent(this.getContext(), ProductDetail.class);
+            intent.putExtra(PRODUCT_TYPE_ID, productTypeAdapter.getItemId(position));
             startActivity(intent);
         });
         gv_product.setAdapter(productTypeAdapter);

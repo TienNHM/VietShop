@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.entity.Store;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class ProductDbHelper extends SQLiteOpenHelper {
@@ -83,8 +84,11 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return products;
     }
 
-    public ArrayList<Product> getProductById(Integer id) {
-        return getProductByField(PRODUCT_ID, id);
+    public Product getProductById(Integer id) {
+        ArrayList<Product> products = getProductByField(PRODUCT_ID, id);
+        if (products.size() > 0)
+            return products.get(0);
+        return null;
     }
 
     public ArrayList<Product> getProductByName(String name) {
@@ -243,5 +247,17 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         });
 
         return products;
+    }
+
+    public Store getStore(Integer storeId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + StoreDbHelper.TABLE_NAME + " WHERE id = ?", new String[]{storeId.toString()});
+        Store store = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            store = StoreDbHelper.cursorToStore(cursor);
+        }
+        cursor.close();
+        return store;
     }
 }
