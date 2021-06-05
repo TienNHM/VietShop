@@ -12,7 +12,7 @@
     <string name="txtLoginWith">Đăng nhập với</string>
     <string name="txtSignupForm">Đăng ký</string>
     <string name="txtFullname">Họ tên</string>
-    <string name="txtPhone">SĐT</string>
+    <string name="txtPhone">Số điện thoại</string>
     <string name="btnSignup">Đăng ký</string>
     <string name="txtSignin">Đăng nhập</string>
     <string name="txtHaveAccount">Bạn đã có tài khoản?</string>

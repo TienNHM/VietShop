@@ -35,6 +35,7 @@
                 android:layout_height="148dp"
                 android:layout_gravity="center"
                 android:background="@drawable/account"
+                android:layout_margin="20dp"
                 android:scaleType="matrix" />
 
             <LinearLayout
@@ -98,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="2dp"
-                android:hint="@string/fullName"
+                android:hint="@string/txtEmail"
                 app:endIconMode="clear_text"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
@@ -107,7 +108,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -117,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="2dp"
-                android:hint="@string/fullName"
+                android:hint="@string/txtPhone"
                 app:endIconMode="clear_text"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
@@ -126,7 +128,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -136,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="2dp"
-                android:hint="@string/fullName"
+                android:hint="@string/txtUsername"
                 app:endIconMode="clear_text"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
@@ -155,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="2dp"
-                android:hint="@string/fullName"
+                android:hint="@string/txtPassword"
                 app:endIconMode="password_toggle"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
@@ -175,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="2dp"
-                android:hint="@string/fullName"
+                android:hint="@string/txtConfirmPassword"
                 app:endIconMode="password_toggle"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
