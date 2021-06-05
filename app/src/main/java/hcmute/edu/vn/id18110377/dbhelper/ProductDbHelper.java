@@ -12,11 +12,13 @@ import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.entity.Store;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class ProductDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Product";
     private static final String PRODUCT_ID = "id";
+    private static final String PRODUCT_STORE_ID = "storeId";
     private static final String PRODUCT_TYPE = "type";
     private static final String PRODUCT_NAME = "name";
     private static final String PRODUCT_PRICE = "price";
@@ -32,17 +34,19 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE IF NOT EXISTS Product ( " +
+                "CREATE TABLE Product ( " +
                         "    id    INTEGER NOT NULL, " +
+                        "    storeId    INTEGER, " +
                         "    type    INTEGER NOT NULL, " +
-                        "    name    TEXT NOT NULL, " +
+                        "    name    INTEGER NOT NULL, " +
                         "    price    REAL, " +
                         "    image    BLOB, " +
                         "    detail    TEXT, " +
                         "    star    REAL, " +
                         "    status    TEXT, " +
                         "    PRIMARY KEY(id), " +
-                        "    FOREIGN KEY(type) REFERENCES ProductType(id)" +
+                        "    FOREIGN KEY(type) REFERENCES ProductType(id), " +
+                        "    FOREIGN KEY(storeId) REFERENCES Store(id) " +
                         ")";
         db.execSQL(query);
     }
@@ -56,12 +60,13 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return new Product(
                 cursor.getInt(0),
                 cursor.getInt(1),
-                cursor.getString(2),
-                cursor.getDouble(3),
-                ImageConverter.byte2Bitmap(cursor.getBlob(4)),
-                cursor.getString(5),
-                cursor.getFloat(6),
-                cursor.getString(7));
+                cursor.getInt(2),
+                cursor.getString(3),
+                cursor.getDouble(4),
+                ImageConverter.byte2Bitmap(cursor.getBlob(5)),
+                cursor.getString(6),
+                cursor.getFloat(7),
+                cursor.getString(8));
     }
 
     public ArrayList<Product> getAllProducts() {
@@ -77,6 +82,13 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return products;
+    }
+
+    public Product getProductById(Integer id) {
+        ArrayList<Product> products = getProductByField(PRODUCT_ID, id);
+        if (products.size() > 0)
+            return products.get(0);
+        return null;
     }
 
     public ArrayList<Product> getProductByName(String name) {
@@ -225,6 +237,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
             );
             cursor.moveToNext();
         }
+        cursor.close();
 
         ArrayList<Product> products = new ArrayList<>();
         promoId.forEach(id -> {
@@ -232,7 +245,19 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     getProductByField(PRODUCT_ID, id)
             );
         });
-        cursor.close();
+
         return products;
+    }
+
+    public Store getStore(Integer storeId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + StoreDbHelper.TABLE_NAME + " WHERE id = ?", new String[]{storeId.toString()});
+        Store store = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            store = StoreDbHelper.cursorToStore(cursor);
+        }
+        cursor.close();
+        return store;
     }
 }

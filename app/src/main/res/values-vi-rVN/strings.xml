@@ -38,4 +38,7 @@
     <string name="help">Hỗ trợ</string>
     <string name="change_language">Đổi ngôn ngữ</string>
     <string name="details">Chi tiết sản phẩm</string>
+    <string name="product">Sản phẩm</string>
+    <string name="discount">Khuyến mãi</string>
+    <string name="buyNow">Mua ngay</string>
 </resources>
