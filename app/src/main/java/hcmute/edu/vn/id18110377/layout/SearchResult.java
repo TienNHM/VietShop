@@ -31,8 +31,8 @@ public class SearchResult extends AppCompatActivity {
 
     private void getSearchResult() {
         GridView gridView = findViewById(R.id.searchResult);
-        Intent intent = getIntent();
-        String txtSearch = intent.getStringExtra("search");
+
+        String txtSearch = getIntent().getStringExtra("search");
 
         ProductDbHelper productDbHelper = new ProductDbHelper(this);
         ArrayList<Product> products = productDbHelper.getFullSearchResult(txtSearch);
@@ -40,7 +40,7 @@ public class SearchResult extends AppCompatActivity {
         ProductAdapter adapter = new ProductAdapter(this, products);
 
         gridView.setOnItemClickListener((parent, view1, position, id) -> {
-            Intent i = new Intent(this, ProductDetail.class);
+            Intent intent = new Intent(this, ProductDetail.class);
             intent.putExtra(PRODUCT_ID, adapter.getItemId(position));
             startActivity(intent);
         });
