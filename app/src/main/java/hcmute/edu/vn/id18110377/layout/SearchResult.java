@@ -16,8 +16,6 @@ import hcmute.edu.vn.id18110377.entity.Product;
 
 public class SearchResult extends AppCompatActivity {
 
-    public static final String PRODUCT_ID = "productId";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,7 @@ public class SearchResult extends AppCompatActivity {
         GridView gridView = findViewById(R.id.searchResult);
         gridView.setOnItemClickListener((parent, view1, position, id) -> {
             Intent intent = new Intent(this, ProductDetail.class);
-            intent.putExtra(PRODUCT_ID, adapter.getItemId(position));
+            intent.putExtra(ProductDetail.PRODUCT_ID, adapter.getItemId(position));
             startActivity(intent);
         });
         gridView.setAdapter(adapter);

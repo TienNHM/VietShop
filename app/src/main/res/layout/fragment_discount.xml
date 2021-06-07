@@ -38,41 +38,79 @@
                 app:queryHint="@string/txtSearch" />
         </LinearLayout>
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingLeft="10dp"
-            android:text="Đề xuất"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:fillViewport="true">
 
-        <GridView
-            android:id="@+id/gvSponsor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:numColumns="4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </GridView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="Đề xuất"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingLeft="10dp"
-            android:text="Kết quả tìm kiếm"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+                <GridView
+                    android:id="@+id/gvSponsor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:numColumns="4">
 
-        <GridView
-            android:id="@+id/gvSearchResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:numColumns="4">
+                </GridView>
 
-        </GridView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="Kết quả tìm kiếm"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvNumDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="0"
+                        android:textColor="#D32F2F"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="@string/product_s_were_found"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <GridView
+                    android:id="@+id/gvSearchResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:numColumns="4">
+
+                </GridView>
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </FrameLayout>

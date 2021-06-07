@@ -1,11 +1,12 @@
 package hcmute.edu.vn.id18110377.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.ProductAdapter;
+import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
 import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.layout.ProductDetail;
 
 public class DiscountFragment extends Fragment {
 
@@ -29,6 +32,9 @@ public class DiscountFragment extends Fragment {
 
     @BindView(R.id.gvSearchResult)
     GridView gvSearchResult;
+
+    @BindView(R.id.tvNumDiscount)
+    TextView tvNumDiscount;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,45 +86,45 @@ public class DiscountFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         // List Product Sponsor
-        List<Product> productList = createListSponsor();
-        ProductAdapter gv_adapter = new ProductAdapter(getContext(), productList);
-        gvSponsor.setAdapter(gv_adapter);
+        getTopPromo();
 
         //txtSearch
-        txtSearch.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    List<Product> lstSearchResult = getSearchResult();
-                    ProductAdapter gv_adapter = new ProductAdapter(getContext(), lstSearchResult);
-                    gvSearchResult.setAdapter(gv_adapter);
-                    return true;
-                }
-                return false;
-            }
-        });
+        getSearchResult();
+
         return view;
     }
 
-    private List<Product> createListSponsor() {
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product(1, 0, "Soda", R.drawable.soda));
-        productList.add(new Product(2, 1, "Milk", R.drawable.milk_bottle));
-        productList.add(new Product(1, 2, "Juice", R.drawable.orange_juice));
-        productList.add(new Product(3, 3, "Fast food", R.drawable.fast_food));
-        return productList;
+    private void getTopPromo() {
+        ProductDbHelper productDbHelper = new ProductDbHelper(getContext());
+        List<Product> productList = productDbHelper.getPromoProducts(4);
+        ProductAdapter gv_adapter = new ProductAdapter(getContext(), productList);
+        gvSponsor.setAdapter(gv_adapter);
     }
 
-    private List<Product> getSearchResult() {
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product(1, 1, "Beer", R.drawable.beer));
-        productList.add(new Product(2, 1, "Milk", R.drawable.milk_bottle));
-        productList.add(new Product(3, 2, "Juice", R.drawable.orange_juice));
-        productList.add(new Product(4, 3, "Fast food", R.drawable.fast_food));
-        productList.add(new Product(5, 4, "Soda", R.drawable.soda));
-        productList.add(new Product(6, 5, "Apple", R.drawable.apple));
-        productList.add(new Product(7, 6, "Paprika", R.drawable.paprika));
-        productList.add(new Product(8, 4, "Pineaple", R.drawable.pineapple));
-        return productList;
+    private void getSearchResult() {
+        txtSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                ProductDbHelper productDbHelper = new ProductDbHelper(getContext());
+                ArrayList<Product> products = productDbHelper.getDiscountProductByName(txtSearch.getQuery().toString());
+                if (products != null) {
+                    tvNumDiscount.setText(String.valueOf(products.size()));
+
+                    ProductAdapter adapter = new ProductAdapter(getContext(), products);
+                    gvSearchResult.setOnItemClickListener((parent, view1, position, id) -> {
+                        Intent intent = new Intent(getContext(), ProductDetail.class);
+                        intent.putExtra(ProductDetail.PRODUCT_ID, adapter.getItemId(position));
+                        startActivity(intent);
+                    });
+                    gvSearchResult.setAdapter(adapter);
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 }

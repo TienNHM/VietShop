@@ -15,6 +15,7 @@ public class Product {
     private String detail;
     private Float star;
     private String status;
+    private Discount discount;
 
     public Product(Integer id, Integer storeId, Integer type, String name, Double price,
                    Bitmap image, String detail, Float star, String status) {
@@ -142,5 +143,13 @@ public class Product {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 }
