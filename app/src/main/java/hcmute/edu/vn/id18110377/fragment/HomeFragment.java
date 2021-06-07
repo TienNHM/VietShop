@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.Spinner;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -81,10 +79,10 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        String[] location = new String[]{"TP.HCM", "Hà Nội", "Đà Nẵng", "Cần Thơ"};
+        /*String[] location = new String[]{"TP.HCM", "Hà Nội", "Đà Nẵng", "Cần Thơ"};
         Spinner spinner = view.findViewById(R.id.spiner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_spinner, location);
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);*/
 
         //Search
         SearchView searchView = view.findViewById(R.id.txtSearch);

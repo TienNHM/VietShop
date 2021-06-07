@@ -17,11 +17,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topNavbar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:background="#FFA000"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Spinner
+            <!--<Spinner
                 android:id="@+id/spiner"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -45,7 +45,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0" />-->
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/txtSearch"
@@ -53,14 +53,13 @@
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/message"
-                android:ems="10"
                 android:focusableInTouchMode="true"
-                app:iconifiedByDefault="false"
-                app:layout_constraintStart_toStartOf="parent"
                 android:inputType="textAutoComplete"
                 android:padding="5dp"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
+                app:iconifiedByDefault="false"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:queryBackground="@null"
