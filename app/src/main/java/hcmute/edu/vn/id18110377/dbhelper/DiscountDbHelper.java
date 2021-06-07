@@ -25,7 +25,7 @@ public class DiscountDbHelper extends SQLiteOpenHelper {
                         "    id    INTEGER NOT NULL, " +
                         "    productId    INTEGER NOT NULL, " +
                         "    expirationDate    TEXT, " +
-                        "    type    TEXT, " +
+                        "    value    REAL NOT NULL, " +
                         "    status    TEXT, " +
                         "    FOREIGN KEY(productId) REFERENCES Product(id), " +
                         "    PRIMARY KEY(id) " +
@@ -49,7 +49,7 @@ public class DiscountDbHelper extends SQLiteOpenHelper {
                             cursor.getInt(0),
                             cursor.getInt(1),
                             cursor.getString(2),
-                            cursor.getString(3),
+                            cursor.getFloat(3),
                             cursor.getString(4)
                     )
             );

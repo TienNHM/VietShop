@@ -78,7 +78,8 @@ public class ProductAdapter extends BaseAdapter {
 
         if (null != product.getDiscount()) {
             productView.tvDiscount.setVisibility(View.VISIBLE);
-            productView.tvDiscount.setText(product.getDiscount().getType());
+            Float discountValue = product.getDiscount().getValue();
+            productView.tvDiscount.setText(discountValue.toString());
         } else {
             productView.tvDiscount.setVisibility(View.INVISIBLE);
         }

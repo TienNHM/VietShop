@@ -291,7 +291,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     cursor.getInt(9),
                     cursor.getInt(10),
                     cursor.getString(11),
-                    cursor.getString(12),
+                    cursor.getFloat(12),
                     cursor.getString(13)
             );
             product.setDiscount(discount);
@@ -317,7 +317,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     cursor.getInt(9),
                     cursor.getInt(10),
                     cursor.getString(11),
-                    cursor.getString(12),
+                    cursor.getFloat(12),
                     cursor.getString(13)
             );
             product.setDiscount(discount);

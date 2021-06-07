@@ -4,13 +4,13 @@ public class Discount {
     private Integer id;
     private Integer productId;
     private String expirationDate;
-    private String type;
+    private Float value;
     private String status;
 
-    public Discount(Integer id, Integer productId, String expirationDate, String type, String status) {
+    public Discount(Integer id, Integer productId, String expirationDate, Float value, String status) {
         this.id = id;
         this.productId = productId;
-        this.type = type;
+        this.value = value;
         this.expirationDate = expirationDate;
         this.status = status;
     }
@@ -47,12 +47,12 @@ public class Discount {
         this.expirationDate = expirationDate;
     }
 
-    public String getType() {
-        return type;
+    public Float getValue() {
+        return value;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setValue(Float value) {
+        this.value = value;
     }
 
     public String getStatus() {
