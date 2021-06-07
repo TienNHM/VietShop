@@ -72,5 +72,6 @@
     <string name="discount">Discount</string>
     <string name="buyNow">Buy now</string>
     <string name="search_results">Search results</string>
+    <string name="product_s_were_found">product(s) were found!</string>
 
 </resources>
