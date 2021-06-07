@@ -5,10 +5,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageButton;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -20,12 +19,10 @@ import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.ProductAdapter;
 import hcmute.edu.vn.id18110377.entity.Product;
 
-public class SearchFragment extends Fragment {
-    @BindView(R.id.btnBack_search)
-    ImageButton btnBack;
+public class DiscountFragment extends Fragment {
 
-    @BindView(R.id.txtSearch_search)
-    EditText txtSearch;
+    @BindView(R.id.txtSearchDiscount)
+    SearchView txtSearch;
 
     @BindView(R.id.gvSponsor)
     GridView gvSponsor;
@@ -42,7 +39,7 @@ public class SearchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SearchFragment() {
+    public DiscountFragment() {
         // Required empty public constructor
     }
 
@@ -52,11 +49,11 @@ public class SearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
+     * @return A new instance of fragment DiscountFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
+    public static DiscountFragment newInstance(String param1, String param2) {
+        DiscountFragment fragment = new DiscountFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,7 +75,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_discount, container, false);
 
         ButterKnife.bind(this, view);
 
