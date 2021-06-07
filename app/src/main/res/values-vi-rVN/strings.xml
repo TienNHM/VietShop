@@ -33,7 +33,7 @@
     <string name="login_failed">Đăng nhập thất bại</string>
     <string name="cart">Giỏ hàng</string>
     <string name="fullName">Họ tên</string>
-    <string name="txtSearch">Tìm sản phẩm, công thức...</string>
+    <string name="txtSearch">Tìm sản phẩm...</string>
     <string name="btnTakePhoto">Chụp ảnh</string>
     <string name="help">Hỗ trợ</string>
     <string name="change_language">Đổi ngôn ngữ</string>
@@ -41,4 +41,5 @@
     <string name="product">Sản phẩm</string>
     <string name="discount">Khuyến mãi</string>
     <string name="buyNow">Mua ngay</string>
+    <string name="search_results">Kết quả tìm kiếm</string>
 </resources>

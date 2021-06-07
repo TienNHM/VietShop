@@ -2,7 +2,6 @@ package hcmute.edu.vn.id18110377.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Spinner;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import java.util.List;
@@ -22,6 +22,7 @@ import hcmute.edu.vn.id18110377.dbhelper.ProductTypeDbHelper;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.ProductType;
 import hcmute.edu.vn.id18110377.layout.ProductDetail;
+import hcmute.edu.vn.id18110377.layout.SearchResult;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,15 +81,31 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        String[] location = new String[]{"TP.HCM", "Bình Dương", "Đồng Nai", "Long An", "BR-VT"};
+        String[] location = new String[]{"TP.HCM", "Hà Nội", "Đà Nẵng", "Cần Thơ"};
         Spinner spinner = view.findViewById(R.id.spiner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_spinner, location);
         spinner.setAdapter(adapter);
 
+        //Search
+        SearchView searchView = view.findViewById(R.id.txtSearch);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getContext(), SearchResult.class);
+                intent.putExtra("search", searchView.getQuery().toString());
+                startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         ProductDbHelper productDbHelper = new ProductDbHelper(this.getContext());
         //Promos
         setPromoItem(view, productDbHelper);
-
         //Products
         setProductItem(view, productDbHelper);
 
@@ -101,7 +118,6 @@ public class HomeFragment extends Fragment {
         GridView gv_promo = view.findViewById(R.id.homePromo);
         gv_promo.setOnItemClickListener((parent, view1, position, id) -> {
             Intent intent = new Intent(this.getContext(), ProductDetail.class);
-            Log.i("%%%%%%%%%%%%%%", (String.valueOf(productAdapter.getItemId(position))));
             intent.putExtra(PROMO_PRODUCT_ID, productAdapter.getItemId(position));
             startActivity(intent);
         });

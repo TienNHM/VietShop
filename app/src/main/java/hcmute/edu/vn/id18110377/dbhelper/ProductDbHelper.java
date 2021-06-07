@@ -107,6 +107,22 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return getProductByField(PRODUCT_STAR, price);
     }
 
+    public ArrayList<Product> getProductByTypeName(String typeName) {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT Product.id, Product.storeId, Product.type, Product.name, Product.price, Product.image, Product.detail, Product.star, Product.status" +
+                        " FROM Product INNER JOIN ProductType ON Product.type = ProductType.id WHERE ProductType.name = ?",
+                new String[]{typeName});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            products.add(cursorToProduct(cursor));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return products;
+    }
+
     public ArrayList<Product> getTopProducts(Integer type, int limit) {
         ArrayList<Product> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -131,7 +147,8 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     }
 
     private Cursor getCursorWithStringValue(SQLiteDatabase db, String field, String value) {
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + field + " LIKE %?%", new String[]{value});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + field + " LIKE ?", new String[]{"%" + value + "%"});
+        return cursor;
     }
 
     private Cursor getCursorWithNumberValue(SQLiteDatabase db, String field, String value) {
@@ -259,5 +276,14 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return store;
+    }
+
+    public ArrayList<Product> getFullSearchResult(String text) {
+        ArrayList<Product> products = new ArrayList<>();
+        products.addAll(getProductByName(text));
+        products.addAll(getProductByTypeName(text));
+        //TODO
+        //getProductByStoreName
+        return products;
     }
 }
