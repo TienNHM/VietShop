@@ -37,6 +37,16 @@ public class PromoDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
+    private Promo cursorToPromo(Cursor cursor) {
+        return new Promo(
+                cursor.getInt(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4)
+        );
+    }
+
     public ArrayList<Promo> getAllPromos() {
         ArrayList<Promo> promos = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -44,13 +54,22 @@ public class PromoDbHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             promos.add(
-                    new Promo(
-                            cursor.getInt(0),
-                            cursor.getInt(1),
-                            cursor.getString(2),
-                            cursor.getString(3),
-                            cursor.getString(4)
-                    )
+                    cursorToPromo(cursor)
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return promos;
+    }
+
+    public ArrayList<Promo> getTopPromos(int limit) {
+        ArrayList<Promo> promos = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " LIMIT ?", new String[]{String.valueOf(limit)});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            promos.add(
+                    cursorToPromo(cursor)
             );
             cursor.moveToNext();
         }

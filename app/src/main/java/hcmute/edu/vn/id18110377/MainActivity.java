@@ -11,10 +11,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import hcmute.edu.vn.id18110377.fragment.CartFragment;
+import hcmute.edu.vn.id18110377.fragment.DiscountFragment;
 import hcmute.edu.vn.id18110377.fragment.HomeFragment;
 import hcmute.edu.vn.id18110377.fragment.MenuFragment;
 import hcmute.edu.vn.id18110377.fragment.NotificationFragment;
-import hcmute.edu.vn.id18110377.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(fragment);
                 return true;
             case R.id.menuDiscount:
-                fragment = new SearchFragment();
+                fragment = new DiscountFragment();
                 loadFragment(fragment);
                 return true;
         }

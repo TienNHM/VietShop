@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.entity.Discount;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.Store;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
@@ -107,6 +108,22 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return getProductByField(PRODUCT_STAR, price);
     }
 
+    public ArrayList<Product> getProductByTypeName(String typeName) {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT Product.id, Product.storeId, Product.type, Product.name, Product.price, Product.image, Product.detail, Product.star, Product.status" +
+                        " FROM Product INNER JOIN ProductType ON Product.type = ProductType.id WHERE ProductType.name = ?",
+                new String[]{typeName});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            products.add(cursorToProduct(cursor));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return products;
+    }
+
     public ArrayList<Product> getTopProducts(Integer type, int limit) {
         ArrayList<Product> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -131,7 +148,8 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     }
 
     private Cursor getCursorWithStringValue(SQLiteDatabase db, String field, String value) {
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + field + " LIKE %?%", new String[]{value});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + field + " LIKE ?", new String[]{"%" + value + "%"});
+        return cursor;
     }
 
     private Cursor getCursorWithNumberValue(SQLiteDatabase db, String field, String value) {
@@ -259,5 +277,63 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return store;
+    }
+
+    public ArrayList<Product> getDicountProducts() {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM Product INNER JOIN Discount ON Product.id = Discount.productId", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Product product = cursorToProduct(cursor);
+            Discount discount = new Discount(
+                    cursor.getInt(9),
+                    cursor.getInt(10),
+                    cursor.getString(11),
+                    cursor.getFloat(12),
+                    cursor.getString(13)
+            );
+            product.setDiscount(discount);
+            products.add(product);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return products;
+    }
+
+    public ArrayList<Product> getDiscountProductByName(String name) {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * " +
+                        "FROM Product INNER JOIN Discount ON Product.id = Discount.productId " +
+                        "WHERE Discount.status = 'OK' AND Product.name LIKE ?",
+                new String[]{"%" + name + "%"});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Product product = cursorToProduct(cursor);
+            Discount discount = new Discount(
+                    cursor.getInt(9),
+                    cursor.getInt(10),
+                    cursor.getString(11),
+                    cursor.getFloat(12),
+                    cursor.getString(13)
+            );
+            product.setDiscount(discount);
+            products.add(product);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return products;
+    }
+
+    public ArrayList<Product> getFullSearchResult(String text) {
+        ArrayList<Product> products = new ArrayList<>();
+        products.addAll(getProductByName(text));
+        products.addAll(getProductByTypeName(text));
+        //TODO
+        //getProductByStoreName
+        return products;
     }
 }

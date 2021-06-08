@@ -63,7 +63,7 @@ public class ProductTypeAdapter extends BaseAdapter {
             productView = new ProductTypeAdapter.ProductTypeView();
             productView.ibtnProduct = convertView.findViewById(R.id.ibtnProduct);
             productView.tv_product_name = convertView.findViewById(R.id.tv_product_name);
-            productView.iv_special_image = convertView.findViewById(R.id.iv_special_image);
+            productView.iv_special_image = convertView.findViewById(R.id.tvDiscount);
 
             convertView.setTag(productView);
         } else {
@@ -74,8 +74,7 @@ public class ProductTypeAdapter extends BaseAdapter {
         ProductType productType = productTypes.get(position);
 
         productView.ibtnProduct.setImageBitmap(productType.getImage());
-        //TODO Set Special image
-        productView.iv_special_image.setImageBitmap(null);
+        productView.iv_special_image.setVisibility(View.INVISIBLE);
         productView.tv_product_name.setText(productType.getName());
 
         return convertView;
@@ -84,6 +83,6 @@ public class ProductTypeAdapter extends BaseAdapter {
     private class ProductTypeView {
         private ImageView ibtnProduct;
         private TextView tv_product_name;
-        private ImageView iv_special_image;
+        private TextView iv_special_image;
     }
 }

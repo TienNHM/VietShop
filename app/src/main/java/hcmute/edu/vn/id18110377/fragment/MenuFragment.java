@@ -86,7 +86,7 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
         ArrayList<Integer> lstItemMenuImg = createMenuItemImage();

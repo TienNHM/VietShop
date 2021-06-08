@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".fragment.HomeFragment">
 
     <LinearLayout
@@ -15,11 +17,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topNavbar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:background="#FFA000"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Spinner
+            <!--<Spinner
                 android:id="@+id/spiner"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -35,33 +37,33 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <ImageButton
-                android:id="@+id/menuMain"
+            <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/account"
+                android:background="@drawable/plush"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0" />-->
 
-            <EditText
+            <androidx.appcompat.widget.SearchView
                 android:id="@+id/txtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="#C6DDCEA7"
-                android:drawableStart="@drawable/search"
-                android:ems="10"
-                android:hint="@string/txtSearch"
+                android:background="@drawable/message"
+                android:focusableInTouchMode="true"
                 android:inputType="textAutoComplete"
                 android:padding="5dp"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
+                app:iconifiedByDefault="false"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:queryBackground="@null"
+                app:queryHint="@string/txtSearch" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView

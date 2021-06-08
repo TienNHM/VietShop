@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import hcmute.edu.vn.id18110377.entity.ProductType;
 
 public class ProductTypeDbHelper extends SQLiteOpenHelper {
-    private static final String TABLE_NAME = "ProductType";
+    public static final String TABLE_NAME = "ProductType";
 
     public ProductTypeDbHelper(@Nullable Context context) {
         super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
