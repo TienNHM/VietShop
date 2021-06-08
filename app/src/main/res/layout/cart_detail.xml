@@ -91,30 +91,26 @@
         </LinearLayout>
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="5dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="5dp"
-            android:background="#9AFFA000">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/days_one"
                 android:gravity="left"
-                android:text="@string/total_price"
-                android:textColor="#00796B"
+                android:text="@string/price"
                 android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/productPrice"
@@ -122,7 +118,68 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/bungee"
-                android:gravity="center"
+                android:gravity="right"
+                android:text="1000"
+                android:textColor="#E64A19"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/days_one"
+                android:gravity="left"
+                android:text="₫"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
+            android:hint="@string/quantity"
+            app:boxStrokeColor="@color/theme_color"
+            app:endIconMode="clear_text"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:hintTextColor="@color/theme_color"
+            app:startIconContentDescription="@string/quantity"
+            app:startIconDrawable="@drawable/numbers_24px">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="#9AFFA000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:gravity="left"
+                android:text="@string/total_price"
+                android:textColor="#00796B"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/cartPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/bungee"
+                android:gravity="right"
                 android:text="1000"
                 android:textColor="#E64A19"
                 android:textSize="20sp"
@@ -141,14 +198,12 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipPayNow"
-        style="@style/Widget.MaterialComponents.Chip.Action"
+    <Button
+        android:id="@+id/btnPayNow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="10dp"
-        android:fontFamily="@font/bungee"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/pay_now"
@@ -157,7 +212,5 @@
         android:textColor="#E64A19"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:chipBackgroundColor="#B5F1B4A1"
-        app:chipIconSize="32dp"
-        app:chipMinHeight="48dp" />
+        android:backgroundTint="#B5F1B4A1" />
 </LinearLayout>

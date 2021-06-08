@@ -73,9 +73,10 @@
     <string name="buyNow">Buy now</string>
     <string name="search_results">Search results</string>
     <string name="product_s_were_found">product(s) were found!</string>
-    <string name="quantity">Quantity:</string>
+    <string name="quantity">"Quantity "</string>
     <string name="cart_detail">Cart detail</string>
     <string name="pay_now">Pay now</string>
     <string name="total_price">"Total price: "</string>
+    <string name="price">"Price "</string>
 
 </resources>

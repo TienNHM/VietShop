@@ -1,13 +1,13 @@
 package hcmute.edu.vn.id18110377.layout;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.StoreDbHelper;
@@ -35,13 +35,14 @@ public class CartDetail extends AppCompatActivity {
         if (cart == null)
             return;
         Product product = cart.getProduct();
-        ((ImageView) findViewById(R.id.productImage)).setImageBitmap(product.getImage());
+        //((ImageView) findViewById(R.id.productImage)).setImageBitmap(product.getImage());
         ((TextView) findViewById(R.id.productTitle)).setText(product.getName());
+        ((TextInputEditText) findViewById(R.id.txtQuantity)).setText(cart.getQuantity().toString());
         ((TextView) findViewById(R.id.productPrice)).setText(product.getPrice().toString());
-
+        ((TextView) findViewById(R.id.cartPrice)).setText(cart.getTotalPrice().toString());
         StoreDbHelper storeDbHelper = new StoreDbHelper(this);
         Store store = storeDbHelper.getStoreById(product.getStoreId());
-        Log.e("=====================", product.getStoreId().toString());
+
         if (store == null)
             return;
         ((TextView) findViewById(R.id.productStore)).setText(store.getName());
