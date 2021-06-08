@@ -16,34 +16,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.entity.ItemMenu;
+import hcmute.edu.vn.id18110377.entity.MenuItem;
 
-public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHolder> {
-    private List<ItemMenu> lstItemMenu;
+public class RecyleItemViewAdapter extends RecyclerView.Adapter<RecyleItemViewAdapter.ViewHolder> {
+    private List<MenuItem> lstRecycleItem;
 
-    public ItemMenuAdapter(List<ItemMenu> lstItemMenu) {
-
-        this.lstItemMenu = lstItemMenu;
+    public RecyleItemViewAdapter(List<MenuItem> lstRecycleItem) {
+        this.lstRecycleItem = lstRecycleItem;
     }
 
-    public List<ItemMenu> getLstItemMenu() {
-        return lstItemMenu;
+    public List<MenuItem> getLstRecycleItem() {
+        return lstRecycleItem;
     }
 
-    public void setLstItemMenu(ArrayList<ItemMenu> lstItemMenu) {
-        this.lstItemMenu = lstItemMenu;
+    public void setLstRecycleItem(ArrayList<MenuItem> lstRecycleItem) {
+        this.lstRecycleItem = lstRecycleItem;
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ItemMenu itemMenu = lstItemMenu.get(position);
+        MenuItem recycleItem = lstRecycleItem.get(position);
 
-        TextView menu_item_title = holder.menu_item_title;
-        menu_item_title.setText(itemMenu.getTitle());
+        TextView item_title = holder.item_title;
+        item_title.setText(recycleItem.getTitle());
 
-        ImageView menu_item_img = holder.menu_item_img;
-        menu_item_img.setImageResource(itemMenu.getLeftImageID());
+        ImageView item_img = holder.item_img;
+        item_img.setImageResource(recycleItem.getDiscountImageID());
     }
 
     @NonNull
@@ -59,22 +58,22 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ViewHo
     @Override
     public int getItemCount() {
 
-        return lstItemMenu == null ? 0 : lstItemMenu.size();
+        return lstRecycleItem == null ? 0 : lstRecycleItem.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView menu_item_title;
-        public ImageView menu_item_img;
+        public TextView item_title;
+        public ImageView item_img;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            menu_item_img = itemView.findViewById(R.id.menu_item_img);
-            menu_item_title = itemView.findViewById(R.id.menu_item_title);
+            item_img = itemView.findViewById(R.id.menu_item_img);
+            item_title = itemView.findViewById(R.id.menu_item_title);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Class cls = ItemMenu.getLayout(menu_item_title.getText().toString());
+                    Class cls = MenuItem.getLayout(item_title.getText().toString());
                     Intent intent = new Intent(v.getContext(), cls);
                     itemView.getContext().startActivity(intent);
                 }

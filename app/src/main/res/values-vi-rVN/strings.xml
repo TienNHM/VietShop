@@ -43,4 +43,5 @@
     <string name="buyNow">Mua ngay</string>
     <string name="search_results">Kết quả tìm kiếm</string>
     <string name="product_s_were_found">sản phẩm đã được tìm thấy!</string>
+    <string name="quantity">Số lượng: </string>
 </resources>

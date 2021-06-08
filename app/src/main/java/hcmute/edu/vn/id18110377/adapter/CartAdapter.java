@@ -3,69 +3,69 @@ package hcmute.edu.vn.id18110377.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.entity.Cart;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    public List<Product> productList;
+    public ArrayList<Cart> carts;
 
-    public CartAdapter(List<Product> productList) {
-        this.productList = productList;
+    public CartAdapter(ArrayList<Cart> carts) {
+        this.carts = carts;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public ArrayList<Cart> getCarts() {
+        return carts;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setCarts(ArrayList<Cart> carts) {
+        this.carts = carts;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_cart, parent, false);
+        View view = inflater.inflate(R.layout.cart_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = productList.get(position);
-        holder.cartImage.setImageBitmap(product.getImage());
-        holder.cartTitle.setText(product.getName());
+        Cart cart = carts.get(position);
+        holder.cartImage.setImageBitmap(cart.getProduct().getImage());
+        holder.cartTitle.setText(cart.getProduct().getName());
+        holder.cartQuantity.setText(String.valueOf(cart.getQuantity()));
+        String status = cart.getStatus() == "Paid" ? "Đã thanh toán" : "Chưa thanh toán";
+        holder.cartStatus.setText(status);
     }
 
     @Override
     public int getItemCount() {
-        return productList == null ? 0 : productList.size();
+        return carts == null ? 0 : carts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView cartImage;
         TextView cartTitle;
-        TextView cartDetail;
-        Button btnCheckout;
-        Button btnCancelCart;
+        TextView cartQuantity;
+        TextView cartStatus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            cartImage = itemView.findViewById(R.id.cart_img);
-            cartTitle = itemView.findViewById(R.id.cart_title);
-            cartDetail = itemView.findViewById(R.id.cart_detail);
-            btnCheckout = itemView.findViewById(R.id.btnCheckout);
-            btnCancelCart = itemView.findViewById(R.id.btnCancelCart);
+            cartImage = itemView.findViewById(R.id.cartImage);
+            cartTitle = itemView.findViewById(R.id.cartProductName);
+            cartQuantity = itemView.findViewById(R.id.cartQuantity);
+            cartStatus = itemView.findViewById(R.id.cartStatus);
         }
     }
 }

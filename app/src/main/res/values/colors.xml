@@ -11,4 +11,5 @@
     <color name="darkmode">#DA1E1E1E</color>
     <color name="light_mode">#ffffff</color>
     <color name="theme_color">#FFA000</color>
+    <color name="background_item">#5CDAB353</color>
 </resources>

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.layout.BillHistory;
-import hcmute.edu.vn.id18110377.layout.Cart;
+import hcmute.edu.vn.id18110377.layout.CartDetail;
 import hcmute.edu.vn.id18110377.layout.ChangeLanguage;
 import hcmute.edu.vn.id18110377.layout.ConnectAccount;
 import hcmute.edu.vn.id18110377.layout.Discount;
@@ -17,7 +17,7 @@ import hcmute.edu.vn.id18110377.layout.ShareApp;
 import hcmute.edu.vn.id18110377.layout.SignUp;
 import hcmute.edu.vn.id18110377.layout.Wallet;
 
-public class ItemMenu {
+public class MenuItem {
     private String title;
     public static List<String> lstItemMenuTitle;
     public static HashMap<String, Class> menuItem;
@@ -29,7 +29,7 @@ public class ItemMenu {
         );
         menuItem = new HashMap<>();
         menuItem.put("Đăng nhập", SignUp.class);
-        menuItem.put("Đơn hàng", Cart.class);
+        menuItem.put("Đơn hàng", CartDetail.class);
         menuItem.put("Nhập mã khuyến mãi", Discount.class);
         menuItem.put("Tài khoản liên kết", ConnectAccount.class);
         menuItem.put("Số dư tài khoản", Wallet.class);
@@ -41,28 +41,28 @@ public class ItemMenu {
         menuItem.put("Đăng xuất", Logout.class);
     }
 
-    private Integer leftImageID;
+    private Integer discountImageID;
     private Integer bgImageID;
 
-    public ItemMenu() {
+    public MenuItem() {
 
     }
 
-    public ItemMenu(String title, Integer leftImageID, Integer bgImageID) {
+    public MenuItem(String title, Integer discountImageID, Integer bgImageID) {
         this.title = title;
-        this.leftImageID = leftImageID;
+        this.discountImageID = discountImageID;
         this.bgImageID = bgImageID;
     }
 
-    public ItemMenu(String title, Integer leftImageID) {
-        this(title, leftImageID, null);
+    public MenuItem(String title, Integer discountImageID) {
+        this(title, discountImageID, null);
     }
 
-    public static List<ItemMenu> createListMenuItem(List<String> lstTitle, List<Integer> lstImg) {
+    public static List<MenuItem> createListMenuItem(List<String> lstTitle, List<Integer> lstImg) {
         int num = lstImg.size() < lstTitle.size() ? lstImg.size() : lstTitle.size();
-        List<ItemMenu> menu = new ArrayList<ItemMenu>();
+        List<MenuItem> menu = new ArrayList<MenuItem>();
         for (int i = 0; i < num; i++) {
-            menu.add(new ItemMenu(lstTitle.get(i), lstImg.get(i)));
+            menu.add(new MenuItem(lstTitle.get(i), lstImg.get(i)));
         }
 
         return menu;
@@ -76,12 +76,12 @@ public class ItemMenu {
         this.title = title;
     }
 
-    public Integer getLeftImageID() {
-        return leftImageID;
+    public Integer getDiscountImageID() {
+        return discountImageID;
     }
 
-    public void setLeftImageID(Integer leftImageID) {
-        this.leftImageID = leftImageID;
+    public void setDiscountImageID(Integer discountImageID) {
+        this.discountImageID = discountImageID;
     }
 
     public Integer getBgImageID() {
