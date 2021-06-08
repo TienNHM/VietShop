@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Cart;
+import hcmute.edu.vn.id18110377.layout.CartDetail;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public ArrayList<Cart> carts;
@@ -66,6 +68,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             cartTitle = itemView.findViewById(R.id.cartProductName);
             cartQuantity = itemView.findViewById(R.id.cartQuantity);
             cartStatus = itemView.findViewById(R.id.cartStatus);
+
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(itemView.getContext(), CartDetail.class);
+                itemView.getContext().startActivity(intent);
+            });
         }
     }
 }

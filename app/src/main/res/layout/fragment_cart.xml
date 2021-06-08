@@ -18,16 +18,7 @@
             android:background="#FFA000"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/btnBack_ChangeLanguage"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/arrow_back" />
-
             <TextView
-                android:id="@+id/txtHelp"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginVertical="10dp"
@@ -36,7 +27,7 @@
                 android:ems="10"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Đơn hàng"
+                android:text="@string/cart"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
                 android:textSize="20sp" />

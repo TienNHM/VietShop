@@ -66,15 +66,17 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         getUnpaidCart(view);
+
+
         return view;
     }
 
     private void getUnpaidCart(View view) {
         CartDbHelper cartDbHelper = new CartDbHelper(this.getContext());
         CartAdapter adapter = new CartAdapter(cartDbHelper.getUnpaidCart(2));
-        RecyclerView rv_account = view.findViewById(R.id.rvCart);
+        RecyclerView rvCart = view.findViewById(R.id.rvCart);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        rv_account.setLayoutManager(layoutManager);
-        rv_account.setAdapter(adapter);
+        rvCart.setLayoutManager(layoutManager);
+        rvCart.setAdapter(adapter);
     }
 }
