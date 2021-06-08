@@ -17,6 +17,8 @@ import hcmute.edu.vn.id18110377.entity.Cart;
 import hcmute.edu.vn.id18110377.layout.CartDetail;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+    public static final String PARAM_CART = "hcmute.edu.vn.id18110377.adapter.Cart";
+
     public ArrayList<Cart> carts;
 
     public CartAdapter(ArrayList<Cart> carts) {
@@ -42,6 +44,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cart cart = carts.get(position);
+        holder.cart = cart;
         holder.cartImage.setImageBitmap(cart.getProduct().getImage());
         holder.cartTitle.setText(cart.getProduct().getName());
         holder.cartQuantity.setText(String.valueOf(cart.getQuantity()));
@@ -60,6 +63,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         TextView cartTitle;
         TextView cartQuantity;
         TextView cartStatus;
+        Cart cart;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +74,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             cartStatus = itemView.findViewById(R.id.cartStatus);
 
             itemView.setOnClickListener(v -> {
+                CartDetail.cart = cart;
                 Intent intent = new Intent(itemView.getContext(), CartDetail.class);
                 itemView.getContext().startActivity(intent);
             });
