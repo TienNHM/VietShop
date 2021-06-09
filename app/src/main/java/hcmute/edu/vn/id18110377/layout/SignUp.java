@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
@@ -35,6 +36,7 @@ import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
 import hcmute.edu.vn.id18110377.entity.User;
+import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class SignUp extends AppCompatActivity {
     @BindView(R.id.txtFullName)
@@ -51,6 +53,8 @@ public class SignUp extends AppCompatActivity {
     TextInputEditText txtConfirmPassword;
     @BindView(R.id.imgAvt)
     ImageView imgAvt;
+    @BindView(R.id.chipGroupSex)
+    ChipGroup chipGroupSex;
 
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int SELECT_PICTURE = 200;
@@ -88,12 +92,13 @@ public class SignUp extends AppCompatActivity {
 
     private void setSignUp() {
         findViewById(R.id.btnSignUp).setOnClickListener(view -> {
-            String fullName = txtFullName.getText().toString();
+            String fullname = txtFullName.getText().toString();
             String email = txtEmail.getText().toString();
             String phone = txtPhone.getText().toString();
             String username = txtUsername.getText().toString();
             String password = txtPassword.getText().toString();
             String confirmPassword = txtConfirmPassword.getText().toString();
+            Bitmap avatar = ImageConverter.drawable2Bitmap(imgAvt.getDrawable());
 
             Account account = new Account(username, password);
             AccountDbHelper accountDbHelper = new AccountDbHelper(this);
@@ -102,7 +107,7 @@ public class SignUp extends AppCompatActivity {
                 Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT);
             } else {
                 Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
-                User user = new User(accountId, fullName, email);
+                User user = new User(accountId, fullname, email, getSex(), phone, avatar);
                 UserDbHelper userDbHelper = new UserDbHelper(this);
                 long re = userDbHelper.insert(user);
                 if (re < 0) {
@@ -113,6 +118,20 @@ public class SignUp extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private String getSex() {
+        int selected = chipGroupSex.getCheckedChipId();
+        switch (selected) {
+            case R.id.chipMale:
+                return "M";
+            case R.id.chipFemale:
+                return "F";
+            case R.id.chipOthers:
+                return "O";
+            default:
+                return null;
+        }
     }
 
     private void setLogIn() {

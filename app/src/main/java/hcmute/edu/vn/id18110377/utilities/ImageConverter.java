@@ -2,6 +2,8 @@ package hcmute.edu.vn.id18110377.utilities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayOutputStream;
 
@@ -23,5 +25,9 @@ public class ImageConverter {
 
     public static Bitmap resource2Bitmap(int resourceId) {
         return BitmapFactory.decodeResource(MainActivity.mainResources, resourceId);
+    }
+
+    public static Bitmap drawable2Bitmap(Drawable image) {
+        return ((BitmapDrawable) image).getBitmap();
     }
 }

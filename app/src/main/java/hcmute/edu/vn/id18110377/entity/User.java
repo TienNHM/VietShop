@@ -23,7 +23,7 @@ public class User {
     private String zalo;
     private String status;
 
-    public User(Integer id, Integer accountId, String fullname, String sex, String email,
+    public User(Integer id, Integer accountId, String fullname, String email, String sex,
                 String phone, Bitmap avatar, String facebook, String zalo, String status) {
         this.id = id;
         this.accountId = accountId;
@@ -35,6 +35,10 @@ public class User {
         this.facebook = facebook;
         this.zalo = zalo;
         this.status = status;
+    }
+
+    public User(Integer accountId, String fullname, String email, String sex, String phone, Bitmap avatar) {
+        this(-1, accountId, fullname, email, sex, phone, avatar, null, null, null);
     }
 
     public User(Integer id, Integer accountId, String fullname, String email, String sex,
@@ -49,10 +53,6 @@ public class User {
         this.facebook = facebook;
         this.zalo = zalo;
         this.status = status;
-    }
-
-    public User(Integer id, Integer accountId, String fullname, String email, String sex) {
-        this(id, accountId, fullname, email, sex, null, null, null, null);
     }
 
     public User(Integer accountId, String fullname, String email) {
