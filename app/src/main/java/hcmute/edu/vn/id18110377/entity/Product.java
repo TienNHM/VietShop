@@ -2,6 +2,8 @@ package hcmute.edu.vn.id18110377.entity;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class Product {
@@ -16,6 +18,7 @@ public class Product {
     private Float star;
     private String status;
     private Discount discount;
+    private ArrayList<Bitmap> productImages;
 
     public Product(Integer id, Integer storeId, Integer type, String name, Double price,
                    Bitmap image, String detail, Float star, String status) {
@@ -151,5 +154,25 @@ public class Product {
 
     public void setDiscount(Discount discount) {
         this.discount = discount;
+    }
+
+    public ArrayList<Bitmap> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(ArrayList<Bitmap> productImages) {
+        this.productImages = productImages;
+    }
+
+    public void addProductImage(Bitmap image) {
+        if (this.getProductImages() == null)
+            this.productImages = new ArrayList<>();
+        this.getProductImages().add(image);
+    }
+
+    public void addProductImage(ArrayList<Bitmap> images) {
+        if (this.getProductImages() == null)
+            this.productImages = new ArrayList<>();
+        this.getProductImages().addAll(images);
     }
 }
