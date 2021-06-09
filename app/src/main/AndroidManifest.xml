@@ -46,7 +46,7 @@
             android:name=".layout.Discount"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.Logout"
+            android:name=".layout.LogIn"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".layout.SettingsAccount"

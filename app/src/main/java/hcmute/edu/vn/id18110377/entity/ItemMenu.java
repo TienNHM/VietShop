@@ -11,7 +11,7 @@ import hcmute.edu.vn.id18110377.layout.ChangeLanguage;
 import hcmute.edu.vn.id18110377.layout.ConnectAccount;
 import hcmute.edu.vn.id18110377.layout.Discount;
 import hcmute.edu.vn.id18110377.layout.Help;
-import hcmute.edu.vn.id18110377.layout.Logout;
+import hcmute.edu.vn.id18110377.layout.LogIn;
 import hcmute.edu.vn.id18110377.layout.SettingsAccount;
 import hcmute.edu.vn.id18110377.layout.ShareApp;
 import hcmute.edu.vn.id18110377.layout.SignUp;
@@ -38,7 +38,7 @@ public class ItemMenu {
         menuItem.put("Chọn ngôn ngữ", ChangeLanguage.class);
         menuItem.put("Liên hệ hỗ trợ", Help.class);
         menuItem.put("Cài đặt tài khoản", SettingsAccount.class);
-        menuItem.put("Đăng xuất", Logout.class);
+        menuItem.put("Đăng xuất", LogIn.class);
     }
 
     private Integer leftImageID;

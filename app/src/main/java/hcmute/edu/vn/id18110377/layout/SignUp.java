@@ -54,6 +54,11 @@ public class SignUp extends AppCompatActivity {
         }
 
         imgAvt = this.findViewById(R.id.imgAvt);
+        findViewById(R.id.txtSignIn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, LogIn.class);
+            startActivity(intent);
+            finish();
+        });
 
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
 
