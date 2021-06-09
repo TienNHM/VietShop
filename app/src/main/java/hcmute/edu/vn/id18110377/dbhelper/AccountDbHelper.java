@@ -13,7 +13,6 @@ import hcmute.edu.vn.id18110377.entity.Account;
 public class AccountDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Account";
     private static final String ACCOUNT_ID = "id";
-    private static final String ACCOUNT_USERID = "userId";
     private static final String ACCOUNT_USERNAME = "username";
     private static final String ACCOUNT_PASSWORD = "password";
     private static final String ACCOUNT_ROLEID = "roleId";
@@ -46,11 +45,10 @@ public class AccountDbHelper extends SQLiteOpenHelper {
     private Account cursorToAccount(Cursor cursor) {
         return new Account(
                 cursor.getInt(0),
-                cursor.getInt(1),
+                cursor.getString(1),
                 cursor.getString(2),
-                cursor.getString(3),
-                cursor.getInt(4),
-                cursor.getString(5)
+                cursor.getInt(3),
+                cursor.getString(4)
         );
     }
 
@@ -82,7 +80,6 @@ public class AccountDbHelper extends SQLiteOpenHelper {
 
     private ContentValues createContentValues(Account account) {
         ContentValues values = new ContentValues();
-        values.put(ACCOUNT_USERID, account.getUserId());
         values.put(ACCOUNT_USERNAME, account.getUsername());
         values.put(ACCOUNT_PASSWORD, account.getPassword());
         values.put(ACCOUNT_ROLEID, account.getRoleID());
@@ -105,5 +102,23 @@ public class AccountDbHelper extends SQLiteOpenHelper {
     public int delete(Account account) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(TABLE_NAME, ACCOUNT_ID + " = ?", new String[]{String.valueOf(account.getId())});
+    }
+
+    public Account getAccountByRowId(long rowID) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE rowid = ?",
+                new String[]{String.valueOf(rowID)});
+        Account account = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            account = cursorToAccount(cursor);
+        }
+        cursor.close();
+        return account;
+    }
+
+    public Integer getAccountIdByRowId(long rowId) {
+        return getAccountByRowId(rowId).getId();
     }
 }

@@ -14,6 +14,7 @@ import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 public class UserDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "User";
     private static final String USER_ID = "id";
+    private static final String USER_ACCOUNTID = "accountId";
     private static final String USER_FULLNAME = "fullname";
     private static final String USER_SEX = "sex";
     private static final String USER_EMAIL = "email";
@@ -33,8 +34,8 @@ public class UserDbHelper extends SQLiteOpenHelper {
                 "CREATE TABLE User ( " +
                         "    id    INTEGER NOT NULL, " +
                         "    fullname    TEXT NOT NULL, " +
-                        "    sex    TEXT NOT NULL, " +
                         "    email    TEXT NOT NULL, " +
+                        "    sex    TEXT NOT NULL, " +
                         "    phone    TEXT NOT NULL, " +
                         "    avatar    BLOB, " +
                         "    facebook    TEXT, " +
@@ -50,23 +51,28 @@ public class UserDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
+    private User cursorToUser(Cursor cursor) {
+        return new User(
+                cursor.getInt(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5),
+                ImageConverter.byte2Bitmap(cursor.getBlob(6)),
+                cursor.getString(7),
+                cursor.getString(8),
+                cursor.getString(9)
+        );
+    }
+
     public User getUser(Integer id) {
         User user = null;
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?", new String[]{id.toString()});
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-            user = new User(
-                    cursor.getInt(0),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getString(5),
-                    ImageConverter.byte2Bitmap(cursor.getBlob(6)),
-                    cursor.getString(7),
-                    cursor.getString(8),
-                    cursor.getString(9)
-            );
+            user = cursorToUser(cursor);
         }
         cursor.close();
         return user;
@@ -100,5 +106,19 @@ public class UserDbHelper extends SQLiteOpenHelper {
     public int delete(User user) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(TABLE_NAME, USER_ID + " = ?", new String[]{String.valueOf(user.getId())});
+    }
+
+    public User getUserByAccountId(Integer accountId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ACCOUNTID + " = ?",
+                new String[]{String.valueOf(accountId)});
+        User user = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            user = cursorToUser(cursor);
+        }
+        cursor.close();
+        return user;
     }
 }
