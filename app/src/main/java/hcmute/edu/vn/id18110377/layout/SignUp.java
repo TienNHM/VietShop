@@ -20,20 +20,42 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
+import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
+import hcmute.edu.vn.id18110377.entity.Account;
+import hcmute.edu.vn.id18110377.entity.User;
 
 public class SignUp extends AppCompatActivity {
+    @BindView(R.id.txtFullName)
+    TextInputEditText txtFullName;
+    @BindView(R.id.txtEmail)
+    TextInputEditText txtEmail;
+    @BindView(R.id.txtPhone)
+    TextInputEditText txtPhone;
+    @BindView(R.id.txtUsername)
+    TextInputEditText txtUsername;
+    @BindView(R.id.txtPassword)
+    TextInputEditText txtPassword;
+    @BindView(R.id.txtComfirmPassword)
+    TextInputEditText txtConfirmPassword;
+    @BindView(R.id.imgAvt)
     ImageView imgAvt;
+
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int SELECT_PICTURE = 200;
     private static final int TAKE_PICTURE = 100;
-    String currentPhotoPath;
+    private String currentPhotoPath;
 
     public static boolean isIntentAvailable(Context context, String action) {
         final PackageManager packageManager = context.getPackageManager();
@@ -48,20 +70,60 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
+        ButterKnife.bind(this);
+
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkPermission() == false)
                 requestPermission();
         }
 
         imgAvt = this.findViewById(R.id.imgAvt);
+        findViewById(R.id.btnBack).setOnClickListener(view -> finish());
+
+        setLogIn();
+        setSignUp();
+        setTakePhoto();
+        setChoosePhoto();
+    }
+
+    private void setSignUp() {
+        findViewById(R.id.btnSignUp).setOnClickListener(view -> {
+            String fullName = txtFullName.getText().toString();
+            String email = txtEmail.getText().toString();
+            String phone = txtPhone.getText().toString();
+            String username = txtUsername.getText().toString();
+            String password = txtPassword.getText().toString();
+            String confirmPassword = txtConfirmPassword.getText().toString();
+
+            Account account = new Account(username, password);
+            AccountDbHelper accountDbHelper = new AccountDbHelper(this);
+            long rowID = accountDbHelper.insert(account);
+            if (rowID < 0) {
+                Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT);
+            } else {
+                Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
+                User user = new User(accountId, fullName, email);
+                UserDbHelper userDbHelper = new UserDbHelper(this);
+                long re = userDbHelper.insert(user);
+                if (re < 0) {
+                    Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!", Toast.LENGTH_SHORT);
+                } else {
+                    //TODO Lưu session
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void setLogIn() {
         findViewById(R.id.txtSignIn).setOnClickListener(view -> {
             Intent intent = new Intent(this, LogIn.class);
             startActivity(intent);
             finish();
         });
+    }
 
-        findViewById(R.id.btnBack).setOnClickListener(view -> finish());
-
+    private void setTakePhoto() {
         findViewById(R.id.btnTakePhoto).setOnClickListener(v -> {
             try {
                 dispatchTakePictureIntent(TAKE_PICTURE);
@@ -69,7 +131,9 @@ public class SignUp extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+    }
 
+    private void setChoosePhoto() {
         findViewById(R.id.btnChoosePhoto).setOnClickListener(v -> {
             Intent i = new Intent();
             i.setType("image/*");
