@@ -48,4 +48,9 @@
     <string name="pay_now">Thanh toán</string>
     <string name="total_price">Thành tiền: </string>
     <string name="price">Giá </string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="others">Khác</string>
+    <string name="sex">Giới tính</string>
+
 </resources>

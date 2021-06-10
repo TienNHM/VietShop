@@ -8,11 +8,12 @@ import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class User {
-    private static final int DEFAUL_AVT_FEMALE = R.drawable.female_profile;
-    private static final int DEFAUL_AVT_MALE = R.drawable.male_profile;
-    private static final int DEFAUL_AVT_UNDEFINED = R.drawable.cat_profile;
+    private static final int DEFAULT_AVT_FEMALE = R.drawable.female_profile;
+    private static final int DEFAULT_AVT_MALE = R.drawable.male_profile;
+    private static final int DEFAULT_AVT_UNDEFINED = R.drawable.cat_profile;
 
     private Integer id;
+    private Integer accountId;
     private String fullname;
     private String sex;
     private String email;
@@ -22,9 +23,10 @@ public class User {
     private String zalo;
     private String status;
 
-    public User(Integer id, String fullname, String sex, String email,
+    public User(Integer id, Integer accountId, String fullname, String email, String sex,
                 String phone, Bitmap avatar, String facebook, String zalo, String status) {
         this.id = id;
+        this.accountId = accountId;
         this.fullname = fullname;
         this.sex = sex;
         this.email = email;
@@ -35,9 +37,14 @@ public class User {
         this.status = status;
     }
 
-    public User(Integer id, String fullname, String sex, String email,
+    public User(Integer accountId, String fullname, String email, String sex, String phone, Bitmap avatar) {
+        this(-1, accountId, fullname, email, sex, phone, avatar, null, null, null);
+    }
+
+    public User(Integer id, Integer accountId, String fullname, String email, String sex,
                 String phone, String facebook, String zalo, String status) {
         this.id = id;
+        this.accountId = accountId;
         this.fullname = fullname;
         this.sex = sex;
         this.email = email;
@@ -48,12 +55,8 @@ public class User {
         this.status = status;
     }
 
-    public User(Integer id, String fullname, String sex, String email) {
-        this(id, fullname, sex, email, null, null, null, null);
-    }
-
-    public User(String fullname, String sex, String email) {
-        this(-1, fullname, sex, email, null, null, null, null);
+    public User(Integer accountId, String fullname, String email) {
+        this(-1, accountId, fullname, email, null, null, null, null, null);
     }
 
     public Integer getId() {
@@ -110,11 +113,13 @@ public class User {
     }
 
     public void setAvatar(String sex) {
-        int avatar = DEFAUL_AVT_UNDEFINED;
-        if (sex.startsWith("F"))
-            avatar = DEFAUL_AVT_FEMALE;
-        else if (sex.startsWith("M"))
-            avatar = DEFAUL_AVT_MALE;
+        int avatar = DEFAULT_AVT_UNDEFINED;
+        if (sex != null) {
+            if (sex.startsWith("F"))
+                avatar = DEFAULT_AVT_FEMALE;
+            else if (sex.startsWith("M"))
+                avatar = DEFAULT_AVT_MALE;
+        }
         this.avatar = BitmapFactory.decodeResource(MainActivity.mainResources, avatar);
     }
 
@@ -140,5 +145,13 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 }
