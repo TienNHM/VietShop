@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +54,8 @@ public class SignUp extends AppCompatActivity {
     TextInputEditText txtPassword;
     @BindView(R.id.txtComfirmPassword)
     TextInputEditText txtConfirmPassword;
+    @BindView(R.id.layoutConfirmPassword)
+    TextInputLayout layoutConfirmPassword;
     @BindView(R.id.imgAvt)
     ImageView imgAvt;
     @BindView(R.id.chipGroupSex)
@@ -82,45 +86,37 @@ public class SignUp extends AppCompatActivity {
                 requestPermission();
         }
 
-        imgAvt = this.findViewById(R.id.imgAvt);
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
-
-        setLogIn();
-        setTakePhoto();
-        setChoosePhoto();
-        setSignUp();
     }
 
-    private void setSignUp() {
-        findViewById(R.id.btnSignUp).setOnClickListener(view -> {
-            String fullname = txtFullName.getText().toString();
-            String email = txtEmail.getText().toString();
-            String phone = txtPhone.getText().toString();
-            String username = txtUsername.getText().toString();
-            String password = txtPassword.getText().toString();
-            String confirmPassword = txtConfirmPassword.getText().toString();
-            Bitmap avatar = ImageConverter.drawable2Bitmap(imgAvt.getDrawable());
+    private void setSignUp(View view) {
+        String fullname = txtFullName.getText().toString();
+        String email = txtEmail.getText().toString();
+        String phone = txtPhone.getText().toString();
+        String username = txtUsername.getText().toString();
+        String password = txtPassword.getText().toString();
+        String confirmPassword = txtConfirmPassword.getText().toString();
+        Bitmap avatar = ImageConverter.drawable2Bitmap(imgAvt.getDrawable());
 
-            Account account = new Account(username, SessionUtilities.encode(password));
-            AccountDbHelper accountDbHelper = new AccountDbHelper(this);
-            long rowID = accountDbHelper.insert(account);
-            if (rowID < 0) {
-                Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT).show();
+        Account account = new Account(username, SessionUtilities.encode(password));
+        AccountDbHelper accountDbHelper = new AccountDbHelper(this);
+        long rowID = accountDbHelper.insert(account);
+        if (rowID < 0) {
+            Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT).show();
+        } else {
+            Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
+            User user = new User(accountId, fullname, email, getSex(), phone, avatar);
+            UserDbHelper userDbHelper = new UserDbHelper(this);
+            long re = userDbHelper.insert(user);
+            if (re < 0) {
+                Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!",
+                        Toast.LENGTH_SHORT).show();
             } else {
-                Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
-                User user = new User(accountId, fullname, email, getSex(), phone, avatar);
-                UserDbHelper userDbHelper = new UserDbHelper(this);
-                long re = userDbHelper.insert(user);
-                if (re < 0) {
-                    Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    SessionUtilities.saveSession(this, username, password);
-                    Toast.makeText(this, "Đã đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
+                SessionUtilities.saveSession(this, username, password);
+                Toast.makeText(this, "Đã đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                finish();
             }
-        });
+        }
     }
 
 
@@ -138,31 +134,25 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    private void setLogIn() {
-        findViewById(R.id.txtSignIn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, LogIn.class);
-            startActivity(intent);
-            finish();
-        });
+    void setLogIn(View view) {
+        Intent intent = new Intent(this, LogIn.class);
+        startActivity(intent);
+        finish();
     }
 
-    private void setTakePhoto() {
-        findViewById(R.id.btnTakePhoto).setOnClickListener(v -> {
-            try {
-                dispatchTakePictureIntent(TAKE_PICTURE);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+    private void setTakePhoto(View view) {
+        try {
+            dispatchTakePictureIntent(TAKE_PICTURE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void setChoosePhoto() {
-        findViewById(R.id.btnChoosePhoto).setOnClickListener(v -> {
-            Intent i = new Intent();
-            i.setType("image/*");
-            i.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
-        });
+    private void setChoosePhoto(View view) {
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
     }
 
     private boolean checkPermission() {
