@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import org.jetbrains.annotations.NotNull;
+
 import hcmute.edu.vn.id18110377.entity.User;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
@@ -25,14 +27,15 @@ public class UserDbHelper extends SQLiteOpenHelper {
     private static final String USER_STATUS = "status";
 
     public UserDbHelper(@Nullable Context context) {
-        super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
+        super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE User ( " +
+                "CREATE TABLE IF NOT EXISTS User ( " +
                         "    id    INTEGER NOT NULL, " +
+                        "    accountId    INTEGER NOT NULL, " +
                         "    fullname    TEXT NOT NULL, " +
                         "    email    TEXT NOT NULL, " +
                         "    sex    TEXT NOT NULL, " +
@@ -78,9 +81,10 @@ public class UserDbHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    private ContentValues createContentValues(User user) {
+    private ContentValues createContentValues(@NotNull User user) {
         ContentValues values = new ContentValues();
         values.put(USER_FULLNAME, user.getFullname());
+        values.put(USER_ACCOUNTID, user.getAccountId());
         values.put(USER_SEX, user.getSex());
         values.put(USER_EMAIL, user.getEmail());
         values.put(USER_PHONE, user.getPhone());

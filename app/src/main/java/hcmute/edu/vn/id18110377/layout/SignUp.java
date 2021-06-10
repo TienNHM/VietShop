@@ -37,6 +37,7 @@ import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
 import hcmute.edu.vn.id18110377.entity.User;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
+import hcmute.edu.vn.id18110377.utilities.SessionUtilities;
 
 public class SignUp extends AppCompatActivity {
     @BindView(R.id.txtFullName)
@@ -85,9 +86,9 @@ public class SignUp extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
 
         setLogIn();
-        setSignUp();
         setTakePhoto();
         setChoosePhoto();
+        setSignUp();
     }
 
     private void setSignUp() {
@@ -100,25 +101,30 @@ public class SignUp extends AppCompatActivity {
             String confirmPassword = txtConfirmPassword.getText().toString();
             Bitmap avatar = ImageConverter.drawable2Bitmap(imgAvt.getDrawable());
 
-            Account account = new Account(username, password);
+            Account account = new Account(username, SessionUtilities.encode(password));
             AccountDbHelper accountDbHelper = new AccountDbHelper(this);
             long rowID = accountDbHelper.insert(account);
             if (rowID < 0) {
                 Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT);
             } else {
                 Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
+                Log.i("ÂCCACACACCAcACA", accountId.toString());
                 User user = new User(accountId, fullname, email, getSex(), phone, avatar);
                 UserDbHelper userDbHelper = new UserDbHelper(this);
                 long re = userDbHelper.insert(user);
                 if (re < 0) {
+                    Log.i("===========================", "000000000000000000000");
                     Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!", Toast.LENGTH_SHORT);
                 } else {
-                    //TODO Lưu session
+                    SessionUtilities.saveSession(this, username, password);
+                    Log.i("===========================", "iiiiiiiiiiiiiiiiiiiiii");
+                    Toast.makeText(this, "Đã đăng nhập thành công!", Toast.LENGTH_SHORT);
                     finish();
                 }
             }
         });
     }
+
 
     private String getSex() {
         int selected = chipGroupSex.getCheckedChipId();

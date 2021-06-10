@@ -19,7 +19,7 @@ public class AccountDbHelper extends SQLiteOpenHelper {
     private static final String ACCOUNT_STATUS = "status";
 
     public AccountDbHelper(@Nullable Context context) {
-        super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
+        super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
     }
 
     @Override

@@ -2,7 +2,9 @@ package hcmute.edu.vn.id18110377;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -10,15 +12,20 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
+import hcmute.edu.vn.id18110377.entity.Account;
+import hcmute.edu.vn.id18110377.entity.User;
 import hcmute.edu.vn.id18110377.fragment.CartFragment;
 import hcmute.edu.vn.id18110377.fragment.DiscountFragment;
 import hcmute.edu.vn.id18110377.fragment.HomeFragment;
 import hcmute.edu.vn.id18110377.fragment.MenuFragment;
 import hcmute.edu.vn.id18110377.fragment.NotificationFragment;
+import hcmute.edu.vn.id18110377.utilities.SessionUtilities;
 
 public class MainActivity extends AppCompatActivity {
-
     public static Resources mainResources;
+    public static Account account;
+    public static User user;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener
             onNavItemSelectedListener = item -> {
@@ -60,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
             navigationView.setSelectedItemId(R.id.menuHome);
         }
         mainResources = getResources();
+        account = SessionUtilities.getSession(this);
+        if (account != null) {
+            UserDbHelper userDbHelper = new UserDbHelper(this);
+            user = userDbHelper.getUserByAccountId(account.getId());
+            Log.i("7777777777777777777777", account.getUsername());
+            Toast.makeText(this, "Đã đăng nhập với tên " + account.getUsername() + "!", Toast.LENGTH_SHORT);
+        }
     }
 
     @Override
