@@ -105,20 +105,18 @@ public class SignUp extends AppCompatActivity {
             AccountDbHelper accountDbHelper = new AccountDbHelper(this);
             long rowID = accountDbHelper.insert(account);
             if (rowID < 0) {
-                Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT).show();
             } else {
                 Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
-                Log.i("ÂCCACACACCAcACA", accountId.toString());
                 User user = new User(accountId, fullname, email, getSex(), phone, avatar);
                 UserDbHelper userDbHelper = new UserDbHelper(this);
                 long re = userDbHelper.insert(user);
                 if (re < 0) {
-                    Log.i("===========================", "000000000000000000000");
-                    Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!",
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     SessionUtilities.saveSession(this, username, password);
-                    Log.i("===========================", "iiiiiiiiiiiiiiiiiiiiii");
-                    Toast.makeText(this, "Đã đăng nhập thành công!", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "Đã đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
