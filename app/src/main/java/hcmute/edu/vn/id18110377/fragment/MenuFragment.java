@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.adapter.ItemMenuAdapter;
-import hcmute.edu.vn.id18110377.entity.ItemMenu;
+import hcmute.edu.vn.id18110377.adapter.RecyleItemViewAdapter;
+import hcmute.edu.vn.id18110377.entity.MenuItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,8 +90,8 @@ public class MenuFragment extends Fragment {
 
         List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
         ArrayList<Integer> lstItemMenuImg = createMenuItemImage();
-        List<ItemMenu> lstItemMenu = ItemMenu.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
-        ItemMenuAdapter adapter = new ItemMenuAdapter(lstItemMenu);
+        List<MenuItem> lstMenuItems = MenuItem.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
+        RecyleItemViewAdapter adapter = new RecyleItemViewAdapter(lstMenuItems);
 
         RecyclerView rv_account = view.findViewById(R.id.rv_account);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

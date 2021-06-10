@@ -57,7 +57,7 @@
             android:name=".layout.ChangeLanguage"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.Cart"
+            android:name=".layout.CartDetail"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".layout.Wallet"

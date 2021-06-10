@@ -7,6 +7,7 @@ public class Cart {
     private Integer quantity;
     private String address;
     private String status;
+    private Product product;
 
     public Cart(Integer id, Integer userId, Integer productId, Integer quantity, String address, String status) {
         this.id = id;
@@ -72,5 +73,19 @@ public class Cart {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Double getTotalPrice() {
+        if (this.getProduct() == null)
+            return 0.0;
+        return quantity * this.getProduct().getPrice();
     }
 }

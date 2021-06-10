@@ -31,7 +31,7 @@
     <string name="invalid_username">Tên người dùng không hợp lệ</string>
     <string name="invalid_password">Mật khẩu phải trên 5 kí tự</string>
     <string name="login_failed">Đăng nhập thất bại</string>
-    <string name="cart">Giỏ hàng</string>
+    <string name="cart">Đơn hàng</string>
     <string name="fullName">Họ tên</string>
     <string name="txtSearch">Tìm sản phẩm...</string>
     <string name="btnTakePhoto">Chụp ảnh</string>
@@ -43,4 +43,9 @@
     <string name="buyNow">Mua ngay</string>
     <string name="search_results">Kết quả tìm kiếm</string>
     <string name="product_s_were_found">sản phẩm đã được tìm thấy!</string>
+    <string name="quantity">"Số lượng "</string>
+    <string name="cart_detail">Chi tiết đơn hàng</string>
+    <string name="pay_now">Thanh toán</string>
+    <string name="total_price">Thành tiền: </string>
+    <string name="price">Giá </string>
 </resources>
