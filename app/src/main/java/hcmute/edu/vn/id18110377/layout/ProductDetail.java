@@ -1,6 +1,7 @@
 package hcmute.edu.vn.id18110377.layout;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,8 @@ public class ProductDetail extends AppCompatActivity {
         this.product = productDbHelper.getProductById((int) bundle.getLong(PRODUCT_ID));
 
         if (this.product != null) {
-            //((ImageView)findViewById(R.id.productImage)).setImageBitmap(product.getImage());
+            if (product.getProductImages() != null)
+                ((ImageView) findViewById(R.id.productImage)).setImageBitmap(product.getProductImages().get(0));
 
             ((TextView) findViewById(R.id.productTitle)).setText(this.product.getName());
 

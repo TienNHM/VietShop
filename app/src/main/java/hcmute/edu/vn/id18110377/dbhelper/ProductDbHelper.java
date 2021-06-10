@@ -17,6 +17,7 @@ import hcmute.edu.vn.id18110377.entity.Store;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class ProductDbHelper extends SQLiteOpenHelper {
+    private final Context context;
     private static final String TABLE_NAME = "Product";
     private static final String PRODUCT_ID = "id";
     private static final String PRODUCT_STORE_ID = "storeId";
@@ -30,12 +31,13 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public ProductDbHelper(@Nullable Context context) {
         super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE Product ( " +
+                "CREATE TABLE IF NOT EXISTS Product ( " +
                         "    id    INTEGER NOT NULL, " +
                         "    storeId    INTEGER, " +
                         "    type    INTEGER NOT NULL, " +
@@ -75,10 +77,11 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         cursor.moveToFirst();
+        ProductImageDbHelper productImageDbHelper = new ProductImageDbHelper(this.context);
         while (!cursor.isAfterLast()) {
-            products.add(
-                    cursorToProduct(cursor)
-            );
+            Product product = cursorToProduct(cursor);
+            product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
+            products.add(product);
             cursor.moveToNext();
         }
         cursor.close();
@@ -111,13 +114,16 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     public ArrayList<Product> getProductByTypeName(String typeName) {
         ArrayList<Product> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+        ProductImageDbHelper productImageDbHelper = new ProductImageDbHelper(this.context);
         Cursor cursor = db.rawQuery(
                 "SELECT Product.id, Product.storeId, Product.type, Product.name, Product.price, Product.image, Product.detail, Product.star, Product.status" +
                         " FROM Product INNER JOIN ProductType ON Product.type = ProductType.id WHERE ProductType.name = ?",
                 new String[]{typeName});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            products.add(cursorToProduct(cursor));
+            Product product = cursorToProduct(cursor);
+            product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
+            products.add(product);
             cursor.moveToNext();
         }
         cursor.close();
@@ -127,6 +133,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     public ArrayList<Product> getTopProducts(Integer type, int limit) {
         ArrayList<Product> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+        ProductImageDbHelper productImageDbHelper = new ProductImageDbHelper(this.context);
         Cursor cursor = db.query(
                 TABLE_NAME,
                 null,
@@ -138,9 +145,9 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                 String.valueOf(limit));
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            products.add(
-                    cursorToProduct(cursor)
-            );
+            Product product = cursorToProduct(cursor);
+            product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
+            products.add(product);
             cursor.moveToNext();
         }
         cursor.close();
@@ -159,6 +166,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     private ArrayList<Product> getProductByField(String field, Object value) {
         ArrayList<Product> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+        ProductImageDbHelper productImageDbHelper = new ProductImageDbHelper(this.context);
         Cursor cursor = null;
         if (value instanceof String)
             cursor = getCursorWithStringValue(db, field, value.toString());
@@ -167,9 +175,9 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            products.add(
-                    cursorToProduct(cursor)
-            );
+            Product product = cursorToProduct(cursor);
+            product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
+            products.add(product);
             cursor.moveToNext();
         }
         cursor.close();
@@ -259,24 +267,15 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
         ArrayList<Product> products = new ArrayList<>();
         promoId.forEach(id -> {
-            products.addAll(
-                    getProductByField(PRODUCT_ID, id)
-            );
+            products.add(getProductById(id));
         });
 
         return products;
     }
 
     public Store getStore(Integer storeId) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + StoreDbHelper.TABLE_NAME + " WHERE id = ?", new String[]{storeId.toString()});
-        Store store = null;
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            store = StoreDbHelper.cursorToStore(cursor);
-        }
-        cursor.close();
-        return store;
+        StoreDbHelper storeDbHelper = new StoreDbHelper(this.context);
+        return storeDbHelper.getStoreById(storeId);
     }
 
     public ArrayList<Product> getDicountProducts() {
