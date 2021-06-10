@@ -38,8 +38,8 @@ import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
 import hcmute.edu.vn.id18110377.entity.User;
+import hcmute.edu.vn.id18110377.utilities.AppUtilities;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
-import hcmute.edu.vn.id18110377.utilities.SessionUtilities;
 
 public class SignUp extends AppCompatActivity {
     @BindView(R.id.txtFullName)
@@ -87,6 +87,10 @@ public class SignUp extends AppCompatActivity {
         }
 
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
+        findViewById(R.id.btnLogIn).setOnClickListener(this::setLogIn);
+        findViewById(R.id.btnSignUp).setOnClickListener(this::setSignUp);
+        findViewById(R.id.btnTakePhoto).setOnClickListener(this::setTakePhoto);
+        findViewById(R.id.btnChoosePhoto).setOnClickListener(this::setChoosePhoto);
     }
 
     private void setSignUp(View view) {
@@ -98,7 +102,7 @@ public class SignUp extends AppCompatActivity {
         String confirmPassword = txtConfirmPassword.getText().toString();
         Bitmap avatar = ImageConverter.drawable2Bitmap(imgAvt.getDrawable());
 
-        Account account = new Account(username, SessionUtilities.encode(password));
+        Account account = new Account(username, AppUtilities.encode(password));
         AccountDbHelper accountDbHelper = new AccountDbHelper(this);
         long rowID = accountDbHelper.insert(account);
         if (rowID < 0) {
@@ -112,7 +116,7 @@ public class SignUp extends AppCompatActivity {
                 Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!",
                         Toast.LENGTH_SHORT).show();
             } else {
-                SessionUtilities.saveSession(this, username, password);
+                AppUtilities.saveSession(this, username, password);
                 Toast.makeText(this, "Đã đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                 finish();
             }

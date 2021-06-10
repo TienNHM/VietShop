@@ -10,7 +10,7 @@ import java.util.Base64;
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
 
-public class SessionUtilities {
+public class AppUtilities {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
 
@@ -29,8 +29,8 @@ public class SessionUtilities {
     public static void saveSession(@NotNull Context context, String username, String password) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(USERNAME, SessionUtilities.encode(username));
-        editor.putString(PASSWORD, SessionUtilities.encode(password));
+        editor.putString(USERNAME, AppUtilities.encode(username));
+        editor.putString(PASSWORD, AppUtilities.encode(password));
         editor.commit();
     }
 
