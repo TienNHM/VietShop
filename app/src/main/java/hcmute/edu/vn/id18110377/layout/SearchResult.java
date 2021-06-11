@@ -53,6 +53,7 @@ public class SearchResult extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(v -> {
             finish();
         });
+        ((TextView) findViewById(R.id.txtSearch)).setText(txtSearch);
 
         getSearchResult();
         chipClothes.setOnCheckedChangeListener(this::setChipClothesOnCheckedChanged);
@@ -63,6 +64,7 @@ public class SearchResult extends AppCompatActivity {
         chipElectronic.setOnCheckedChangeListener(this::setChipElectronicOnCheckedChanged);
         chipOthers.setOnCheckedChangeListener(this::setChipOthersOnCheckedChanged);
         chipAllTypes.setOnCheckedChangeListener(this::setChipAllTypesOnCheckedChanged);
+        chipAllTypes.setChecked(true);
     }
 
     private void setChipClothesOnCheckedChanged(CompoundButton compoundButton, boolean b) {

@@ -25,7 +25,7 @@
             android:background="@drawable/arrow_back" />
 
         <TextView
-            android:id="@+id/txtHelp"
+            android:id="@+id/txtSearch"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_marginVertical="10dp"
