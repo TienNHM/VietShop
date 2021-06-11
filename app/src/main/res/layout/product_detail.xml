@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/frame_product_detail"
     tools:context=".layout.ProductDetail">
 
     <LinearLayout
@@ -233,6 +234,23 @@
                 android:textStyle="bold"
                 android:backgroundTint="#9AFFA000"
                 android:drawableStart="@drawable/add" />
+
+            <Button
+                android:id="@+id/btnViewCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#9AFFA000"
+                android:drawableStart="@drawable/pay_now"
+                android:fontFamily="@font/bungee"
+                android:gravity="center"
+                android:text="@string/view_cart"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#E64A19"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

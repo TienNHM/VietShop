@@ -2,7 +2,6 @@ package hcmute.edu.vn.id18110377;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         if (account != null) {
             UserDbHelper userDbHelper = new UserDbHelper(this);
             user = userDbHelper.getUserByAccountId(account.getId());
-            Log.i("7777777777777777777777", account.getUsername());
             Toast.makeText(this, "Đã đăng nhập với tên " + account.getUsername() + "!", Toast.LENGTH_SHORT);
         }
     }
