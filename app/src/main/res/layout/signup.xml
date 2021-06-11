@@ -145,7 +145,7 @@
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
                 app:startIconContentDescription="@string/fullName"
-                app:startIconDrawable="@drawable/account">
+                app:startIconDrawable="@drawable/ic_account">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtFullName"
@@ -192,6 +192,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:hint="@string/address"
+                app:endIconMode="clear_text"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:hintTextColor="@color/theme_color"
+                app:startIconContentDescription="@string/fullName"
+                app:startIconDrawable="@drawable/ic_location">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
