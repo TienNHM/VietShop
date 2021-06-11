@@ -41,6 +41,7 @@ public class SearchResult extends AppCompatActivity {
     Chip chipAllTypes;
 
     private ArrayList<String> selectedProductTypes = new ArrayList<>();
+    private String txtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class SearchResult extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
+        this.txtSearch = getIntent().getStringExtra("search");
         findViewById(R.id.btnBack).setOnClickListener(v -> {
             finish();
         });
@@ -142,7 +144,9 @@ public class SearchResult extends AppCompatActivity {
         } else {
             selectedProductTypes.clear();
         }
-        getSearchResultByType();
+        ProductDbHelper productDbHelper = new ProductDbHelper(this);
+        ArrayList<Product> products = productDbHelper.getFullSearchResult(txtSearch);
+        setProductsOnGridView(products);
     }
 
     private void getSearchResultByType() {
@@ -152,7 +156,6 @@ public class SearchResult extends AppCompatActivity {
     }
 
     private void getSearchResult() {
-        String txtSearch = getIntent().getStringExtra("search");
         ProductDbHelper productDbHelper = new ProductDbHelper(this);
         ArrayList<Product> products = productDbHelper.getFullSearchResult(txtSearch);
         if (products == null)

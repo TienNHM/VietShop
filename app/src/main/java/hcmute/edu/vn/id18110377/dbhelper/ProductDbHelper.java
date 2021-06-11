@@ -144,7 +144,10 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                 cursor.moveToNext();
             }
         }
-        cursor.close();
+        if (cursor != null) {
+            if (!cursor.isClosed())
+                cursor.close();
+        }
         return products;
     }
 
