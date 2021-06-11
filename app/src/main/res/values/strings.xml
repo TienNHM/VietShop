@@ -69,7 +69,7 @@
     <string name="details">Details</string>
     <string name="product">Product</string>
     <string name="discount">Discount</string>
-    <string name="buyNow">Buy now</string>
+    <string name="addCart">Add to cart</string>
     <string name="search_results">Search results</string>
     <string name="product_s_were_found">product(s) were found!</string>
     <string name="quantity">"Quantity "</string>
