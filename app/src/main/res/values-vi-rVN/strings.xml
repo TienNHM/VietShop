@@ -52,5 +52,6 @@
     <string name="female">Nữ</string>
     <string name="others">Khác</string>
     <string name="sex">Giới tính</string>
+    <string name="address">Địa chỉ</string>
 
 </resources>

@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -48,6 +50,8 @@ public class SignUp extends AppCompatActivity {
     TextInputEditText txtEmail;
     @BindView(R.id.txtPhone)
     TextInputEditText txtPhone;
+    @BindView(R.id.txtAddress)
+    TextInputEditText txtAddress;
     @BindView(R.id.txtUsername)
     TextInputEditText txtUsername;
     @BindView(R.id.txtPassword)
@@ -87,20 +91,65 @@ public class SignUp extends AppCompatActivity {
         }
 
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
-        findViewById(R.id.btnLogIn).setOnClickListener(this::setLogIn);
+        findViewById(R.id.txtSignIn).setOnClickListener(this::setLogIn);
         findViewById(R.id.btnSignUp).setOnClickListener(this::setSignUp);
         findViewById(R.id.btnTakePhoto).setOnClickListener(this::setTakePhoto);
         findViewById(R.id.btnChoosePhoto).setOnClickListener(this::setChoosePhoto);
+        txtConfirmPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                setConfirmPasswordErrorHelper();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                setConfirmPasswordErrorHelper();
+            }
+        });
+    }
+
+    private void setConfirmPasswordErrorHelper() {
+        String password = txtPassword.getText().toString();
+        String confirmPassword = txtConfirmPassword.getText().toString();
+
+        if (password.equals(confirmPassword))
+            layoutConfirmPassword.setErrorEnabled(false);
+        else {
+            layoutConfirmPassword.setErrorEnabled(true);
+            layoutConfirmPassword.setError("Phải trùng với mật khẩu đã nhập.");
+        }
+    }
+
+    private boolean validate(String fullName, String email, String phone, String address,
+                             String username, String password, String confirmPassword) {
+        if (fullName.equals("")) return false;
+        if (email.equals("")) return false;
+        if (phone.equals("")) return false;
+        if (address.equals("")) return false;
+        if (username.equals("")) return false;
+        if (password.equals("")) return false;
+        return !confirmPassword.equals("");
     }
 
     private void setSignUp(View view) {
-        String fullname = txtFullName.getText().toString();
+        String fullName = txtFullName.getText().toString();
         String email = txtEmail.getText().toString();
         String phone = txtPhone.getText().toString();
+        String address = txtAddress.getText().toString();
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
         String confirmPassword = txtConfirmPassword.getText().toString();
         Bitmap avatar = ImageConverter.drawable2Bitmap(imgAvt.getDrawable());
+
+        if (validate(fullName, email, phone, address, username, password, confirmPassword) == false) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin cá nhân!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Account account = new Account(username, AppUtilities.encode(password));
         AccountDbHelper accountDbHelper = new AccountDbHelper(this);
@@ -109,7 +158,7 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT).show();
         } else {
             Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
-            User user = new User(accountId, fullname, email, getSex(), phone, avatar);
+            User user = new User(accountId, fullName, email, getSex(), phone, address, avatar);
             UserDbHelper userDbHelper = new UserDbHelper(this);
             long re = userDbHelper.insert(user);
             if (re < 0) {
@@ -117,7 +166,7 @@ public class SignUp extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             } else {
                 AppUtilities.saveSession(this, username, password);
-                Toast.makeText(this, "Đã đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Đã đăng ký thành công!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
@@ -131,10 +180,8 @@ public class SignUp extends AppCompatActivity {
                 return "M";
             case R.id.chipFemale:
                 return "F";
-            case R.id.chipOthers:
-                return "O";
             default:
-                return null;
+                return "O";
         }
     }
 
