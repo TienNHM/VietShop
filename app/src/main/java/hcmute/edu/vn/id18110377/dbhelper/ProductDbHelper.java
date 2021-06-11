@@ -130,6 +130,24 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return products;
     }
 
+    public ArrayList<Product> getProductByListTypeId(ArrayList<String> productTypeIDs) {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        for (String id : productTypeIDs) {
+            cursor = db.rawQuery(
+                    "SELECT * FROM " + TABLE_NAME + " WHERE " + PRODUCT_TYPE + " = ?",
+                    new String[]{String.valueOf(id)});
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                products.add(cursorToProduct(cursor));
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return products;
+    }
+
     public ArrayList<Product> getTopProducts(Integer type, int limit) {
         ArrayList<Product> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();

@@ -146,7 +146,9 @@ public class SearchResult extends AppCompatActivity {
     }
 
     private void getSearchResultByType() {
-
+        ProductDbHelper productDbHelper = new ProductDbHelper(this);
+        ArrayList<Product> products = productDbHelper.getProductByListTypeId(this.selectedProductTypes);
+        setProductsOnGridView(products);
     }
 
     private void getSearchResult() {
@@ -156,6 +158,10 @@ public class SearchResult extends AppCompatActivity {
         if (products == null)
             return;
 
+        setProductsOnGridView(products);
+    }
+
+    private void setProductsOnGridView(ArrayList<Product> products) {
         TextView tvNumberProducts = findViewById(R.id.tvNumProducts);
         tvNumberProducts.setText(String.valueOf(products.size()));
         ProductAdapter adapter = new ProductAdapter(this, products);
@@ -168,5 +174,4 @@ public class SearchResult extends AppCompatActivity {
         });
         gridView.setAdapter(adapter);
     }
-
 }
