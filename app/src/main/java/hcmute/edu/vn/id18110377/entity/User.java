@@ -18,45 +18,45 @@ public class User {
     private String sex;
     private String email;
     private String phone;
+    private String address;
     private Bitmap avatar;
     private String facebook;
     private String zalo;
     private String status;
 
     public User(Integer id, Integer accountId, String fullname, String email, String sex,
-                String phone, Bitmap avatar, String facebook, String zalo, String status) {
+                String phone, String address, Bitmap avatar, String facebook, String zalo, String status) {
         this.id = id;
         this.accountId = accountId;
         this.fullname = fullname;
         this.sex = sex;
         this.email = email;
         this.phone = phone;
+        this.address = address;
         this.avatar = avatar;
         this.facebook = facebook;
         this.zalo = zalo;
         this.status = status;
     }
 
-    public User(Integer accountId, String fullname, String email, String sex, String phone, Bitmap avatar) {
-        this(-1, accountId, fullname, email, sex, phone, avatar, null, null, null);
+    public User(Integer accountId, String fullname, String email, String sex,
+                String phone, String address, Bitmap avatar) {
+        this(-1, accountId, fullname, email, sex, phone, address, avatar, null, null, null);
     }
 
     public User(Integer id, Integer accountId, String fullname, String email, String sex,
-                String phone, String facebook, String zalo, String status) {
+                String phone, String address, String facebook, String zalo, String status) {
         this.id = id;
         this.accountId = accountId;
         this.fullname = fullname;
         this.sex = sex;
         this.email = email;
         this.phone = phone;
+        this.address = address;
         this.setAvatar(sex);
         this.facebook = facebook;
         this.zalo = zalo;
         this.status = status;
-    }
-
-    public User(Integer accountId, String fullname, String email) {
-        this(-1, accountId, fullname, email, null, null, null, null, null);
     }
 
     public Integer getId() {
@@ -153,5 +153,13 @@ public class User {
 
     public void setAccountId(Integer accountId) {
         this.accountId = accountId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
