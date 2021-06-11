@@ -58,5 +58,6 @@
     <string name="food">Món ăn</string>
     <string name="fruit">Trái cây</string>
     <string name="drink">Nước uống</string>
+    <string name="all_types">Tất cả</string>
 
 </resources>

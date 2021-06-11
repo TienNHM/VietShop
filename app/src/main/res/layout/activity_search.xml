@@ -70,6 +70,7 @@
     </LinearLayout>
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupProductType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -87,7 +88,7 @@
             app:chipSurfaceColor="@color/chip_state" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipFoods"
+            android:id="@+id/chipFood"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +98,7 @@
             app:chipSurfaceColor="@color/chip_state" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipFruits"
+            android:id="@+id/chipFruit"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,7 +108,7 @@
             app:chipSurfaceColor="@color/chip_state" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipDrinks"
+            android:id="@+id/chipDrink"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,6 +143,16 @@
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_height="wrap_content"
             android:text="@string/others"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAllProductTypes"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_types"
             android:textAlignment="center"
             android:textStyle="bold"
             app:chipSurfaceColor="@color/chip_state" />

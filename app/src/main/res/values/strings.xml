@@ -87,5 +87,6 @@
     <string name="electronic">Electronic</string>
     <string name="fresh_food">FreshFood</string>
     <string name="others">Others</string>
+    <string name="all_types">All types</string>
 
 </resources>
