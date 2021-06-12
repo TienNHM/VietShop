@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377.layout;
+package hcmute.edu.vn.id18110377.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.ProductAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
 import hcmute.edu.vn.id18110377.entity.Product;
+import hcmute.edu.vn.id18110377.fragment.HomeFragment;
 
 public class SearchResult extends AppCompatActivity {
     @BindView(R.id.chipGroupProductType)
@@ -50,6 +51,11 @@ public class SearchResult extends AppCompatActivity {
         ButterKnife.bind(this);
 
         this.txtSearch = getIntent().getStringExtra("search");
+        long prodcutType = getIntent().getLongExtra(HomeFragment.PRODUCT_TYPE_ID, -1);
+        if (prodcutType!= -1){
+
+        }
+
         findViewById(R.id.btnBack).setOnClickListener(v -> {
             finish();
         });
