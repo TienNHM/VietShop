@@ -1,9 +1,7 @@
 package hcmute.edu.vn.id18110377.activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,14 +14,7 @@ public class Help extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feature_help);
 
-        ImageButton ibtn = findViewById(R.id.btnBack_help);
-        ibtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
+        findViewById(R.id.btnBack_help).setOnClickListener(view -> finish());
         WebView webView = findViewById(R.id.webHelp);
         String url = getResources().getString(R.string.help_url);
         webView.loadUrl(url);
