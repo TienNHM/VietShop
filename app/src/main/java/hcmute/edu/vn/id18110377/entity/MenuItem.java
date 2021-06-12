@@ -5,17 +5,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import hcmute.edu.vn.id18110377.layout.BillHistory;
-import hcmute.edu.vn.id18110377.layout.CartDetail;
-import hcmute.edu.vn.id18110377.layout.ChangeLanguage;
-import hcmute.edu.vn.id18110377.layout.ConnectAccount;
-import hcmute.edu.vn.id18110377.layout.Discount;
-import hcmute.edu.vn.id18110377.layout.Help;
-import hcmute.edu.vn.id18110377.layout.LogIn;
-import hcmute.edu.vn.id18110377.layout.SettingsAccount;
-import hcmute.edu.vn.id18110377.layout.ShareApp;
-import hcmute.edu.vn.id18110377.layout.SignUp;
-import hcmute.edu.vn.id18110377.layout.Wallet;
+import hcmute.edu.vn.id18110377.activity.BillHistory;
+import hcmute.edu.vn.id18110377.activity.CartDetail;
+import hcmute.edu.vn.id18110377.activity.ChangeLanguage;
+import hcmute.edu.vn.id18110377.activity.ConnectAccount;
+import hcmute.edu.vn.id18110377.activity.Discount;
+import hcmute.edu.vn.id18110377.activity.Help;
+import hcmute.edu.vn.id18110377.activity.LogIn;
+import hcmute.edu.vn.id18110377.activity.SettingsAccount;
+import hcmute.edu.vn.id18110377.activity.ShareApp;
+import hcmute.edu.vn.id18110377.activity.SignUp;
+import hcmute.edu.vn.id18110377.activity.Wallet;
 
 public class MenuItem {
     private String title;

@@ -50,18 +50,11 @@ public class SearchResult extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        this.txtSearch = getIntent().getStringExtra("search");
-        long prodcutType = getIntent().getLongExtra(HomeFragment.PRODUCT_TYPE_ID, -1);
-        if (prodcutType!= -1){
-
-        }
-
         findViewById(R.id.btnBack).setOnClickListener(v -> {
             finish();
         });
         ((TextView) findViewById(R.id.txtSearch)).setText(txtSearch);
 
-        getSearchResult();
         chipClothes.setOnCheckedChangeListener(this::setChipClothesOnCheckedChanged);
         chipFood.setOnCheckedChangeListener(this::setChipFoodOnCheckedChanged);
         chipFreshFood.setOnCheckedChangeListener(this::setChipFreshFoodOnCheckedChanged);
@@ -71,6 +64,48 @@ public class SearchResult extends AppCompatActivity {
         chipOthers.setOnCheckedChangeListener(this::setChipOthersOnCheckedChanged);
         chipAllTypes.setOnCheckedChangeListener(this::setChipAllTypesOnCheckedChanged);
         chipAllTypes.setChecked(true);
+
+        this.txtSearch = getIntent().getStringExtra("search");
+        long productTypeId = getIntent().getLongExtra(HomeFragment.PRODUCT_TYPE_ID, -1);
+        if (this.txtSearch != null)
+            getSearchResult();
+        else
+            setShowProductByTypeId(productTypeId);
+    }
+
+    private void setShowProductByTypeId(long productTypeId) {
+        int typeId = (int) productTypeId;
+        if (productTypeId != -1) {
+            selectedProductTypes = new ArrayList<>();
+            selectedProductTypes.add(String.valueOf(productTypeId));
+            switch (typeId) {
+                case 1:
+                    chipClothes.setChecked(true);
+                    break;
+                case 2:
+                    chipFood.setChecked(true);
+                    break;
+                case 3:
+                    chipFruit.setChecked(true);
+                    break;
+                case 4:
+                    chipDrinks.setChecked(true);
+                    break;
+                case 5:
+                    chipElectronic.setChecked(true);
+                    break;
+                case 6:
+                    chipFreshFood.setChecked(true);
+                case 7:
+                    chipOthers.setChecked(true);
+                default:
+                    break;
+            }
+            chipAllTypes.setChecked(false);
+            ProductDbHelper productDbHelper = new ProductDbHelper(this);
+            ArrayList<Product> products = productDbHelper.getProductByTypeId(typeId);
+            setProductsOnGridView(products);
+        }
     }
 
     private void setChipClothesOnCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -137,6 +172,8 @@ public class SearchResult extends AppCompatActivity {
     }
 
     private void setChipAllTypesOnCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (this.txtSearch == null)
+            return;
         if (b) {
             chipFood.setChecked(false);
             chipClothes.setChecked(false);
@@ -164,6 +201,8 @@ public class SearchResult extends AppCompatActivity {
     }
 
     private void getSearchResult() {
+        if (this.txtSearch == null)
+            return;
         ProductDbHelper productDbHelper = new ProductDbHelper(this);
         ArrayList<Product> products = productDbHelper.getFullSearchResult(txtSearch);
         if (products == null)

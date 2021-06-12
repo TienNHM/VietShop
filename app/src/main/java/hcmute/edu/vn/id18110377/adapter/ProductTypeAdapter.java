@@ -70,9 +70,7 @@ public class ProductTypeAdapter extends BaseAdapter {
             productView = (ProductTypeAdapter.ProductTypeView) convertView.getTag();
         }
 
-
         ProductType productType = productTypes.get(position);
-
         productView.ibtnProduct.setImageBitmap(productType.getImage());
         productView.iv_special_image.setVisibility(View.INVISIBLE);
         productView.tv_product_name.setText(productType.getName());
