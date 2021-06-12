@@ -41,7 +41,7 @@
                 android:text="@string/help"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <WebView
