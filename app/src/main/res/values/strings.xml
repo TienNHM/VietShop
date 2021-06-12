@@ -74,5 +74,6 @@
     <string name="others">Others</string>
     <string name="all_types">All types</string>
     <string name="address">Address</string>
+    <string name="txtLogout">Logout</string>
 
 </resources>

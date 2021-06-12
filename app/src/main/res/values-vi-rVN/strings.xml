@@ -60,5 +60,6 @@
     <string name="drink">Nước uống</string>
     <string name="all_types">Tất cả</string>
     <string name="address">Địa chỉ</string>
+    <string name="txtLogout">Đăng xuất</string>
 
 </resources>
