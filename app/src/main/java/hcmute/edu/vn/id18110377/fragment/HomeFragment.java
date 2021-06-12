@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
         spinner.setAdapter(adapter);*/
 
         //Search
-        SearchView searchView = view.findViewById(R.id.txtSearch);
+        SearchView searchView = view.findViewById(R.id.tvSearch);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

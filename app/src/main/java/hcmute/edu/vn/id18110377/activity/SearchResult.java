@@ -22,6 +22,8 @@ import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.fragment.HomeFragment;
 
 public class SearchResult extends AppCompatActivity {
+    @BindView(R.id.tvSearch)
+    TextView tvSearch;
     @BindView(R.id.chipGroupProductType)
     ChipGroup chipGroupProductType;
     @BindView(R.id.chipClothes)
@@ -53,7 +55,6 @@ public class SearchResult extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(v -> {
             finish();
         });
-        ((TextView) findViewById(R.id.txtSearch)).setText(txtSearch);
 
         chipClothes.setOnCheckedChangeListener(this::setChipClothesOnCheckedChanged);
         chipFood.setOnCheckedChangeListener(this::setChipFoodOnCheckedChanged);
@@ -67,17 +68,18 @@ public class SearchResult extends AppCompatActivity {
 
         this.txtSearch = getIntent().getStringExtra("search");
         long productTypeId = getIntent().getLongExtra(HomeFragment.PRODUCT_TYPE_ID, -1);
-        if (this.txtSearch != null)
+        if (this.txtSearch != null) {
+            tvSearch.setText(txtSearch);
             getSearchResult();
-        else
+        } else {
+            tvSearch.setText("Xem sản phẩm theo loại");
             setShowProductByTypeId(productTypeId);
+        }
     }
 
     private void setShowProductByTypeId(long productTypeId) {
         int typeId = (int) productTypeId;
         if (productTypeId != -1) {
-            selectedProductTypes = new ArrayList<>();
-            selectedProductTypes.add(String.valueOf(productTypeId));
             switch (typeId) {
                 case 1:
                     chipClothes.setChecked(true);
