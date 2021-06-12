@@ -17,11 +17,12 @@ import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 public class UserDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "User";
     private static final String USER_ID = "id";
-    private static final String USER_ACCOUNTID = "accountId";
-    private static final String USER_FULLNAME = "fullname";
+    private static final String USER_ACCOUNT_ID = "accountId";
+    private static final String USER_FULL_NAME = "fullname";
     private static final String USER_SEX = "sex";
     private static final String USER_EMAIL = "email";
     private static final String USER_PHONE = "phone";
+    private static final String USER_ADDRESS = "address";
     private static final String USER_AVATAR = "avatar";
     private static final String USER_FACEBOOK = "facebook";
     private static final String USER_ZALO = "zalo";
@@ -41,11 +42,13 @@ public class UserDbHelper extends SQLiteOpenHelper {
                         "    email    TEXT NOT NULL, " +
                         "    sex    TEXT NOT NULL, " +
                         "    phone    TEXT NOT NULL, " +
+                        "    address    TEXT NOT NULL, " +
                         "    avatar    BLOB, " +
                         "    facebook    TEXT, " +
                         "    zalo    TEXT, " +
                         "    status    TEXT, " +
-                        "    PRIMARY KEY(id)" +
+                        "    PRIMARY KEY(id), " +
+                        "    FOREIGN KEY(accountId) REFERENCES Account(id) " +
                         ")";
         db.execSQL(query);
     }
@@ -65,10 +68,11 @@ public class UserDbHelper extends SQLiteOpenHelper {
                 cursor.getString(3),
                 cursor.getString(4),
                 cursor.getString(5),
-                ImageConverter.byte2Bitmap(cursor.getBlob(6)),
-                cursor.getString(7),
+                cursor.getString(6),
+                ImageConverter.byte2Bitmap(cursor.getBlob(7)),
                 cursor.getString(8),
-                cursor.getString(9)
+                cursor.getString(9),
+                cursor.getString(10)
         );
     }
 
@@ -87,11 +91,12 @@ public class UserDbHelper extends SQLiteOpenHelper {
     @NotNull
     private ContentValues createContentValues(@NotNull User user) {
         ContentValues values = new ContentValues();
-        values.put(USER_FULLNAME, user.getFullname());
-        values.put(USER_ACCOUNTID, user.getAccountId());
+        values.put(USER_FULL_NAME, user.getFullname());
+        values.put(USER_ACCOUNT_ID, user.getAccountId());
         values.put(USER_SEX, user.getSex());
         values.put(USER_EMAIL, user.getEmail());
         values.put(USER_PHONE, user.getPhone());
+        values.put(USER_ADDRESS, user.getAddress());
         values.put(USER_AVATAR, user.getRawAvatar());
         values.put(USER_FACEBOOK, user.getFacebook());
         values.put(USER_ZALO, user.getZalo());
@@ -119,7 +124,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
     public User getUserByAccountId(Integer accountId) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ACCOUNTID + " = ?",
+                "SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ACCOUNT_ID + " = ?",
                 new String[]{String.valueOf(accountId)});
         User user = null;
         if (cursor.getCount() > 0) {

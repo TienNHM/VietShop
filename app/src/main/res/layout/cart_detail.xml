@@ -199,14 +199,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnPayNow"
+        android:id="@+id/btnViewCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="10dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/pay_now"
+        android:text="@string/view_cart"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#E64A19"

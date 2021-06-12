@@ -1,6 +1,9 @@
 package hcmute.edu.vn.id18110377.entity;
 
 public class Cart {
+    public static final String CART_UNPAID = "Unpaid";
+    public static final String CART_PAID = "Paid";
+
     private Integer id;
     private Integer userId;
     private Integer productId;
@@ -23,7 +26,7 @@ public class Cart {
     }
 
     public Cart(Integer userId, Integer productId, Integer quantity, String address) {
-        this(-1, userId, productId, quantity, address, null);
+        this(-1, userId, productId, quantity, address, CART_UNPAID);
     }
 
     public Integer getId() {
