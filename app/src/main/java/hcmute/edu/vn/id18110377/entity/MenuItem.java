@@ -2,51 +2,34 @@ package hcmute.edu.vn.id18110377.entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
+import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.activity.BillHistory;
-import hcmute.edu.vn.id18110377.activity.CartDetail;
 import hcmute.edu.vn.id18110377.activity.ChangeLanguage;
-import hcmute.edu.vn.id18110377.activity.ConnectAccount;
-import hcmute.edu.vn.id18110377.activity.Discount;
 import hcmute.edu.vn.id18110377.activity.Help;
-import hcmute.edu.vn.id18110377.activity.LogIn;
-import hcmute.edu.vn.id18110377.activity.SettingsAccount;
-import hcmute.edu.vn.id18110377.activity.ShareApp;
-import hcmute.edu.vn.id18110377.activity.SignUp;
-import hcmute.edu.vn.id18110377.activity.Wallet;
 
 public class MenuItem {
-    private String title;
-    public static List<String> lstItemMenuTitle;
-    public static HashMap<String, Class> menuItem;
+    public static final String MENU_BILL_HISTORY = "Lịch sử hóa đơn";
+    public static final String MENU_LANGUAGE = "Chọn ngôn ngữ";
+    public static final String MENU_HELP = "Liên hệ hỗ trợ";
+    public static List<String> menuItemTitle;
+    public static List<Class> menuItemClass;
+    public static List<Integer> menuItemImage;
 
     static {
-        lstItemMenuTitle = Arrays.asList(
-                "Đăng nhập", "Đơn hàng", "Nhập mã khuyến mãi", "Tài khoản liên kết", "Số dư tài khoản",
-                "Lịch sử hóa đơn", "Giới thiệu bạn bè", "Chọn ngôn ngữ", "Liên hệ hỗ trợ", "Cài đặt tài khoản", "Đăng xuất"
+        menuItemTitle = Arrays.asList(MENU_BILL_HISTORY, MENU_LANGUAGE, MENU_HELP);
+        menuItemClass = Arrays.asList(BillHistory.class, ChangeLanguage.class, Help.class);
+        menuItemImage = Arrays.asList(
+                R.drawable.history,
+                R.drawable.translation,
+                R.drawable.messaging
         );
-        menuItem = new HashMap<>();
-        menuItem.put("Đăng nhập", SignUp.class);
-        menuItem.put("Đơn hàng", CartDetail.class);
-        menuItem.put("Nhập mã khuyến mãi", Discount.class);
-        menuItem.put("Tài khoản liên kết", ConnectAccount.class);
-        menuItem.put("Số dư tài khoản", Wallet.class);
-        menuItem.put("Lịch sử hóa đơn", BillHistory.class);
-        menuItem.put("Giới thiệu bạn bè", ShareApp.class);
-        menuItem.put("Chọn ngôn ngữ", ChangeLanguage.class);
-        menuItem.put("Liên hệ hỗ trợ", Help.class);
-        menuItem.put("Cài đặt tài khoản", SettingsAccount.class);
-        menuItem.put("Đăng xuất", LogIn.class);
     }
 
     private Integer discountImageID;
+    private String title;
     private Integer bgImageID;
-
-    public MenuItem() {
-
-    }
 
     public MenuItem(String title, Integer discountImageID, Integer bgImageID) {
         this.title = title;
@@ -58,13 +41,12 @@ public class MenuItem {
         this(title, discountImageID, null);
     }
 
-    public static List<MenuItem> createListMenuItem(List<String> lstTitle, List<Integer> lstImg) {
-        int num = lstImg.size() < lstTitle.size() ? lstImg.size() : lstTitle.size();
+    public static List<MenuItem> createListMenuItem() {
         List<MenuItem> menu = new ArrayList<MenuItem>();
+        int num = menuItemClass.size();
         for (int i = 0; i < num; i++) {
-            menu.add(new MenuItem(lstTitle.get(i), lstImg.get(i)));
+            menu.add(new MenuItem(menuItemTitle.get(i), menuItemImage.get(i)));
         }
-
         return menu;
     }
 
@@ -92,7 +74,12 @@ public class MenuItem {
         this.bgImageID = bgImageID;
     }
 
+    public static Class getLayout(Integer position) {
+        return menuItemClass.get(position);
+    }
+
     public static Class getLayout(String title) {
-        return menuItem.get(title);
+        int position = menuItemTitle.indexOf(title);
+        return menuItemClass.get(position);
     }
 }

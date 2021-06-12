@@ -47,20 +47,6 @@
     <string name="txtSearch">Search</string>
     <string name="btnTakePhoto">Take a photo</string>
 
-    <!-- account menu item -->
-    <string-array name="account_menu_items">
-        <item>Đăng nhập</item>
-        <item>Đơn hàng</item>
-        <item>Nhập mã khuyến mãi</item>
-        <item>Tài khoản liên kết</item>
-        <item>Số dư tài khoản</item>
-        <item>Lịch sử hóa đơn</item>
-        <item>Giới thiệu bạn bè</item>
-        <item>Chọn ngôn ngữ</item>
-        <item>Liên hệ hỗ trợ</item>
-        <item>Cài đặt tài khoản</item>
-        <item>Đăng xuất</item>
-    </string-array>
     <string name="help">Help</string>
     <string name="help_url" translatable="false">https://github.com/TienNHM/VietShop/wiki</string>
     <string name="change_language">Change language</string>

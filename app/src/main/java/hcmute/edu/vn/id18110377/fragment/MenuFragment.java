@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
@@ -48,36 +46,17 @@ public class MenuFragment extends Fragment {
         }
     }
 
-    private ArrayList<Integer> createMenuItemImage() {
-        ArrayList<Integer> lstItemMenuImg = new ArrayList<>();
-        lstItemMenuImg.add(R.drawable.key);
-        lstItemMenuImg.add(R.drawable.shopping_cart);
-        lstItemMenuImg.add(R.drawable.discount);
-        lstItemMenuImg.add(R.drawable.user_folder);
-        lstItemMenuImg.add(R.drawable.wallet);
-        lstItemMenuImg.add(R.drawable.history);
-        lstItemMenuImg.add(R.drawable.add);
-        lstItemMenuImg.add(R.drawable.translation);
-        lstItemMenuImg.add(R.drawable.messaging);
-        lstItemMenuImg.add(R.drawable.settings);
-        lstItemMenuImg.add(R.drawable.shutdown);
-        return lstItemMenuImg;
-    }
-
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        List<String> lstItemMenuTitle = Arrays.asList(getResources().getStringArray(R.array.account_menu_items));
-        ArrayList<Integer> lstItemMenuImg = createMenuItemImage();
-        List<MenuItem> lstMenuItems = MenuItem.createListMenuItem(lstItemMenuTitle, lstItemMenuImg);
+        List<MenuItem> lstMenuItems = MenuItem.createListMenuItem();
         RecyleItemViewAdapter adapter = new RecyleItemViewAdapter(lstMenuItems);
 
-        RecyclerView rv_account = view.findViewById(R.id.rv_account);
+        RecyclerView rv_account = view.findViewById(R.id.rv_menu_item);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_account.setLayoutManager(layoutManager);
         rv_account.setAdapter(adapter);

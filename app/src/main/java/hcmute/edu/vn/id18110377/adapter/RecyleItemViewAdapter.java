@@ -37,12 +37,8 @@ public class RecyleItemViewAdapter extends RecyclerView.Adapter<RecyleItemViewAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MenuItem recycleItem = lstRecycleItem.get(position);
-
-        TextView item_title = holder.item_title;
-        item_title.setText(recycleItem.getTitle());
-
-        ImageView item_img = holder.item_img;
-        item_img.setImageResource(recycleItem.getDiscountImageID());
+        holder.item_title.setText(recycleItem.getTitle());
+        holder.item_img.setImageResource(recycleItem.getDiscountImageID());
     }
 
     @NonNull
