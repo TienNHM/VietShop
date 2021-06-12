@@ -52,5 +52,12 @@
     <string name="female">Nữ</string>
     <string name="others">Khác</string>
     <string name="sex">Giới tính</string>
+    <string name="clothes">Quần áo</string>
+    <string name="electronic">Điện tử</string>
+    <string name="fresh_food">Thực phẩm sống</string>
+    <string name="food">Món ăn</string>
+    <string name="fruit">Trái cây</string>
+    <string name="drink">Nước uống</string>
+    <string name="all_types">Tất cả</string>
 
 </resources>

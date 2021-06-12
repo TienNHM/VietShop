@@ -79,7 +79,14 @@
     <string name="price">"Price "</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="others">Others</string>
     <string name="sex">Sex</string>
+    <string name="clothes">Clothes</string>
+    <string name="food">Foods</string>
+    <string name="fruit">Fruits</string>
+    <string name="drink">Drinks</string>
+    <string name="electronic">Electronic</string>
+    <string name="fresh_food">FreshFood</string>
+    <string name="others">Others</string>
+    <string name="all_types">All types</string>
 
 </resources>

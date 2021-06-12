@@ -29,7 +29,7 @@
         android:roundIcon="@drawable/plush"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-        <activity android:name=".layout.SearchResult"></activity>
+        <activity android:name=".activity.SearchResult"></activity>
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan">
@@ -40,40 +40,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".layout.SignUp"
+            android:name=".activity.SignUp"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.Discount"
+            android:name=".activity.Discount"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.LogIn"
+            android:name=".activity.LogIn"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.SettingsAccount"
+            android:name=".activity.SettingsAccount"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.Help"
+            android:name=".activity.Help"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.ChangeLanguage"
+            android:name=".activity.ChangeLanguage"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.CartDetail"
+            android:name=".activity.CartDetail"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.Wallet"
+            android:name=".activity.Wallet"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.BillHistory"
+            android:name=".activity.BillHistory"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.ShareApp"
+            android:name=".activity.ShareApp"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.ConnectAccount"
+            android:name=".activity.ConnectAccount"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".layout.ProductDetail"
+            android:name=".activity.ProductDetail"
             android:windowSoftInputMode="adjustPan" />
 
         <meta-data

@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377.layout;
+package hcmute.edu.vn.id18110377.activity;
 
 import android.os.Bundle;
 import android.view.View;

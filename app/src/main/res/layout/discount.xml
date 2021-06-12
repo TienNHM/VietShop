@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hcmute.edu.vn.id18110377.layout.Discount">
+    tools:context="hcmute.edu.vn.id18110377.activity.Discount">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

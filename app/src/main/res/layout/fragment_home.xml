@@ -48,7 +48,7 @@
                 app:layout_constraintVertical_bias="0.0" />-->
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/txtSearch"
+                android:id="@+id/tvSearch"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
@@ -93,7 +93,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#43FBC02D">
 
                         <TextView
@@ -131,7 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="20dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 

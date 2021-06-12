@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.activity.CartDetail;
 import hcmute.edu.vn.id18110377.entity.Cart;
-import hcmute.edu.vn.id18110377.layout.CartDetail;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public static final String PARAM_CART = "hcmute.edu.vn.id18110377.adapter.Cart";

@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context=".layout.SearchResult">
+    tools:context=".activity.SearchResult">
 
     <LinearLayout
         android:id="@+id/topNavbar"
@@ -25,7 +25,7 @@
             android:background="@drawable/arrow_back" />
 
         <TextView
-            android:id="@+id/txtHelp"
+            android:id="@+id/tvSearch"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_marginVertical="10dp"
@@ -37,7 +37,7 @@
             android:text="@string/search_results"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,6 +68,95 @@
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupProductType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        app:chipSpacing="3dp">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipClothes"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clothes"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFood"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/food"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFruit"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fruit"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipDrink"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drink"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipElectronic"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/electronic"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFreshFood"
+            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_height="wrap_content"
+            android:text="@string/fresh_food"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipOthers"
+            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_height="wrap_content"
+            android:text="@string/others"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAllProductTypes"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_types"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:chipSurfaceColor="@color/chip_state" />
+    </com.google.android.material.chip.ChipGroup>
 
     <ScrollView
         android:layout_width="match_parent"

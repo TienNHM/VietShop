@@ -1,4 +1,4 @@
-package hcmute.edu.vn.id18110377.layout;
+package hcmute.edu.vn.id18110377.activity;
 
 import android.os.Bundle;
 
@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import hcmute.edu.vn.id18110377.R;
 
-public class ConnectAccount extends AppCompatActivity {
+public class Wallet extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.connect_account);
+        setContentView(R.layout.wallet);
     }
 }
