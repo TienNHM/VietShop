@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new CartFragment();
                 loadFragment(fragment);
                 return true;
-            case R.id.menuMain:
+            case R.id.menuAvatar:
                 fragment = new MenuFragment();
                 loadFragment(fragment);
                 return true;

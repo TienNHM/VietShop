@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -18,10 +20,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.activity.LogIn;
 import hcmute.edu.vn.id18110377.adapter.RecyleItemViewAdapter;
 import hcmute.edu.vn.id18110377.entity.MenuItem;
+import hcmute.edu.vn.id18110377.utilities.AppUtilities;
+import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 public class MenuFragment extends Fragment {
 
@@ -29,6 +34,12 @@ public class MenuFragment extends Fragment {
     LinearLayout menuLogin;
     @BindView(R.id.menuLogout)
     LinearLayout menuLogout;
+    @BindView(R.id.menuAvatar)
+    ImageView menuAvatar;
+    @BindView(R.id.menuFullName)
+    TextView menuFullName;
+    @BindView(R.id.menuUsername)
+    TextView menuUsername;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -58,6 +69,12 @@ public class MenuFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkLogin();
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,9 +86,34 @@ public class MenuFragment extends Fragment {
         setMenuItemSection(view);
         setLoginClick(view);
         setLogoutClick(view);
+        checkLogin();
 
-        menuLogout.setVisibility(View.GONE);
         return view;
+    }
+
+    private void checkLogin() {
+        if (MainActivity.user != null)
+            setLogin();
+        else
+            setLogout();
+    }
+
+    private void setLogin() {
+        menuLogin.setVisibility(View.GONE);
+        menuAvatar.setImageBitmap(MainActivity.user.getAvatar());
+        menuFullName.setText(MainActivity.user.getFullname());
+        menuUsername.setText("@" + MainActivity.account.getUsername());
+        menuLogin.setVisibility(View.GONE);
+        menuLogout.setVisibility(View.VISIBLE);
+    }
+
+    private void setLogout() {
+        menuLogout.setVisibility(View.GONE);
+        menuAvatar.setImageBitmap(ImageConverter.resource2Bitmap(R.drawable.ic_account));
+        menuFullName.setText(R.string.action_sign_in);
+        menuUsername.setText(R.string.username);
+        menuLogout.setVisibility(View.GONE);
+        menuLogin.setVisibility(View.VISIBLE);
     }
 
     private void setMenuItemSection(View view) {
@@ -87,8 +129,9 @@ public class MenuFragment extends Fragment {
         menuLogin.setOnClickListener(view1 -> {
             Intent intent = new Intent(view.getContext(), LogIn.class);
             view.getContext().startActivity(intent);
-            menuLogin.setVisibility(View.GONE);
-            menuLogout.setVisibility(View.VISIBLE);
+            if (MainActivity.user != null) {
+                setLogin();
+            }
         });
     }
 
@@ -98,15 +141,15 @@ public class MenuFragment extends Fragment {
                     .setTitle("Đăng xuất")
                     .setMessage("Bạn có muốn đăng xuất khỏi ứng dụng?")
                     .setPositiveButton("Có", (dialogInterface, i) -> {
-                        //TODO Xóa session
+                        AppUtilities.clearSession(view.getContext());
                         Toast.makeText(view.getContext(), "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
-                        menuLogout.setVisibility(View.GONE);
-                        menuLogin.setVisibility(View.VISIBLE);
+                        MainActivity.account = null;
+                        MainActivity.user = null;
+                        setLogout();
                     })
                     .setNegativeButton("Không", null)
                     .setIcon(R.drawable.shutdown)
                     .show();
-
         });
     }
 }

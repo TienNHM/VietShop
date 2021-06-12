@@ -31,7 +31,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menuMain"
+        android:id="@+id/menuAvatar"
         android:contentDescription="Menu"
         android:icon="@drawable/menu"
         android:title="Menu"
