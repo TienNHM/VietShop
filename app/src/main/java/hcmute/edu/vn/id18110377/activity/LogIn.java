@@ -41,6 +41,7 @@ public class LogIn extends AppCompatActivity {
         btnLogin.setOnClickListener(this::setLogin);
     }
 
+
     private void setLogin(View view) {
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
@@ -52,6 +53,7 @@ public class LogIn extends AppCompatActivity {
             User user = userDbHelper.getUserByAccountId(account.getId());
             if (user != null) {
                 MainActivity.user = user;
+                AppUtilities.saveSession(this, username, password);
                 Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                 finish();
             } else

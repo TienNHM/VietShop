@@ -19,8 +19,8 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/menuMain"
+            <ImageView
+                android:id="@+id/menuAvatar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginVertical="10dp"
@@ -36,7 +36,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/fullname"
+                    android:id="@+id/menuFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
@@ -46,24 +46,15 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtUsername"
+                    android:id="@+id/menuUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5sp"
                     android:text="@string/username"
-                    android:textColor="#EACD9D"
+                    android:textColor="#E64A19"
                     android:textSize="14sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic|bold" />
             </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/settings"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0.5"
-                android:background="@drawable/ic_settings" />
         </LinearLayout>
 
         <LinearLayout

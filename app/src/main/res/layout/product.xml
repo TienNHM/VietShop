@@ -28,7 +28,7 @@
             android:background="@drawable/notifications" />
 
         <ImageButton
-            android:id="@+id/menuMain"
+            android:id="@+id/menuAvatar"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
