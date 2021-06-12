@@ -22,7 +22,6 @@ public class CartDbHelper extends SQLiteOpenHelper {
     private static final String CART_QUANTITY = "quantity";
     private static final String CART_ADDRESS = "address";
     private static final String CART_STATUS = "status";
-    private static final String CART_UNPAID = "Unpaid";
 
     public CartDbHelper(@Nullable Context context) {
         super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
@@ -130,6 +129,6 @@ public class CartDbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Cart> getUnpaidCart(Integer userId) {
-        return getCartByStatus(userId, CART_UNPAID);
+        return getCartByStatus(userId, Cart.CART_UNPAID);
     }
 }

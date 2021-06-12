@@ -45,14 +45,13 @@
     <string name="product_s_were_found">sản phẩm đã được tìm thấy!</string>
     <string name="quantity">"Số lượng "</string>
     <string name="cart_detail">Chi tiết đơn hàng</string>
-    <string name="pay_now">Thanh toán</string>
+    <string name="view_cart">Xem giỏ hàng</string>
     <string name="total_price">Thành tiền: </string>
     <string name="price">Giá </string>
     <string name="male">Nam</string>
     <string name="female">Nữ</string>
     <string name="others">Khác</string>
     <string name="sex">Giới tính</string>
-<<<<<<< HEAD
     <string name="clothes">Quần áo</string>
     <string name="electronic">Điện tử</string>
     <string name="fresh_food">Thực phẩm sống</string>
@@ -60,8 +59,6 @@
     <string name="fruit">Trái cây</string>
     <string name="drink">Nước uống</string>
     <string name="all_types">Tất cả</string>
-=======
     <string name="address">Địa chỉ</string>
->>>>>>> 7558256... add address field and validate data in signup.xml
 
 </resources>

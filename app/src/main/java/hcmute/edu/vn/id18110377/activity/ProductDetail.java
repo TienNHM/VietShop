@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,7 @@ import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
 import hcmute.edu.vn.id18110377.entity.Cart;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.Store;
+import hcmute.edu.vn.id18110377.fragment.CartFragment;
 
 public class ProductDetail extends AppCompatActivity {
 
@@ -29,7 +31,8 @@ public class ProductDetail extends AppCompatActivity {
     private Product product;
     @BindView(R.id.btnAddCart)
     Button btnAddCart;
-
+    @BindView(R.id.btnViewCart)
+    Button btnViewCart;
     @BindView(R.id.subtract)
     ImageButton btnSubtract;
     @BindView(R.id.plus)
@@ -47,6 +50,8 @@ public class ProductDetail extends AppCompatActivity {
 
         ButterKnife.bind(this);
         this.quantity = 0;
+        txtQuantity.setText("0");
+        btnViewCart.setVisibility(View.GONE);
 
         findViewById(R.id.btnBack_detail).setOnClickListener(v -> {
             finish();
@@ -56,6 +61,16 @@ public class ProductDetail extends AppCompatActivity {
         btnSubtract.setOnClickListener(this::setSubtractQuantity);
         btnPlus.setOnClickListener(this::setAddQuantity);
         btnAddCart.setOnClickListener(this::setAddCart);
+        btnViewCart.setOnClickListener(this::setViewCart);
+    }
+
+    private void setViewCart(View view) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        //transaction.add(new CartFragment(), "hcmute.edu.vn.id18110377.layout.ProductDetail");
+        transaction.add(R.id.frame_product_detail, new CartFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+        finish();
     }
 
     private void setAddCart(View view) {
@@ -65,11 +80,17 @@ public class ProductDetail extends AppCompatActivity {
         }
         if (MainActivity.user != null) {
             CartDbHelper cartDbHelper = new CartDbHelper(this);
-            Cart cart = new Cart(MainActivity.user.getId(), this.product.getId(), this.quantity, "");
+            Cart cart = new Cart(
+                    MainActivity.user.getId(),
+                    this.product.getId(),
+                    this.quantity,
+                    MainActivity.user.getAddress());
             long re = cartDbHelper.insert(cart);
-            if (re > 0)
+            if (re > 0) {
                 Toast.makeText(this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
-            else
+                btnAddCart.setVisibility(View.GONE);
+                btnViewCart.setVisibility(View.VISIBLE);
+            } else
                 Toast.makeText(this, "Đã xảy ra lỗi khi thêm giỏ hàng.", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(this, LogIn.class);

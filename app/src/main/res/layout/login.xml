@@ -77,7 +77,7 @@
             app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
             app:hintTextColor="@color/theme_color"
             app:startIconContentDescription="@string/fullName"
-            app:startIconDrawable="@drawable/account">
+            app:startIconDrawable="@drawable/ic_account">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtUsername"
