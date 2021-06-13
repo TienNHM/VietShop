@@ -105,6 +105,7 @@ public class CartDetail extends AppCompatActivity {
         if (result > 0) {
             CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
             cart.setCartOrdered();
+            cart.setQuantity(quantity);
             cartDbHelper.update(cart);
             Toast.makeText(view.getContext(), "Đã đặt hàng thành công.", Toast.LENGTH_SHORT).show();
             btnOrder.setText("Đã đặt hàng");
@@ -146,6 +147,7 @@ public class CartDetail extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                quantity = Integer.parseInt(txtQuantity.getText().toString());
                 calcPrice();
             }
         });
