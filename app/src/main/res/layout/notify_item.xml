@@ -6,7 +6,7 @@
     android:layout_margin="5dp"
     android:orientation="horizontal"
     android:paddingTop="10dp"
-    android:background="#4D8F8B80"
+    android:background="@color/background_item"
     android:paddingBottom="10dp">
 
     <ImageView
