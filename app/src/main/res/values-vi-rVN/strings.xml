@@ -43,7 +43,7 @@
     <string name="addCart">Thêm vào giỏ hàng</string>
     <string name="search_results">Kết quả tìm kiếm</string>
     <string name="product_s_were_found">sản phẩm đã được tìm thấy!</string>
-    <string name="quantity">"Số lượng "</string>
+    <string name="quantity">Số lượng </string>
     <string name="cart_detail">Chi tiết đơn hàng</string>
     <string name="view_cart">Xem giỏ hàng</string>
     <string name="total_price">Thành tiền: </string>
@@ -66,5 +66,6 @@
     <string name="order">Đặt hàng</string>
     <string name="bill_history">Lịch sử hóa đơn</string>
     <string name="view_all_bills_history">Xem tất cả hóa đơn</string>
+    <string name="time">Thời gian</string>
 
 </resources>
