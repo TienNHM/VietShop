@@ -3,6 +3,9 @@ package hcmute.edu.vn.id18110377.activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +28,11 @@ public class CartDetail extends AppCompatActivity {
     @BindView(R.id.productTitle)
     TextView productTitle;
     @BindView(R.id.txtQuantity)
-    TextInputEditText txtQuantity;
+    EditText txtQuantity;
+    @BindView(R.id.subtract)
+    ImageButton btnSubtract;
+    @BindView(R.id.plus)
+    ImageButton btnPlus;
     @BindView(R.id.productPrice)
     TextView productPrice;
     @BindView(R.id.productStore)
@@ -39,6 +46,7 @@ public class CartDetail extends AppCompatActivity {
 
     public static Cart cart;
     private Product product;
+    private int quantity = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,10 +56,12 @@ public class CartDetail extends AppCompatActivity {
         ButterKnife.bind(this);
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
 
-        getCart();
+        setCartInfo();
+        btnPlus.setOnClickListener(this::setPlus);
+        btnSubtract.setOnClickListener(this::setSubtract);
     }
 
-    private void getCart() {
+    private void setCartInfo() {
         if (cart == null)
             return;
         this.product = cart.getProduct();
@@ -71,16 +81,19 @@ public class CartDetail extends AppCompatActivity {
     }
 
     private void setQuantity() {
+        this.quantity = cart.getQuantity();
         txtQuantity.setText(cart.getQuantity().toString());
         txtQuantity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (txtQuantity.getText().length() <= 0)
-                    txtQuantity.setText("0");
+                if (txtQuantity.getText().equals("0"))
+                    txtQuantity.setText("");
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (txtQuantity.getText().length() <= 0)
+                    txtQuantity.setText("0");
                 calcPrice();
             }
 
@@ -93,11 +106,18 @@ public class CartDetail extends AppCompatActivity {
 
     private void calcPrice() {
         String quantity = txtQuantity.getText().toString();
-        if (quantity.length() <= 0)
-            cartPrice.setText("0");
-        else {
-            double totalPrice = product.getPrice() * Integer.getInteger(quantity);
-            cartPrice.setText(String.valueOf(cartPrice));
-        }
+        double totalPrice = product.getPrice() * Integer.valueOf(quantity);
+        cartPrice.setText(String.valueOf(totalPrice));
+    }
+
+    private void setSubtract(View view) {
+        if (quantity <= 0) return;
+        this.quantity--;
+        txtQuantity.setText(String.valueOf(quantity));
+    }
+
+    private void setPlus(View view) {
+        this.quantity++;
+        txtQuantity.setText(String.valueOf(quantity));
     }
 }
