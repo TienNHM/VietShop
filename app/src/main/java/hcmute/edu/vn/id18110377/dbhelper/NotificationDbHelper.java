@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.dbhelper;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,21 +14,24 @@ import hcmute.edu.vn.id18110377.entity.Notification;
 
 public class NotificationDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Notification";
+    private static final String NOTIFY_ID = "id";
+    private static final String NOTIFY_STATUS = "status";
 
     public NotificationDbHelper(@Nullable Context context) {
-        super(context, TABLE_NAME, null, DbHelper.DATABASE_VERSION);
+        super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE Notification ( " +
+                "CREATE TABLE IF NOT EXISTS Notification ( " +
                         "    id    INTEGER NOT NULL, " +
+                        "    userId    INTEGER NOT NULL, " +
                         "    type    TEXT NOT NULL, " +
-                        "    detail    TEXT, " +
-                        "    shortDetail    TEXT, " +
+                        "    detail    INTEGER, " +
                         "    status    TEXT, " +
-                        "    PRIMARY KEY(id) " +
+                        "    PRIMARY KEY(id), " +
+                        "    FOREIGN KEY(userId) REFERENCES User(id) " +
                         ")";
         db.execSQL(query);
     }
@@ -37,24 +41,36 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
+    private Notification cursorToNotification(Cursor cursor) {
+        return new Notification(
+                cursor.getInt(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4)
+        );
+    }
+
     public ArrayList<Notification> getAllNotifications(Integer userId) {
         ArrayList<Notification> notifications = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE userId = ?", new String[]{userId.toString()});
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE userId = ? AND " + NOTIFY_STATUS + " = ?",
+                new String[]{userId.toString(), Notification.NOTIFY_UNREAD});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            notifications.add(
-                    new Notification(
-                            cursor.getInt(0),
-                            cursor.getString(1),
-                            cursor.getString(2),
-                            cursor.getString(3),
-                            cursor.getString(4)
-                    )
-            );
+            notifications.add(cursorToNotification(cursor));
             cursor.moveToNext();
         }
         cursor.close();
         return notifications;
+    }
+
+    public int update(Notification notification) {
+        SQLiteDatabase db = getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NOTIFY_STATUS, notification.getStatus());
+        return db.update(TABLE_NAME, contentValues, NOTIFY_ID + " = ?",
+                new String[]{notification.getId().toString()});
     }
 }

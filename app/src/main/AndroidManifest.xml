@@ -60,16 +60,7 @@
             android:name=".activity.CartDetail"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.Wallet"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".activity.BillHistory"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".activity.ShareApp"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".activity.ConnectAccount"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.ProductDetail"
