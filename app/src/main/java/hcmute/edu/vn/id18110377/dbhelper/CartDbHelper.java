@@ -23,8 +23,11 @@ public class CartDbHelper extends SQLiteOpenHelper {
     private static final String CART_ADDRESS = "address";
     private static final String CART_STATUS = "status";
 
+    private final Context context;
+
     public CartDbHelper(@Nullable Context context) {
         super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -89,22 +92,23 @@ public class CartDbHelper extends SQLiteOpenHelper {
 
     private ArrayList<Cart> getCart(Cursor cursor) {
         ArrayList<Cart> carts = new ArrayList<>();
+        ProductImageDbHelper productImageDbHelper = new ProductImageDbHelper(this.context);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Cart cart = cursorToCart(cursor);
-            cart.setProduct(
-                    new Product(
-                            cursor.getInt(6),
-                            cursor.getInt(7),
-                            cursor.getInt(8),
-                            cursor.getString(9),
-                            cursor.getDouble(10),
-                            ImageConverter.byte2Bitmap(cursor.getBlob(11)),
-                            cursor.getString(12),
-                            cursor.getFloat(13),
-                            cursor.getString(14)
-                    )
+            Product product = new Product(
+                    cursor.getInt(6),
+                    cursor.getInt(7),
+                    cursor.getInt(8),
+                    cursor.getString(9),
+                    cursor.getDouble(10),
+                    ImageConverter.byte2Bitmap(cursor.getBlob(11)),
+                    cursor.getString(12),
+                    cursor.getFloat(13),
+                    cursor.getString(14)
             );
+            product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
+            cart.setProduct(product);
             carts.add(cart);
             cursor.moveToNext();
         }

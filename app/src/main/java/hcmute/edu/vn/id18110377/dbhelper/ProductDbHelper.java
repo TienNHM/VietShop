@@ -313,8 +313,9 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         return storeDbHelper.getStoreById(storeId);
     }
 
-    public ArrayList<Product> getDicountProducts() {
+    public ArrayList<Product> getDiscountProducts() {
         ArrayList<Product> products = new ArrayList<>();
+        ProductImageDbHelper productImageDbHelper = new ProductImageDbHelper(this.context);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(
                 "SELECT * FROM Product INNER JOIN Discount ON Product.id = Discount.productId", null);
@@ -329,6 +330,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     cursor.getString(13)
             );
             product.setDiscount(discount);
+            product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
             products.add(product);
             cursor.moveToNext();
         }
@@ -338,6 +340,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public ArrayList<Product> getDiscountProductByName(String name) {
         ArrayList<Product> products = new ArrayList<>();
+        ProductImageDbHelper productImageDbHelper = new ProductImageDbHelper(this.context);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(
                 "SELECT * " +
@@ -355,6 +358,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     cursor.getString(13)
             );
             product.setDiscount(discount);
+            product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
             products.add(product);
             cursor.moveToNext();
         }

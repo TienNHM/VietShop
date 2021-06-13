@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,8 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.StoreDbHelper;
 import hcmute.edu.vn.id18110377.entity.Cart;
@@ -65,11 +69,13 @@ public class CartDetail extends AppCompatActivity {
         if (cart == null)
             return;
         this.product = cart.getProduct();
-        productImage.setImageBitmap(product.getImage());
+
         productTitle.setText(product.getName());
         productPrice.setText(product.getPrice().toString());
         cartPrice.setText(cart.getTotalPrice().toString());
+        setAddress();
         setQuantity();
+        setBackgroundImage();
 
         StoreDbHelper storeDbHelper = new StoreDbHelper(this);
         Store store = storeDbHelper.getStoreById(product.getStoreId());
@@ -78,6 +84,21 @@ public class CartDetail extends AppCompatActivity {
             return;
         txtProductStore.setText(store.getName());
         txtProductStoreAddress.setText(store.getAddress());
+    }
+
+    private void setBackgroundImage() {
+        ArrayList<Bitmap> images = product.getProductImages();
+        if (images != null) {
+            if (images.size() > 0)
+                productImage.setImageBitmap(images.get(0));
+        }
+    }
+
+    private void setAddress() {
+        String address = MainActivity.user.getAddress();
+        if (address.length() > 0) {
+            txtDeliveryAddress.setText(address);
+        }
     }
 
     private void setQuantity() {
