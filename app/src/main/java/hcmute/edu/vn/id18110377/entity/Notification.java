@@ -1,10 +1,13 @@
 package hcmute.edu.vn.id18110377.entity;
 
 public class Notification {
+
+    private static final String NOTIFY_UNREAD = "Unread";
+    private static final String NOTIFY_READ = "Read";
     private Integer id;
+    private Integer userId;
     private String type;
-    private String detail;
-    private String title;
+    private String message;
     private String status;
 
     public Integer getId() {
@@ -15,6 +18,18 @@ public class Notification {
         this.id = id;
     }
 
+    public Notification(Integer id, Integer userId, String type, String message, String status) {
+        this.id = id;
+        this.userId = userId;
+        this.type = type;
+        this.message = message;
+        this.status = status;
+    }
+
+    public Notification(Integer userId, String type, String message) {
+        this(-1, userId, type, message, NOTIFY_UNREAD);
+    }
+
     public String getType() {
         return type;
     }
@@ -23,24 +38,20 @@ public class Notification {
         this.type = type;
     }
 
-    public Notification(Integer id, String type, String title, String detail, String status) {
-        this.id = id;
-        this.type = type;
-        this.detail = detail;
-        this.status = status;
-        this.title = title;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public Notification(Integer id, String type, String title) {
-        this(id, type, title, null, null);
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Notification(String type, String title) {
-        this(-1, type, title, null, null);
+    public String getMessage() {
+        return message;
     }
 
-    public String getDetail() {
-        return detail;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getStatus() {
@@ -49,17 +60,5 @@ public class Notification {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

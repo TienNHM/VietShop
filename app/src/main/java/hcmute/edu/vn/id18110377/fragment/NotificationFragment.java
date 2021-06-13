@@ -1,7 +1,6 @@
 package hcmute.edu.vn.id18110377.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +14,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.NotificationAdapter;
+import hcmute.edu.vn.id18110377.dbhelper.NotificationDbHelper;
 import hcmute.edu.vn.id18110377.entity.Notification;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NotificationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NotificationFragment extends Fragment {
 
     @BindView(R.id.rvNotifications)
@@ -60,7 +56,6 @@ public class NotificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
         ButterKnife.bind(this, view);
@@ -75,15 +70,9 @@ public class NotificationFragment extends Fragment {
     }
 
     private List<Notification> getAllNotifications() {
-        List<Notification> notifications = new ArrayList<>();
-        notifications.add(new Notification(0, "account", "Read", "Đăng nhập ngay để trải nghiệm những tiện ích dành riêng cho bạn.", "Đăng nhập"));
-        notifications.add(new Notification(1, "guide", "Read", "Hướng dẫn sử dụng ứng dụng cho người dùng lần đầu đăng ký tài khoản.", "Hướng dẫn"));
-        notifications.add(new Notification(2, "sale", "Unread", "Chào Lễ lớn, Đón khuyến mãi to cùng VietShop", "Khuyến mãi"));
-        notifications.add(new Notification(3, "cart", "Unread", "Bạn có đơn hàng chưa thanh toán.", "Thanh toán"));
-        for (Notification x :
-                notifications) {
-            Log.i("=====", x.toString());
-        }
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this.getContext());
+        ArrayList<Notification> notifications = notificationDbHelper.getAllNotifications(MainActivity.user.getId());
+
         return notifications;
     }
 }

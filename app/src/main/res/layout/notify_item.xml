@@ -15,31 +15,24 @@
         android:layout_gravity="center"
         android:layout_marginLeft="15dp" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/notify_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="Short detail"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/notify_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center_vertical"
-            android:padding="3dp"
-            android:text="Title"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/dismissNotification"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/delete" />
 
-        <TextView
-            android:id="@+id/notify_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|left"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center_vertical"
-            android:text="Short detail"
-            android:textSize="15sp" />
-    </LinearLayout>
 </LinearLayout>

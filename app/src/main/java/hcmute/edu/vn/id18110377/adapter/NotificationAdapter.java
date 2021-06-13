@@ -19,13 +19,17 @@ import hcmute.edu.vn.id18110377.entity.Notification;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
     private static final HashMap<String, Integer> mapNotify_Image;
+    private static final String NOTIFY_CART = "Cart";
+    private static final String NOTIFY_SALE = "Sale";
+    private static final String NOTIFY_GUIDE = "Guide";
+    private static final String NOTIFY_ACCOUNT = "Account";
 
     static {
         mapNotify_Image = new HashMap<>();
-        mapNotify_Image.put("cart", R.drawable.shopping_cart);
-        mapNotify_Image.put("sale", R.drawable.land_sales);
-        mapNotify_Image.put("guide", R.drawable.guide);
-        mapNotify_Image.put("account", R.drawable.person);
+        mapNotify_Image.put(NOTIFY_CART, R.drawable.shopping_cart);
+        mapNotify_Image.put(NOTIFY_SALE, R.drawable.land_sales);
+        mapNotify_Image.put(NOTIFY_GUIDE, R.drawable.guide);
+        mapNotify_Image.put(NOTIFY_ACCOUNT, R.drawable.person);
     }
 
     private List<Notification> notifications;
@@ -54,16 +58,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Notification item = notifications.get(position);
+        Notification notification = notifications.get(position);
+        holder.notificationImg.setImageResource(mapNotify_Image.get(notification.getType()).intValue());
+        holder.txtNotification.setText(notification.getMessage());
 
-        ImageView ivNotitfyImg = holder.ivNotitfyImg;
-        ivNotitfyImg.setImageResource(mapNotify_Image.get(item.getType()).intValue());
-
-        TextView txtNotifyTitle = holder.txtNotifyTitle;
-        txtNotifyTitle.setText(item.getType());
-
-        TextView txtNotifyDetail = holder.txtNotifyDetail;
-        txtNotifyDetail.setText(item.getDetail());
     }
 
     @Override
@@ -73,16 +71,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivNotitfyImg;
-        TextView txtNotifyTitle;
-        TextView txtNotifyDetail;
+        ImageView notificationImg;
+        TextView txtNotification;
+        ImageView dismissNotification;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivNotitfyImg = itemView.findViewById(R.id.notify_img);
-            txtNotifyDetail = itemView.findViewById(R.id.notify_detail);
-            txtNotifyTitle = itemView.findViewById(R.id.notify_title);
+            notificationImg = itemView.findViewById(R.id.notify_img);
+            txtNotification = itemView.findViewById(R.id.notify_detail);
+            dismissNotification = itemView.findViewById(R.id.dismissNotification);
         }
     }
 }
