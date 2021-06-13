@@ -61,5 +61,7 @@
     <string name="all_types">Tất cả</string>
     <string name="address">Địa chỉ</string>
     <string name="txtLogout">Đăng xuất</string>
+    <string name="pay_now">Thanh toán</string>
+    <string name="delivery_address">Địa chỉ giao hàng</string>
 
 </resources>
