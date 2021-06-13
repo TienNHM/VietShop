@@ -5,26 +5,34 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.dbhelper.BillDbHelper;
+import hcmute.edu.vn.id18110377.dbhelper.CartDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.StoreDbHelper;
+import hcmute.edu.vn.id18110377.entity.Bill;
 import hcmute.edu.vn.id18110377.entity.Cart;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.Store;
+
+import static hcmute.edu.vn.id18110377.MainActivity.user;
 
 public class CartDetail extends AppCompatActivity {
     @BindView(R.id.productImage)
@@ -47,6 +55,8 @@ public class CartDetail extends AppCompatActivity {
     TextInputEditText txtDeliveryAddress;
     @BindView(R.id.cartPrice)
     TextView cartPrice;
+    @BindView(R.id.btnOrder)
+    Button btnOrder;
 
     public static Cart cart;
     private Product product;
@@ -57,10 +67,12 @@ public class CartDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_detail);
 
+        if (cart == null) return;
+
         ButterKnife.bind(this);
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
-
         setCartInfo();
+        btnOrder.setOnClickListener(this::setOrder);
         btnPlus.setOnClickListener(this::setPlus);
         btnSubtract.setOnClickListener(this::setSubtract);
     }
@@ -86,6 +98,20 @@ public class CartDetail extends AppCompatActivity {
         txtProductStoreAddress.setText(store.getAddress());
     }
 
+    private void setOrder(@NotNull View view) {
+        BillDbHelper billDbHelper = new BillDbHelper(view.getContext());
+        Bill bill = new Bill(user.getId(), cart.getId());
+        long result = billDbHelper.insert(bill);
+        if (result > 0) {
+            CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
+            cart.setCartOrdered();
+            cartDbHelper.update(cart);
+            Toast.makeText(view.getContext(), "Đã đặt hàng thành công.", Toast.LENGTH_SHORT).show();
+            btnOrder.setText("Đã đặt hàng");
+            btnOrder.setEnabled(false);
+        }
+    }
+
     private void setBackgroundImage() {
         ArrayList<Bitmap> images = product.getProductImages();
         if (images != null) {
@@ -95,7 +121,7 @@ public class CartDetail extends AppCompatActivity {
     }
 
     private void setAddress() {
-        String address = MainActivity.user.getAddress();
+        String address = user.getAddress();
         if (address.length() > 0) {
             txtDeliveryAddress.setText(address);
         }

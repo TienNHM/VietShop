@@ -63,5 +63,6 @@
     <string name="txtLogout">Đăng xuất</string>
     <string name="pay_now">Thanh toán</string>
     <string name="delivery_address">Địa chỉ giao hàng</string>
+    <string name="order">Đặt hàng</string>
 
 </resources>

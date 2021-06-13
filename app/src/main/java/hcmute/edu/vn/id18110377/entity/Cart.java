@@ -3,6 +3,7 @@ package hcmute.edu.vn.id18110377.entity;
 public class Cart {
     public static final String CART_UNPAID = "Unpaid";
     public static final String CART_PAID = "Paid";
+    public static final String CART_ORDERED = "Ordered";
 
     private Integer id;
     private Integer userId;
@@ -90,5 +91,13 @@ public class Cart {
         if (this.getProduct() == null)
             return 0.0;
         return quantity * this.getProduct().getPrice();
+    }
+
+    public void setCartOrdered() {
+        this.setStatus(CART_ORDERED);
+    }
+
+    public void setCartPaid() {
+        this.setStatus(CART_PAID);
     }
 }

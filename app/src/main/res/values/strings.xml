@@ -77,5 +77,6 @@
     <string name="txtLogout">Logout</string>
     <string name="pay_now">Pay now</string>
     <string name="delivery_address">Delivery address</string>
+    <string name="order">Order</string>
 
 </resources>
