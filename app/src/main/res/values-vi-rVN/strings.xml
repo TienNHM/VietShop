@@ -64,5 +64,7 @@
     <string name="pay_now">Thanh toán</string>
     <string name="delivery_address">Địa chỉ giao hàng</string>
     <string name="order">Đặt hàng</string>
+    <string name="bill_history">Lịch sử hóa đơn</string>
+    <string name="view_all_bills_history">Xem tất cả hóa đơn</string>
 
 </resources>

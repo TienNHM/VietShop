@@ -78,5 +78,7 @@
     <string name="pay_now">Pay now</string>
     <string name="delivery_address">Delivery address</string>
     <string name="order">Order</string>
+    <string name="bill_history">Bill History</string>
+    <string name="view_all_bills_history">View all bills history</string>
 
 </resources>

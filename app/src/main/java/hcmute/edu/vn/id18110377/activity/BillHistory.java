@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import hcmute.edu.vn.id18110377.R;
 
 public class BillHistory extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
