@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
@@ -53,5 +55,17 @@ public class AppUtilities {
         editor.remove(USERNAME);
         editor.remove(PASSWORD);
         editor.commit();
+    }
+
+    @NotNull
+    public static String getDateTimeNow() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+
+    public static LocalDateTime stringToTime(String str) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return LocalDateTime.parse(str, formatter);
     }
 }
