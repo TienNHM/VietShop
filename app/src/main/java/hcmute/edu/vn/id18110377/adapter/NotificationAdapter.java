@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.dbhelper.NotificationDbHelper;
 import hcmute.edu.vn.id18110377.entity.Notification;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
@@ -61,7 +62,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         Notification notification = notifications.get(position);
         holder.notificationImg.setImageResource(mapNotify_Image.get(notification.getType()).intValue());
         holder.txtNotification.setText(notification.getMessage());
-
+        holder.dismissNotification.setOnClickListener(view -> {
+            notification.setStatusRead();
+            NotificationDbHelper notificationDbHelper = new NotificationDbHelper(holder.dismissNotification.getContext());
+            int result = notificationDbHelper.update(notification);
+            if (result > 0) {
+                notifications.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, notifications.size());
+            }
+        });
     }
 
     @Override

@@ -2,8 +2,8 @@ package hcmute.edu.vn.id18110377.entity;
 
 public class Notification {
 
-    private static final String NOTIFY_UNREAD = "Unread";
-    private static final String NOTIFY_READ = "Read";
+    public static final String NOTIFY_UNREAD = "Unread";
+    public static final String NOTIFY_READ = "Read";
     private Integer id;
     private Integer userId;
     private String type;
@@ -60,5 +60,9 @@ public class Notification {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setStatusRead() {
+        this.status = NOTIFY_READ;
     }
 }

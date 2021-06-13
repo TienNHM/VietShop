@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.dbhelper;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,8 @@ import hcmute.edu.vn.id18110377.entity.Notification;
 
 public class NotificationDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Notification";
+    private static final String NOTIFY_ID = "id";
+    private static final String NOTIFY_STATUS = "status";
 
     public NotificationDbHelper(@Nullable Context context) {
         super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
@@ -51,7 +54,9 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
     public ArrayList<Notification> getAllNotifications(Integer userId) {
         ArrayList<Notification> notifications = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE userId = ?", new String[]{userId.toString()});
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE userId = ? AND " + NOTIFY_STATUS + " = ?",
+                new String[]{userId.toString(), Notification.NOTIFY_UNREAD});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             notifications.add(cursorToNotification(cursor));
@@ -59,5 +64,13 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return notifications;
+    }
+
+    public int update(Notification notification) {
+        SQLiteDatabase db = getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NOTIFY_STATUS, notification.getStatus());
+        return db.update(TABLE_NAME, contentValues, NOTIFY_ID + " = ?",
+                new String[]{notification.getId().toString()});
     }
 }
