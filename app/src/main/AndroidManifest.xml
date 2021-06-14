@@ -42,9 +42,6 @@
             android:name=".activity.SignUp"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.Discount"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".activity.LogIn"
             android:windowSoftInputMode="adjustPan" />
         <activity
