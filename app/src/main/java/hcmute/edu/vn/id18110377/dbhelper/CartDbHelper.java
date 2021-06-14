@@ -62,7 +62,13 @@ public class CartDbHelper extends SQLiteOpenHelper {
     public long insert(Cart cart) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = createContentValues(cart);
-        return db.insert(TABLE_NAME, null, values);
+        long result = db.insert(TABLE_NAME, null, values);
+        if (result > 0) {
+            ProductDbHelper productDbHelper = new ProductDbHelper(this.context);
+            Product product = productDbHelper.getProductById(cart.getProductId());
+            cart.setProduct(product);
+        }
+        return result;
     }
 
     public int update(Cart cart) {

@@ -13,23 +13,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.CartDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
 import hcmute.edu.vn.id18110377.entity.Cart;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.Store;
-import hcmute.edu.vn.id18110377.fragment.CartFragment;
+
+import static hcmute.edu.vn.id18110377.MainActivity.user;
 
 public class ProductDetail extends AppCompatActivity {
 
     public static final String PRODUCT_ID = "productId";
     private Product product;
+    private Cart cart;
+    private int quantity = 0;
+
     @SuppressLint("NonConstantResourceId")
     @BindView(value = R.id.productImage)
     ImageView productImage;
@@ -51,7 +53,6 @@ public class ProductDetail extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(value = R.id.svReview)
     ScrollView svReview;
-    private int quantity = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,11 +76,9 @@ public class ProductDetail extends AppCompatActivity {
     }
 
     private void setViewCart(View view) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        //transaction.add(new CartFragment(), "hcmute.edu.vn.id18110377.layout.ProductDetail");
-        transaction.add(R.id.frame_product_detail, new CartFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
+        Intent intent = new Intent(view.getContext(), CartDetail.class);
+        CartDetail.cart = this.cart;
+        view.getContext().startActivity(intent);
         finish();
     }
 
@@ -88,15 +87,16 @@ public class ProductDetail extends AppCompatActivity {
             Toast.makeText(this, "Số lượng sản phẩm tối thiểu là 1.", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (MainActivity.user != null) {
+        if (user != null) {
             CartDbHelper cartDbHelper = new CartDbHelper(this);
             Cart cart = new Cart(
-                    MainActivity.user.getId(),
+                    user.getId(),
                     this.product.getId(),
                     this.quantity);
             long re = cartDbHelper.insert(cart);
             if (re > 0) {
                 Toast.makeText(this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
+                this.cart = cart;
                 btnAddCart.setVisibility(View.GONE);
                 btnViewCart.setVisibility(View.VISIBLE);
             } else
@@ -128,28 +128,40 @@ public class ProductDetail extends AppCompatActivity {
         this.product = productDbHelper.getProductById((int) bundle.getLong(PRODUCT_ID));
 
         if (this.product != null) {
-            if (product.getProductImages() != null) {
-                if (product.getProductImages().size() > 0)
-                    productImage.setImageBitmap(product.getProductImages().get(0));
-            }
-
-            ((TextView) findViewById(R.id.productTitle)).setText(this.product.getName());
-            ((TextView) findViewById(R.id.productPrice)).setText(product.getPrice().toString());
-
-            String productDetail = product.getDetail();
-            TextView tvProductDetail = findViewById(R.id.productDescription);
-            if (productDetail == null)
-                tvProductDetail.setVisibility(TextView.GONE);
-            else
-                tvProductDetail.setText(product.getDetail());
-
-            Store store = productDbHelper.getStore(this.product.getId());
-            if (store != null) {
-                ((TextView) findViewById(R.id.productStore)).setText(store.getName());
-                ((TextView) findViewById(R.id.productStoreAddress)).setText(store.getAddress());
-            }
-
+            setProductImage();
+            setProductTitle();
+            setProductDetail();
+            setProductStore(productDbHelper);
             svReview.setVisibility(View.GONE);
+        }
+    }
+
+    private void setProductImage() {
+        if (product.getProductImages() != null) {
+            if (product.getProductImages().size() > 0)
+                productImage.setImageBitmap(product.getProductImages().get(0));
+        }
+    }
+
+    private void setProductTitle() {
+        ((TextView) findViewById(R.id.productTitle)).setText(this.product.getName());
+        ((TextView) findViewById(R.id.productPrice)).setText(product.getPrice().toString());
+    }
+
+    private void setProductDetail() {
+        String productDetail = product.getDetail();
+        TextView tvProductDetail = findViewById(R.id.productDescription);
+        if (productDetail == null)
+            tvProductDetail.setVisibility(TextView.GONE);
+        else
+            tvProductDetail.setText(product.getDetail());
+    }
+
+    private void setProductStore(ProductDbHelper productDbHelper) {
+        Store store = productDbHelper.getStore(this.product.getStoreId());
+        if (store != null) {
+            ((TextView) findViewById(R.id.productStore)).setText(store.getName());
+            ((TextView) findViewById(R.id.productStoreAddress)).setText(store.getAddress());
         }
     }
 }

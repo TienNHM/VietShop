@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -76,7 +75,6 @@ public class StoreDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?", new String[]{id.toString()});
         Store store = null;
-        Log.e("========================", String.valueOf(cursor.getCount()));
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             store = cursorToStore(cursor);
