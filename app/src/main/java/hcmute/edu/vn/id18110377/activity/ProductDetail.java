@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,17 +30,26 @@ public class ProductDetail extends AppCompatActivity {
 
     public static final String PRODUCT_ID = "productId";
     private Product product;
-    @BindView(R.id.btnAddCart)
+    @SuppressLint("NonConstantResourceId")
+    @BindView(value = R.id.productImage)
+    ImageView productImage;
+    @SuppressLint("NonConstantResourceId")
+    @BindView(value = R.id.btnAddCart)
     Button btnAddCart;
-    @BindView(R.id.btnViewCart)
+    @SuppressLint("NonConstantResourceId")
+    @BindView(value = R.id.btnViewCart)
     Button btnViewCart;
-    @BindView(R.id.subtract)
+    @SuppressLint("NonConstantResourceId")
+    @BindView(value = R.id.subtract)
     ImageButton btnSubtract;
-    @BindView(R.id.plus)
+    @SuppressLint("NonConstantResourceId")
+    @BindView(value = R.id.plus)
     ImageButton btnPlus;
-    @BindView(R.id.txtQuantity)
+    @SuppressLint("NonConstantResourceId")
+    @BindView(value = R.id.txtQuantity)
     EditText txtQuantity;
-    @BindView(R.id.svReview)
+    @SuppressLint("NonConstantResourceId")
+    @BindView(value = R.id.svReview)
     ScrollView svReview;
     private int quantity = 0;
 
@@ -83,8 +93,7 @@ public class ProductDetail extends AppCompatActivity {
             Cart cart = new Cart(
                     MainActivity.user.getId(),
                     this.product.getId(),
-                    this.quantity,
-                    MainActivity.user.getAddress());
+                    this.quantity);
             long re = cartDbHelper.insert(cart);
             if (re > 0) {
                 Toast.makeText(this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
@@ -119,8 +128,10 @@ public class ProductDetail extends AppCompatActivity {
         this.product = productDbHelper.getProductById((int) bundle.getLong(PRODUCT_ID));
 
         if (this.product != null) {
-            if (product.getProductImages() != null)
-                ((ImageView) findViewById(R.id.productImage)).setImageBitmap(product.getProductImages().get(0));
+            if (product.getProductImages() != null) {
+                if (product.getProductImages().size() > 0)
+                    productImage.setImageBitmap(product.getProductImages().get(0));
+            }
 
             ((TextView) findViewById(R.id.productTitle)).setText(this.product.getName());
             ((TextView) findViewById(R.id.productPrice)).setText(product.getPrice().toString());

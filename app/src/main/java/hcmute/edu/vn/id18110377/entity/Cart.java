@@ -9,25 +9,19 @@ public class Cart {
     private Integer userId;
     private Integer productId;
     private Integer quantity;
-    private String address;
     private String status;
     private Product product;
 
-    public Cart(Integer id, Integer userId, Integer productId, Integer quantity, String address, String status) {
-        this.id = id;
-        this.userId = userId;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.address = address;
-        this.status = status;
+    public Cart(Integer id, Integer userId, Integer productId, Integer quantity, String status) {
+        this.setId(id);
+        this.setUserId(userId);
+        this.setProductId(productId);
+        this.setQuantity(quantity);
+        this.setStatus(status);
     }
 
-    public Cart(Integer id, Integer userId, Integer productId, Integer quantity, String address) {
-        this(id, userId, productId, quantity, address, null);
-    }
-
-    public Cart(Integer userId, Integer productId, Integer quantity, String address) {
-        this(-1, userId, productId, quantity, address, CART_UNPAID);
+    public Cart(Integer userId, Integer productId, Integer quantity) {
+        this(-1, userId, productId, quantity, CART_UNPAID);
     }
 
     public Integer getId() {
@@ -61,14 +55,6 @@ public class Cart {
     public void setQuantity(Integer quantity) {
         if (quantity >= 0)
             this.quantity = quantity;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getStatus() {

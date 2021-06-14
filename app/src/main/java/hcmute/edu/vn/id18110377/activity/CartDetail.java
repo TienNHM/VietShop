@@ -100,7 +100,8 @@ public class CartDetail extends AppCompatActivity {
 
     private void setOrder(@NotNull View view) {
         BillDbHelper billDbHelper = new BillDbHelper(view.getContext());
-        Bill bill = new Bill(user.getId(), cart.getId());
+        String deliveryAddress = txtDeliveryAddress.getText().toString();
+        Bill bill = new Bill(user.getId(), cart.getId(), deliveryAddress);
         long result = billDbHelper.insert(bill);
         if (result > 0) {
             CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());

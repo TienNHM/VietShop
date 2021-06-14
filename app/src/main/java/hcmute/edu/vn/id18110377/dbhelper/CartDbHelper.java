@@ -17,10 +17,9 @@ import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 public class CartDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Cart";
     private static final String CART_ID = "id";
-    private static final String CART_USERID = "userId";
-    private static final String CART_PRODUCTID = "productId";
+    private static final String CART_USER_ID = "userId";
+    private static final String CART_PRODUCT_ID = "productId";
     private static final String CART_QUANTITY = "quantity";
-    private static final String CART_ADDRESS = "address";
     private static final String CART_STATUS = "status";
 
     private final Context context;
@@ -33,12 +32,11 @@ public class CartDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE Cart ( " +
+                "CREATE TABLE IF NOT EXISTS Cart ( " +
                         "    id    INTEGER NOT NULL, " +
                         "    userId    INTEGER NOT NULL, " +
                         "    productId    INTEGER NOT NULL, " +
                         "    quantity    INTEGER NOT NULL, " +
-                        "    address    TEXT NOT NULL, " +
                         "    status    TEXT, " +
                         "    PRIMARY KEY(id), " +
                         "    FOREIGN KEY(userId) REFERENCES User(id), " +
@@ -54,10 +52,9 @@ public class CartDbHelper extends SQLiteOpenHelper {
 
     private ContentValues createContentValues(Cart cart) {
         ContentValues values = new ContentValues();
-        values.put(CART_USERID, cart.getUserId());
-        values.put(CART_PRODUCTID, cart.getProductId());
+        values.put(CART_USER_ID, cart.getUserId());
+        values.put(CART_PRODUCT_ID, cart.getProductId());
         values.put(CART_QUANTITY, cart.getQuantity());
-        values.put(CART_ADDRESS, cart.getAddress());
         values.put(CART_STATUS, cart.getStatus());
         return values;
     }
@@ -85,8 +82,7 @@ public class CartDbHelper extends SQLiteOpenHelper {
                 cursor.getInt(1),
                 cursor.getInt(2),
                 cursor.getInt(3),
-                cursor.getString(4),
-                cursor.getString(5)
+                cursor.getString(4)
         );
     }
 
@@ -97,15 +93,15 @@ public class CartDbHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
             Cart cart = cursorToCart(cursor);
             Product product = new Product(
+                    cursor.getInt(5),
                     cursor.getInt(6),
                     cursor.getInt(7),
-                    cursor.getInt(8),
-                    cursor.getString(9),
-                    cursor.getDouble(10),
-                    ImageConverter.byte2Bitmap(cursor.getBlob(11)),
-                    cursor.getString(12),
-                    cursor.getFloat(13),
-                    cursor.getString(14)
+                    cursor.getString(8),
+                    cursor.getDouble(9),
+                    ImageConverter.byte2Bitmap(cursor.getBlob(10)),
+                    cursor.getString(11),
+                    cursor.getFloat(12),
+                    cursor.getString(13)
             );
             product.addProductImage(productImageDbHelper.getAllImageByProduct(product.getId()));
             cart.setProduct(product);

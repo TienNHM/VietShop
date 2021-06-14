@@ -46,7 +46,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         holder.billQuantity.setText(cart.getQuantity());
         holder.billTotalPrice.setText(cart.getTotalPrice().toString());
         holder.billStatus.setText(bill.getStatus());
-        holder.billDeliveryAddress.setText(cart.getAddress());
         holder.billTime.setText(bill.getDate());
     }
 
@@ -70,7 +69,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         TextView billQuantity;
         TextView billTotalPrice;
         TextView billStatus;
-        TextView billDeliveryAddress;
         TextView billTime;
 
         public ViewHolder(@NonNull View itemView) {
@@ -82,7 +80,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
             billQuantity = itemView.findViewById(R.id.billQuantity);
             billTotalPrice = itemView.findViewById(R.id.billTotalPrice);
             billStatus = itemView.findViewById(R.id.billStatus);
-            billDeliveryAddress = itemView.findViewById(R.id.billDeliveryAddress);
             billTime = itemView.findViewById(R.id.billTime);
         }
     }

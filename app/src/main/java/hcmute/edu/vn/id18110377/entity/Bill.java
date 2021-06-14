@@ -2,30 +2,34 @@ package hcmute.edu.vn.id18110377.entity;
 
 import hcmute.edu.vn.id18110377.utilities.AppUtilities;
 
+import static hcmute.edu.vn.id18110377.MainActivity.user;
+
 public class Bill {
     public static final String BILL_UNPAID = "Unpaid";
     public static final String BILL_PAID = "Paid";
     private Integer id;
     private Integer userId;
     private Integer cartId;
+    private String address;
     private String date;
     private String status;
     private Cart cart;
 
-    public Bill(Integer id, Integer userId, Integer cartId, String date, String status) {
-        this.id = id;
-        this.userId = userId;
-        this.cartId = cartId;
-        this.date = date;
-        this.status = status;
+    public Bill(Integer id, Integer userId, Integer cartId, String address, String date, String status) {
+        this.setId(id);
+        this.setUserId(userId);
+        this.setCartId(cartId);
+        this.setAddress(address);
+        this.setDate(date);
+        this.setStatus(status);
     }
 
-    public Bill(Integer id, Integer userId, Integer cartId) {
-        this(id, userId, cartId, AppUtilities.getDateTimeNow(), BILL_UNPAID);
+    public Bill(Integer userId, Integer cartId, String address) {
+        this(-1, userId, cartId, address, AppUtilities.getDateTimeNow(), BILL_UNPAID);
     }
 
     public Bill(Integer userId, Integer cartId) {
-        this(-1, userId, cartId, AppUtilities.getDateTimeNow(), BILL_UNPAID);
+        this(-1, userId, cartId, user.getAddress(), AppUtilities.getDateTimeNow(), BILL_UNPAID);
     }
 
     public Integer getId() {
@@ -50,6 +54,14 @@ public class Bill {
 
     public void setCartId(Integer cartId) {
         this.cartId = cartId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDate() {

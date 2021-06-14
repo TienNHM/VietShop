@@ -16,6 +16,7 @@ public class BillDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Bill";
     private static final String BILL_ID = "id";
     private static final String BILL_USER_ID = "userId";
+    private static final String BILL_ADDRESS = "address";
     private static final String BILL_CART_ID = "cartId";
     private static final String BILL_DATE = "date";
     private static final String BILL_STATUS = "status";
@@ -31,6 +32,7 @@ public class BillDbHelper extends SQLiteOpenHelper {
                         "    id    INTEGER NOT NULL, " +
                         "    userId    INTEGER NOT NULL, " +
                         "    cartId    INTEGER NOT NULL, " +
+                        "    address    TEXT NOT NULL, " +
                         "    date    TEXT, " +
                         "    status    TEXT, " +
                         "    FOREIGN KEY(cartId) REFERENCES Cart(id), " +
@@ -51,7 +53,8 @@ public class BillDbHelper extends SQLiteOpenHelper {
                 cursor.getInt(1),
                 cursor.getInt(2),
                 cursor.getString(3),
-                cursor.getString(4)
+                cursor.getString(4),
+                cursor.getString(5)
         );
     }
 
@@ -59,6 +62,7 @@ public class BillDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(BILL_USER_ID, bill.getUserId());
         values.put(BILL_CART_ID, bill.getCartId());
+        values.put(BILL_ADDRESS, bill.getAddress());
         values.put(BILL_DATE, bill.getDate());
         values.put(BILL_STATUS, bill.getStatus());
         return values;
