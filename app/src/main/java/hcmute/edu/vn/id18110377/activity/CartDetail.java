@@ -26,9 +26,11 @@ import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.BillDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.CartDbHelper;
+import hcmute.edu.vn.id18110377.dbhelper.NotificationDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.StoreDbHelper;
 import hcmute.edu.vn.id18110377.entity.Bill;
 import hcmute.edu.vn.id18110377.entity.Cart;
+import hcmute.edu.vn.id18110377.entity.Notification;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.Store;
 
@@ -104,14 +106,28 @@ public class CartDetail extends AppCompatActivity {
         Bill bill = new Bill(user.getId(), cart.getId(), deliveryAddress);
         long result = billDbHelper.insert(bill);
         if (result > 0) {
-            CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
-            cart.setCartOrdered();
-            cart.setQuantity(quantity);
-            cartDbHelper.update(cart);
+            createCart(view);
+            createNotification(view, product.getName());
             Toast.makeText(view.getContext(), "Đã đặt hàng thành công.", Toast.LENGTH_SHORT).show();
             btnOrder.setText("Đã đặt hàng");
             btnOrder.setEnabled(false);
         }
+    }
+
+    private void createCart(View view) {
+        CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
+        cart.setCartOrdered();
+        cart.setQuantity(quantity);
+        cartDbHelper.update(cart);
+    }
+
+    private void createNotification(View view, String productName) {
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(view.getContext());
+        Notification notification = new Notification(
+                user.getId(),
+                Notification.NOTIFY_CART,
+                Notification.NOTIFY_ORDER_PRODUCT + productName);
+        notificationDbHelper.insert(notification);
     }
 
     private void setBackgroundImage() {
