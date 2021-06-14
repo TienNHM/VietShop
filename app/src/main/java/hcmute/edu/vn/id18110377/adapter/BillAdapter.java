@@ -1,5 +1,7 @@
 package hcmute.edu.vn.id18110377.adapter;
 
+import android.annotation.SuppressLint;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,9 +14,12 @@ import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.Bill;
+import hcmute.edu.vn.id18110377.entity.Cart;
+import hcmute.edu.vn.id18110377.entity.Product;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     private ArrayList<Bill> bills;
+    private View view;
 
     public BillAdapter(ArrayList<Bill> bills) {
         this.bills = bills;
@@ -23,12 +28,26 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     @NonNull
     @Override
     public BillAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        this.view = inflater.inflate(R.layout.bill_item, parent, false);
+        return new BillAdapter.ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull BillAdapter.ViewHolder holder, int position) {
+        Bill bill = bills.get(position);
+        Cart cart = bill.getCart();
+        Product product = cart.getProduct();
 
+        holder.productImage.setImageBitmap(product.getImage());
+        holder.productName.setText(product.getName());
+        holder.productPrice.setText(product.getPrice().toString());
+        holder.billQuantity.setText(cart.getQuantity());
+        holder.billTotalPrice.setText(cart.getTotalPrice().toString());
+        holder.billStatus.setText(bill.getStatus());
+        holder.billDeliveryAddress.setText(cart.getAddress());
+        holder.billTime.setText(bill.getDate());
     }
 
     @Override
