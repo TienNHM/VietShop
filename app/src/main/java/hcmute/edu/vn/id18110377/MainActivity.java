@@ -1,9 +1,11 @@
 package hcmute.edu.vn.id18110377;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,6 +22,7 @@ import hcmute.edu.vn.id18110377.utilities.AccountSesionManager;
 public class MainActivity extends AppCompatActivity {
     public static Resources mainResources;
 
+    @SuppressLint("NonConstantResourceId")
     private final BottomNavigationView.OnNavigationItemSelectedListener
             onNavItemSelectedListener = item -> {
         Fragment fragment;
@@ -61,18 +64,19 @@ public class MainActivity extends AppCompatActivity {
         }
         mainResources = getResources();
         AccountSesionManager.checkLogin(this);
+        checkAccountVerified();
+    }
 
-        /*account = AppUtilities.getSession(this);
-        if (account != null) {
-            UserDbHelper userDbHelper = new UserDbHelper(this);
-            user = userDbHelper.getUserByAccountId(account.getId());
-
-            if (user == null){
-                account = null;
-                AppUtilities.clearSession(this);
-                return;
-            }
-        }*/
+    private void checkAccountVerified() {
+        boolean isVerified = AccountSesionManager.isEmailVerified();
+        if (!isVerified) {
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Thông báo")
+                    .setMessage("Tài khoản của bạn chưa được xác minh. Vùi lòng truy cập email đã được dùng đăng ký tài khoản đã xác nhận.")
+                    .setIcon(R.drawable.warning_32px)
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
     }
 
     @Override

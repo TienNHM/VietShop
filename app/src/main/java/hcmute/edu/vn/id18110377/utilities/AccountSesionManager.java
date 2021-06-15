@@ -45,4 +45,11 @@ public class AccountSesionManager {
         account = null;
         user = null;
     }
+
+    public static boolean isEmailVerified() {
+        if (mAuth != null && currentUser != null) {
+            return currentUser.isEmailVerified();
+        }
+        return false;
+    }
 }

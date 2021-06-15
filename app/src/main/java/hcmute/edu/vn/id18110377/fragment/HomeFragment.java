@@ -62,13 +62,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        /*String[] location = new String[]{"TP.HCM", "Hà Nội", "Đà Nẵng", "Cần Thơ"};
-        Spinner spinner = view.findViewById(R.id.spiner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_spinner, location);
-        spinner.setAdapter(adapter);*/
 
         //Search
         SearchView searchView = view.findViewById(R.id.tvSearch);
