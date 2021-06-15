@@ -160,38 +160,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
-                android:hint="@string/txtEmail"
+                android:hint="@string/txtUsername"
                 app:endIconMode="clear_text"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
                 app:startIconContentDescription="@string/fullName"
-                app:startIconDrawable="@drawable/email">
+                app:startIconDrawable="@drawable/text_field">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtEmail"
+                    android:id="@+id/txtUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="2dp"
-                android:hint="@string/txtPhone"
-                app:endIconMode="clear_text"
-                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                app:hintTextColor="@color/theme_color"
-                app:startIconContentDescription="@string/fullName"
-                app:startIconDrawable="@drawable/phone">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -220,18 +200,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
-                android:hint="@string/txtUsername"
+                android:hint="@string/txtPhone"
                 app:endIconMode="clear_text"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:hintTextColor="@color/theme_color"
                 app:startIconContentDescription="@string/fullName"
-                app:startIconDrawable="@drawable/text_field">
+                app:startIconDrawable="@drawable/phone">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtUsername"
+                    android:id="@+id/txtPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:hint="@string/txtEmail"
+                app:endIconMode="clear_text"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:hintTextColor="@color/theme_color"
+                app:startIconContentDescription="@string/fullName"
+                app:startIconDrawable="@drawable/email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

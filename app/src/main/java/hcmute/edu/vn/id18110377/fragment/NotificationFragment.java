@@ -14,11 +14,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.NotificationAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.NotificationDbHelper;
 import hcmute.edu.vn.id18110377.entity.Notification;
+
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
 
 public class NotificationFragment extends Fragment {
 
@@ -71,9 +72,9 @@ public class NotificationFragment extends Fragment {
 
     private List<Notification> getAllNotifications() {
         ArrayList<Notification> notifications = new ArrayList<>();
-        if (MainActivity.user == null) return notifications;
+        if (user == null) return notifications;
 
         NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this.getContext());
-        return notificationDbHelper.getAllNotifications(MainActivity.user.getId());
+        return notificationDbHelper.getAllNotifications(user.getId());
     }
 }

@@ -18,7 +18,8 @@ import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.BillDbHelper;
 import hcmute.edu.vn.id18110377.entity.Bill;
 
-import static hcmute.edu.vn.id18110377.MainActivity.user;
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
+
 
 public class BillHistory extends AppCompatActivity {
 

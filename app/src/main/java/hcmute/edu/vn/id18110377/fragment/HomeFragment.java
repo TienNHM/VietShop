@@ -10,6 +10,8 @@ import android.widget.GridView;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @NotNull
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -57,7 +60,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -93,7 +96,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void setPromoItem(View view, ProductDbHelper productDbHelper) {
+    private void setPromoItem(@NotNull View view, @NotNull ProductDbHelper productDbHelper) {
         List<Product> promoProducts = productDbHelper.getPromoProducts(4);
         ProductAdapter productAdapter = new ProductAdapter(getContext(), promoProducts);
         GridView gv_promo = view.findViewById(R.id.homePromo);
@@ -105,7 +108,7 @@ public class HomeFragment extends Fragment {
         gv_promo.setAdapter(productAdapter);
     }
 
-    private void setProductItem(View view, ProductDbHelper productDbHelper) {
+    private void setProductItem(@NotNull View view, ProductDbHelper productDbHelper) {
         ProductTypeDbHelper productTypeDbHelper = new ProductTypeDbHelper(this.getContext());
         List<ProductType> productTypes = productTypeDbHelper.getAllProductTypes();
         ProductTypeAdapter productTypeAdapter = new ProductTypeAdapter(getContext(), productTypes);

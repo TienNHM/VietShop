@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="2dp"
-            android:hint="@string/txtUsername"
+            android:hint="@string/txtEmail"
             app:endIconMode="clear_text"
             app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
             app:hintTextColor="@color/theme_color"
@@ -80,10 +80,10 @@
             app:startIconDrawable="@drawable/ic_account">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtUsername"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

@@ -49,6 +49,7 @@ dependencies {
     implementation files('..\\libs\\additionnal.jar')
     implementation files('..\\libs\\mail.jar')
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'com.google.firebase:firebase-dynamic-links:20.1.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

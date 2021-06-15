@@ -37,7 +37,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
@@ -172,19 +171,20 @@ public class SignUp extends AppCompatActivity {
                 Toast.makeText(this, "Đã xảy ra lỗi trong quá trình tạo tài khoản. Vui lòng tạo lại!",
                         Toast.LENGTH_SHORT).show();
             } else {
-                AppUtilities.saveSession(this, username, password);
-
-                Intent intent = new Intent(this, FirebaseActivity.class);
-                intent.putExtra(FirebaseActivity.EMAIL, account.getEmail());
-                intent.putExtra(FirebaseActivity.PASSWORD, account.getPassword());
-                intent.setAction(FirebaseActivity.CREATE_ACCOUNT_ACTION);
-                startActivityForResult(intent, FirebaseActivity.CREATE_ACCOUNT);
-                MainActivity.account = account;
-                MainActivity.user = user;
+                //AppUtilities.saveSession(this, username, password);
+                createFirebaseUser(account.getEmail(), account.getPassword());
                 Toast.makeText(this, "Đã đăng ký thành công!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
+    }
+
+    private void createFirebaseUser(String email, String password) {
+        Intent intent = new Intent(this, FirebaseActivity.class);
+        intent.putExtra(FirebaseActivity.EMAIL, email);
+        intent.putExtra(FirebaseActivity.PASSWORD, password);
+        intent.setAction(FirebaseActivity.CREATE_ACCOUNT_ACTION);
+        startActivityForResult(intent, FirebaseActivity.CREATE_ACCOUNT);
     }
 
     @NotNull

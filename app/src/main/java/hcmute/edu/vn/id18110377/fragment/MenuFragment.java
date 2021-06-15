@@ -1,4 +1,4 @@
- package hcmute.edu.vn.id18110377.fragment;
+package hcmute.edu.vn.id18110377.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -22,13 +22,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.activity.LogIn;
 import hcmute.edu.vn.id18110377.adapter.RecyleItemViewAdapter;
 import hcmute.edu.vn.id18110377.entity.MenuItem;
-import hcmute.edu.vn.id18110377.utilities.AppUtilities;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
+
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.account;
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.logout;
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
 
 public class MenuFragment extends Fragment {
 
@@ -95,7 +97,7 @@ public class MenuFragment extends Fragment {
     }
 
     private void checkLogin() {
-        if (MainActivity.user != null)
+        if (user != null)
             setLogin();
         else
             setLogout();
@@ -103,9 +105,9 @@ public class MenuFragment extends Fragment {
 
     private void setLogin() {
         menuLogin.setVisibility(View.GONE);
-        menuAvatar.setImageBitmap(MainActivity.user.getAvatar());
-        menuFullName.setText(MainActivity.user.getFullname());
-        menuUsername.setText("@" + MainActivity.account.getUsername());
+        menuAvatar.setImageBitmap(user.getAvatar());
+        menuFullName.setText(user.getFullname());
+        menuUsername.setText("@" + account.getUsername());
         menuLogin.setVisibility(View.GONE);
         menuLogout.setVisibility(View.VISIBLE);
     }
@@ -132,7 +134,7 @@ public class MenuFragment extends Fragment {
         menuLogin.setOnClickListener(view1 -> {
             Intent intent = new Intent(view.getContext(), LogIn.class);
             view.getContext().startActivity(intent);
-            if (MainActivity.user != null) {
+            if (user != null) {
                 setLogin();
             }
         });
@@ -144,11 +146,10 @@ public class MenuFragment extends Fragment {
                     .setTitle("Đăng xuất")
                     .setMessage("Bạn có muốn đăng xuất khỏi ứng dụng?")
                     .setPositiveButton("Có", (dialogInterface, i) -> {
-                        AppUtilities.clearSession(view.getContext());
-                        Toast.makeText(view.getContext(), "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
-                        MainActivity.account = null;
-                        MainActivity.user = null;
+                        //AppUtilities.clearSession(view.getContext());
+                        logout();
                         setLogout();
+                        Toast.makeText(view.getContext(), "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
                     })
                     .setNegativeButton("Không", null)
                     .setIcon(R.drawable.shutdown)

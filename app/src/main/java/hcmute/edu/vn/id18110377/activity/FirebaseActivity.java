@@ -12,7 +12,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
+import org.jetbrains.annotations.NotNull;
+
+import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
+import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
+
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.account;
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.currentUser;
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.mAuth;
+import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
 
 public class FirebaseActivity extends Activity {
 
@@ -28,10 +37,6 @@ public class FirebaseActivity extends Activity {
     public static final int SIGN_IN_OK = 100;
     public static final int CREATE_ACCOUNT_OK = 200;
     public static final int VERIFY_OK = 300;
-
-    // [START declare_auth]
-    private FirebaseAuth mAuth;
-    // [END declare_auth]
 
     private String email;
     private String password;
@@ -65,7 +70,7 @@ public class FirebaseActivity extends Activity {
         action(intent.getAction());
     }
 
-    private void action(String action) {
+    private void action(@NotNull String action) {
         if (action.equals(SIGN_IN_ACTION)) {
             setResult(signIn());
         } else if (action.equals(CREATE_ACCOUNT_ACTION)) {
@@ -82,7 +87,7 @@ public class FirebaseActivity extends Activity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             reload();
         }
@@ -99,15 +104,14 @@ public class FirebaseActivity extends Activity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            currentUser = mAuth.getCurrentUser();
+                            updateAccountSession();
                             result[0] = CREATE_ACCOUNT_OK;
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(FirebaseActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
                     }
                 });
@@ -125,15 +129,13 @@ public class FirebaseActivity extends Activity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            updateAccountSession();
                             result[0] = SIGN_IN_OK;
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(FirebaseActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
                     }
                 });
@@ -145,8 +147,8 @@ public class FirebaseActivity extends Activity {
         // Send verification email
         final int[] result = {-1};
         // [START send_email_verification]
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
+        currentUser = (currentUser == null) ? mAuth.getCurrentUser() : currentUser;
+        currentUser.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -161,7 +163,19 @@ public class FirebaseActivity extends Activity {
     private void reload() {
     }
 
-    private void updateUI(FirebaseUser user) {
-
+    private void updateAccountSession() {
+        currentUser = (currentUser == null) ? mAuth.getCurrentUser() : currentUser;
+        AccountDbHelper accountDbHelper = new AccountDbHelper(this);
+        account = accountDbHelper.login(email, password);
+        if (account != null) {
+            UserDbHelper userDbHelper = new UserDbHelper(this);
+            user = userDbHelper.getUserByAccountId(account.getId());
+            if (user == null) {
+                account = null;
+                Toast.makeText(this, "Đã có lỗi phát sinh trong quá trình đăng nhập.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Đăng nhập thất bại. Vui lòng đăng nhập lại.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
