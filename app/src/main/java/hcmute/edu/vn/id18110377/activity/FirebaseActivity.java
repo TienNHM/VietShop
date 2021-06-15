@@ -6,14 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
@@ -67,19 +64,18 @@ public class FirebaseActivity extends Activity {
         Intent intent = getIntent();
         this.email = intent.getStringExtra(EMAIL);
         this.password = intent.getStringExtra(PASSWORD);
-        action(intent.getAction());
+        action(Objects.requireNonNull(intent.getAction()));
     }
 
     private void action(@NotNull String action) {
         if (action.equals(SIGN_IN_ACTION)) {
-            setResult(signIn());
+            signIn();
         } else if (action.equals(CREATE_ACCOUNT_ACTION)) {
             createAccount();
-            setResult(sendEmailVerification());
+            sendEmailVerification();
         } else if (action.equals(VERIFY_ACTION)) {
-            setResult(sendEmailVerification());
+            sendEmailVerification();
         }
-        finish();
     }
 
     // [START on_start_check_user]
@@ -94,70 +90,65 @@ public class FirebaseActivity extends Activity {
     }
     // [END on_start_check_user]
 
-    private int createAccount() {
+    private void createAccount() {
         // [START create_user_with_email]
-        final int[] result = {-1};
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            currentUser = mAuth.getCurrentUser();
-                            updateAccountSession();
-                            result[0] = CREATE_ACCOUNT_OK;
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(FirebaseActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success");
+                        currentUser = mAuth.getCurrentUser();
+                        updateAccountSession();
+                        setResult(CREATE_ACCOUNT_OK);
+                        finish();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(FirebaseActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        setResult(-1);
+                        finish();
                     }
                 });
         // [END create_user_with_email]
-        return result[0];
     }
 
-    private int signIn() {
-        final int[] result = {-1};
+    private void signIn() {
         // [START sign_in_with_email]
+        // password has been encoded
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            updateAccountSession();
-                            result[0] = SIGN_IN_OK;
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(FirebaseActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success");
+                        updateAccountSession();
+                        setResult(SIGN_IN_OK);
+                        finish();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(FirebaseActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        setResult(-1);
+                        finish();
                     }
                 });
         // [END sign_in_with_email]
-        return result[0];
     }
 
-    private int sendEmailVerification() {
+    private void sendEmailVerification() {
         // Send verification email
-        final int[] result = {-1};
         // [START send_email_verification]
         currentUser = (currentUser == null) ? mAuth.getCurrentUser() : currentUser;
         currentUser.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.i(EMAIL, "Email sent.");
-                        result[0] = VERIFY_OK;
-                    }
+                .addOnCompleteListener(this, task -> {
+                    Log.i(EMAIL, "Email sent.");
+                    setResult(VERIFY_OK);
+                    finish();
                 });
         // [END send_email_verification]
-        return result[0];
+        setResult(-1);
+        finish();
     }
 
     private void reload() {

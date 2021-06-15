@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.utilities.AccountSesionManager;
 import hcmute.edu.vn.id18110377.utilities.AppUtilities;
 
 public class LogIn extends AppCompatActivity {
@@ -46,6 +47,11 @@ public class LogIn extends AppCompatActivity {
         intent.putExtra(FirebaseActivity.PASSWORD, AppUtilities.encode(password));
         intent.setAction(FirebaseActivity.SIGN_IN_ACTION);
         startActivityForResult(intent, FirebaseActivity.SIGN_IN);
+
+        if (AccountSesionManager.user != null) {
+            Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void setSignUp(View view) {

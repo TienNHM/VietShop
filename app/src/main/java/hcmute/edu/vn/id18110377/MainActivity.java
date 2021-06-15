@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         if (!isVerified) {
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle("Thông báo")
-                    .setMessage("Tài khoản của bạn chưa được xác minh. Vùi lòng truy cập email đã được dùng đăng ký tài khoản đã xác nhận.")
+                    .setMessage("Tài khoản của bạn chưa được xác minh. Vùi lòng truy cập email đã được dùng đăng ký tài khoản để xác nhận.")
                     .setIcon(R.drawable.warning_32px)
                     .setPositiveButton("OK", null)
                     .show();
