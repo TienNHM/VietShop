@@ -173,7 +173,7 @@ public class SignUp extends AppCompatActivity {
             } else {
                 //AppUtilities.saveSession(this, username, password);
                 createFirebaseUser(account.getEmail(), account.getPassword());
-                Toast.makeText(this, "Đã đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Đã đăng ký thành công! Vui lòng xác thực email để sử dụng đầy đủ các chức năng.", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

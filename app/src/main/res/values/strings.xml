@@ -81,5 +81,7 @@
     <string name="bill_history">Bill History</string>
     <string name="view_all_bills_history">View all bills history</string>
     <string name="time">Time</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="email_verified">Email Verified</string>
 
 </resources>

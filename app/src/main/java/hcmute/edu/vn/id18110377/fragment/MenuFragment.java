@@ -1,16 +1,12 @@
 package hcmute.edu.vn.id18110377.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,21 +19,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.activity.LogIn;
 import hcmute.edu.vn.id18110377.adapter.RecyleItemViewAdapter;
 import hcmute.edu.vn.id18110377.entity.MenuItem;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.account;
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.logout;
 import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
 
 public class MenuFragment extends Fragment {
-
-    @BindView(R.id.menuLogin)
-    LinearLayout menuLogin;
-    @BindView(R.id.menuLogout)
-    LinearLayout menuLogout;
     @BindView(R.id.menuAvatar)
     ImageView menuAvatar;
     @BindView(R.id.menuFullName)
@@ -89,8 +78,6 @@ public class MenuFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         setMenuItemSection(view);
-        setLoginClick(view);
-        setLogoutClick(view);
         checkLogin();
 
         return view;
@@ -98,27 +85,21 @@ public class MenuFragment extends Fragment {
 
     private void checkLogin() {
         if (user != null)
-            setLogin();
+            setLoggedInUserInfo();
         else
-            setLogout();
+            setUnknownAccount();
     }
 
-    private void setLogin() {
-        menuLogin.setVisibility(View.GONE);
+    private void setLoggedInUserInfo() {
         menuAvatar.setImageBitmap(user.getAvatar());
         menuFullName.setText(user.getFullname());
         menuUsername.setText("@" + account.getUsername());
-        menuLogin.setVisibility(View.GONE);
-        menuLogout.setVisibility(View.VISIBLE);
     }
 
-    private void setLogout() {
-        menuLogout.setVisibility(View.GONE);
+    private void setUnknownAccount() {
         menuAvatar.setImageBitmap(ImageConverter.resource2Bitmap(R.drawable.ic_account));
         menuFullName.setText(R.string.action_sign_in);
         menuUsername.setText(R.string.username);
-        menuLogout.setVisibility(View.GONE);
-        menuLogin.setVisibility(View.VISIBLE);
     }
 
     private void setMenuItemSection(@NotNull View view) {
@@ -128,32 +109,5 @@ public class MenuFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_account.setLayoutManager(layoutManager);
         rv_account.setAdapter(adapter);
-    }
-
-    private void setLoginClick(View view) {
-        menuLogin.setOnClickListener(view1 -> {
-            Intent intent = new Intent(view.getContext(), LogIn.class);
-            view.getContext().startActivity(intent);
-            if (user != null) {
-                setLogin();
-            }
-        });
-    }
-
-    private void setLogoutClick(View view) {
-        menuLogout.setOnClickListener(view1 -> {
-            AlertDialog dialog = new AlertDialog.Builder(view.getContext())
-                    .setTitle("Đăng xuất")
-                    .setMessage("Bạn có muốn đăng xuất khỏi ứng dụng?")
-                    .setPositiveButton("Có", (dialogInterface, i) -> {
-                        //AppUtilities.clearSession(view.getContext());
-                        logout();
-                        setLogout();
-                        Toast.makeText(view.getContext(), "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
-                    })
-                    .setNegativeButton("Không", null)
-                    .setIcon(R.drawable.shutdown)
-                    .show();
-        });
     }
 }

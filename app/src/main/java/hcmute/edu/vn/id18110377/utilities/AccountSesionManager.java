@@ -25,6 +25,11 @@ public class AccountSesionManager {
             AccountDbHelper accountDbHelper = new AccountDbHelper(context);
             account = accountDbHelper.getAccountByEmail(email);
 
+            if (account == null) {
+                currentUser = null;
+                user = null;
+                return false;
+            }
             UserDbHelper userDbHelper = new UserDbHelper(context);
             user = userDbHelper.getUserByAccountId(account.getId());
 

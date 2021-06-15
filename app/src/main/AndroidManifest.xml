@@ -49,7 +49,7 @@
             android:name=".activity.LogIn"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.SettingsAccount"
+            android:name=".activity.AccountSettings"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.Help"

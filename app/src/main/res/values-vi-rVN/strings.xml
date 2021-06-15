@@ -67,5 +67,7 @@
     <string name="bill_history">Lịch sử hóa đơn</string>
     <string name="view_all_bills_history">Xem tất cả hóa đơn</string>
     <string name="time">Thời gian</string>
+    <string name="account_settings">Quản lý tài khoản</string>
+    <string name="email_verified">Xác thực email</string>
 
 </resources>

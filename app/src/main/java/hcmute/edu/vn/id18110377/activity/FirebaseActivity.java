@@ -72,7 +72,6 @@ public class FirebaseActivity extends Activity {
             signIn();
         } else if (action.equals(CREATE_ACCOUNT_ACTION)) {
             createAccount();
-            sendEmailVerification();
         } else if (action.equals(VERIFY_ACTION)) {
             sendEmailVerification();
         }
@@ -143,12 +142,11 @@ public class FirebaseActivity extends Activity {
         currentUser.sendEmailVerification()
                 .addOnCompleteListener(this, task -> {
                     Log.i(EMAIL, "Email sent.");
+                    Toast.makeText(this, "Vui lòng kiểm tra email để xác thực tài khoản.", Toast.LENGTH_SHORT).show();
                     setResult(VERIFY_OK);
                     finish();
                 });
         // [END send_email_verification]
-        setResult(-1);
-        finish();
     }
 
     private void reload() {
