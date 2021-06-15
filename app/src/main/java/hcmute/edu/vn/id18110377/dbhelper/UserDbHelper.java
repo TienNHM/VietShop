@@ -20,7 +20,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
     private static final String USER_ACCOUNT_ID = "accountId";
     private static final String USER_FULL_NAME = "fullname";
     private static final String USER_SEX = "sex";
-    private static final String USER_EMAIL = "email";
     private static final String USER_PHONE = "phone";
     private static final String USER_ADDRESS = "address";
     private static final String USER_AVATAR = "avatar";
@@ -39,7 +38,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
                         "    id    INTEGER NOT NULL, " +
                         "    accountId    INTEGER NOT NULL, " +
                         "    fullname    TEXT NOT NULL, " +
-                        "    email    TEXT NOT NULL, " +
                         "    sex    TEXT NOT NULL, " +
                         "    phone    TEXT NOT NULL, " +
                         "    address    TEXT NOT NULL, " +
@@ -68,11 +66,10 @@ public class UserDbHelper extends SQLiteOpenHelper {
                 cursor.getString(3),
                 cursor.getString(4),
                 cursor.getString(5),
-                cursor.getString(6),
-                ImageConverter.byte2Bitmap(cursor.getBlob(7)),
+                ImageConverter.byte2Bitmap(cursor.getBlob(6)),
+                cursor.getString(7),
                 cursor.getString(8),
-                cursor.getString(9),
-                cursor.getString(10)
+                cursor.getString(9)
         );
     }
 
@@ -94,7 +91,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
         values.put(USER_FULL_NAME, user.getFullname());
         values.put(USER_ACCOUNT_ID, user.getAccountId());
         values.put(USER_SEX, user.getSex());
-        values.put(USER_EMAIL, user.getEmail());
         values.put(USER_PHONE, user.getPhone());
         values.put(USER_ADDRESS, user.getAddress());
         values.put(USER_AVATAR, user.getRawAvatar());

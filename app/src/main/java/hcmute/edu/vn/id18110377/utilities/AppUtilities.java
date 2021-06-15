@@ -15,7 +15,7 @@ import hcmute.edu.vn.id18110377.entity.Account;
 
 public class AppUtilities {
     private static final String PREFERENCES = "hcmute.edu.vn.id18110377";
-    private static final String USERNAME = "username";
+    private static final String EMAIL = "email";
     private static final String PASSWORD = "password";
 
     public static String encode(@NotNull String plainString) {
@@ -30,10 +30,10 @@ public class AppUtilities {
         return new String(decodedBytes);
     }
 
-    public static void saveSession(@NotNull Context context, String username, String password) {
+    public static void saveSession(@NotNull Context context, String email, String password) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(USERNAME, AppUtilities.encode(username));
+        editor.putString(EMAIL, AppUtilities.encode(email));
         editor.putString(PASSWORD, AppUtilities.encode(password));
         editor.commit();
     }
@@ -41,18 +41,18 @@ public class AppUtilities {
     @Nullable
     public static Account getSession(@NotNull Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString(USERNAME, "");
+        String email = sharedPreferences.getString(EMAIL, "");
         String password = sharedPreferences.getString(PASSWORD, "");
-        if (username.equals("") || password.equals(""))
+        if (email.equals("") || password.equals(""))
             return null;
         AccountDbHelper accountDbHelper = new AccountDbHelper(context);
-        return accountDbHelper.login(decode(username), password);
+        return accountDbHelper.login(decode(email), password);
     }
 
     public static void clearSession(@NotNull Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove(USERNAME);
+        editor.remove(EMAIL);
         editor.remove(PASSWORD);
         editor.commit();
     }
