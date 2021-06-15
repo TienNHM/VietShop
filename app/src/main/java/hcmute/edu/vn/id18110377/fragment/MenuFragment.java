@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -51,6 +53,7 @@ public class MenuFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @NotNull
     public static MenuFragment newInstance(String param1, String param2) {
         MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
@@ -77,7 +80,7 @@ public class MenuFragment extends Fragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
@@ -116,7 +119,7 @@ public class MenuFragment extends Fragment {
         menuLogin.setVisibility(View.VISIBLE);
     }
 
-    private void setMenuItemSection(View view) {
+    private void setMenuItemSection(@NotNull View view) {
         List<MenuItem> lstMenuItems = MenuItem.createListMenuItem();
         RecyleItemViewAdapter adapter = new RecyleItemViewAdapter(lstMenuItems);
         RecyclerView rv_account = view.findViewById(R.id.rv_menu_item);

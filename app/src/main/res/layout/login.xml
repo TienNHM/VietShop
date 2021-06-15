@@ -154,6 +154,7 @@
                 android:text="@string/txtSignup"
                 android:textColor="#F44336"
                 android:textSize="16dp"
+                android:clickable="true"
                 android:textStyle="bold|italic" />
         </LinearLayout>
     </LinearLayout>

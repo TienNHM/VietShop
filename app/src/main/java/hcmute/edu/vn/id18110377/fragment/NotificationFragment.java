@@ -70,9 +70,10 @@ public class NotificationFragment extends Fragment {
     }
 
     private List<Notification> getAllNotifications() {
-        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this.getContext());
-        ArrayList<Notification> notifications = notificationDbHelper.getAllNotifications(MainActivity.user.getId());
+        ArrayList<Notification> notifications = new ArrayList<>();
+        if (MainActivity.user == null) return notifications;
 
-        return notifications;
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this.getContext());
+        return notificationDbHelper.getAllNotifications(MainActivity.user.getId());
     }
 }

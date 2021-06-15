@@ -28,7 +28,8 @@
         android:roundIcon="@drawable/plush"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-        <activity android:name=".activity.SearchResult"></activity>
+        <activity android:name=".activity.FirebaseActivity"></activity>
+        <activity android:name=".activity.SearchResult" />
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan">
@@ -69,6 +70,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="hcmute.edu.vn.id18110377"

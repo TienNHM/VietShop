@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,8 +40,8 @@ public class LogIn extends AppCompatActivity {
         ButterKnife.bind(this);
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
         btnLogin.setOnClickListener(this::setLogin);
+        txtSignUp.setOnClickListener(this::setSignUp);
     }
-
 
     private void setLogin(View view) {
         String username = txtUsername.getText().toString();
@@ -54,12 +55,35 @@ public class LogIn extends AppCompatActivity {
             if (user != null) {
                 MainActivity.user = user;
                 AppUtilities.saveSession(this, username, password);
-                Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                finish();
+
+                Intent intent = new Intent(this, FirebaseActivity.class);
+                intent.putExtra(FirebaseActivity.EMAIL, username);
+                intent.putExtra(FirebaseActivity.PASSWORD, password);
+                intent.setAction(FirebaseActivity.SIGN_IN_ACTION);
+                startActivityForResult(intent, FirebaseActivity.SIGN_IN);
+
             } else
                 Toast.makeText(this, "Đã có lỗi phát sinh trong quá trình đăng nhập.", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Đăng nhập thất bại. Vui lòng đăng nhập lại.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setSignUp(View view) {
+        Intent intent = new Intent(this, SignUp.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == FirebaseActivity.SIGN_IN) {
+            if (resultCode == FirebaseActivity.SIGN_IN_OK) {
+                Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 }

@@ -10,7 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
 import hcmute.edu.vn.id18110377.entity.User;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     public static Resources mainResources;
     public static Account account;
     public static User user;
+    FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener
             onNavItemSelectedListener = item -> {
@@ -66,11 +71,39 @@ public class MainActivity extends AppCompatActivity {
             navigationView.setSelectedItemId(R.id.menuHome);
         }
         mainResources = getResources();
-        account = AppUtilities.getSession(this);
+        checkLogin();
+
+        /*account = AppUtilities.getSession(this);
         if (account != null) {
             UserDbHelper userDbHelper = new UserDbHelper(this);
             user = userDbHelper.getUserByAccountId(account.getId());
-            Toast.makeText(this, "Đã đăng nhập với tên " + account.getUsername() + "!", Toast.LENGTH_SHORT);
+
+            if (user == null){
+                account = null;
+                AppUtilities.clearSession(this);
+                return;
+            }
+        }*/
+    }
+
+    private void checkLogin() {
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            String email = currentUser.getEmail();
+            AccountDbHelper accountDbHelper = new AccountDbHelper(this);
+            account = accountDbHelper.getAccountByEmail(email);
+
+            UserDbHelper userDbHelper = new UserDbHelper(this);
+            user = userDbHelper.getUserByAccountId(account.getId());
+
+            if (user == null) {
+                account = null;
+                AppUtilities.clearSession(this);
+                return;
+            } else {
+                Toast.makeText(this, "Đã đăng nhập với tên " + user.getFullname(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

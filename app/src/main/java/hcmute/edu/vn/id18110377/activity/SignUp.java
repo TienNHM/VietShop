@@ -27,6 +27,8 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -35,6 +37,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hcmute.edu.vn.id18110377.MainActivity;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
@@ -70,7 +73,7 @@ public class SignUp extends AppCompatActivity {
     private static final int TAKE_PICTURE = 100;
     private String currentPhotoPath;
 
-    public static boolean isIntentAvailable(Context context, String action) {
+    public static boolean isIntentAvailable(@NotNull Context context, String action) {
         final PackageManager packageManager = context.getPackageManager();
         final Intent intent = new Intent(action);
         List<ResolveInfo> list =
@@ -95,6 +98,10 @@ public class SignUp extends AppCompatActivity {
         findViewById(R.id.btnSignUp).setOnClickListener(this::setSignUp);
         findViewById(R.id.btnTakePhoto).setOnClickListener(this::setTakePhoto);
         findViewById(R.id.btnChoosePhoto).setOnClickListener(this::setChoosePhoto);
+        setConfirmPassword();
+    }
+
+    private void setConfirmPassword() {
         txtConfirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -125,7 +132,7 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    private boolean validate(String fullName, String email, String phone, String address,
+    private boolean validate(@NotNull String fullName, String email, String phone, String address,
                              String username, String password, String confirmPassword) {
         if (fullName.equals("")) return false;
         if (email.equals("")) return false;
@@ -151,14 +158,14 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-        Account account = new Account(username, AppUtilities.encode(password));
+        Account account = new Account(username, email, AppUtilities.encode(password));
         AccountDbHelper accountDbHelper = new AccountDbHelper(this);
         long rowID = accountDbHelper.insert(account);
         if (rowID < 0) {
             Toast.makeText(this, "Vui lòng nhập lại thông tin!", Toast.LENGTH_SHORT).show();
         } else {
             Integer accountId = accountDbHelper.getAccountByRowId(rowID).getId();
-            User user = new User(accountId, fullName, email, getSex(), phone, address, avatar);
+            User user = new User(accountId, fullName, getSex(), phone, address, avatar);
             UserDbHelper userDbHelper = new UserDbHelper(this);
             long re = userDbHelper.insert(user);
             if (re < 0) {
@@ -166,13 +173,21 @@ public class SignUp extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             } else {
                 AppUtilities.saveSession(this, username, password);
+
+                Intent intent = new Intent(this, FirebaseActivity.class);
+                intent.putExtra(FirebaseActivity.EMAIL, account.getEmail());
+                intent.putExtra(FirebaseActivity.PASSWORD, account.getPassword());
+                intent.setAction(FirebaseActivity.CREATE_ACCOUNT_ACTION);
+                startActivityForResult(intent, FirebaseActivity.CREATE_ACCOUNT);
+                MainActivity.account = account;
+                MainActivity.user = user;
                 Toast.makeText(this, "Đã đăng ký thành công!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
     }
 
-
+    @NotNull
     private String getSex() {
         int selected = chipGroupSex.getCheckedChipId();
         switch (selected) {
@@ -237,15 +252,10 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    // this function is triggered when user
-    // selects the image from the imageChooser
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
             if (requestCode == SELECT_PICTURE) {
                 // Get the url of the image from data
                 Uri selectedImageUri = data.getData();
@@ -255,6 +265,11 @@ public class SignUp extends AppCompatActivity {
                 }
             } else if (requestCode == TAKE_PICTURE) {
                 setPic();
+            }
+        } else if (resultCode == FirebaseActivity.CREATE_ACCOUNT_OK) {
+            if (requestCode == FirebaseActivity.CREATE_ACCOUNT) {
+                Toast.makeText(this, "Đã đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
@@ -275,6 +290,7 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
+    @NotNull
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
