@@ -21,8 +21,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
             android:forceHasOverlappingRendering="true"
+            android:background="@drawable/background_product_icon"
             android:clickable="false"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/tv_product_name"
@@ -39,11 +40,11 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_gravity="right"
-            android:alpha="0.6"
+            android:alpha="0.8"
             android:background="@drawable/discount_value"
             android:gravity="right|center_vertical"
             android:paddingHorizontal="6dp"
-            android:textColor="@color/theme_color"
+            android:textColor="@color/light_mode"
             android:textSize="14sp"
             android:textStyle="bold" />
 

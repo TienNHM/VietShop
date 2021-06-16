@@ -26,9 +26,11 @@ import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.BillDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.CartDbHelper;
+import hcmute.edu.vn.id18110377.dbhelper.NotificationDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.StoreDbHelper;
 import hcmute.edu.vn.id18110377.entity.Bill;
 import hcmute.edu.vn.id18110377.entity.Cart;
+import hcmute.edu.vn.id18110377.entity.Notification;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.Store;
 
@@ -55,6 +57,8 @@ public class CartDetail extends AppCompatActivity {
     TextInputEditText txtDeliveryAddress;
     @BindView(R.id.cartPrice)
     TextView cartPrice;
+    @BindView(R.id.btnCancelOrder)
+    Button btnCancelOrder;
     @BindView(R.id.btnOrder)
     Button btnOrder;
 
@@ -72,6 +76,7 @@ public class CartDetail extends AppCompatActivity {
         ButterKnife.bind(this);
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
         setCartInfo();
+        btnCancelOrder.setOnClickListener(this::setCancelOrder);
         btnOrder.setOnClickListener(this::setOrder);
         btnPlus.setOnClickListener(this::setPlus);
         btnSubtract.setOnClickListener(this::setSubtract);
@@ -104,14 +109,37 @@ public class CartDetail extends AppCompatActivity {
         Bill bill = new Bill(user.getId(), cart.getId(), deliveryAddress);
         long result = billDbHelper.insert(bill);
         if (result > 0) {
-            CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
-            cart.setCartOrdered();
-            cart.setQuantity(quantity);
-            cartDbHelper.update(cart);
+            createCart(view);
+            long re = createNotification(view, product.getName());
             Toast.makeText(view.getContext(), "Đã đặt hàng thành công.", Toast.LENGTH_SHORT).show();
-            btnOrder.setText("Đã đặt hàng");
-            btnOrder.setEnabled(false);
+            finish();
         }
+    }
+
+    private void setCancelOrder(View view) {
+        CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
+        int re = cartDbHelper.delete(cart.getId());
+        if (re > 0) {
+            Toast.makeText(view.getContext(), "Đã xóa giỏ hàng.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+
+    private void createCart(@NotNull View view) {
+        CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
+        cart.setCartOrdered();
+        cart.setQuantity(quantity);
+        cartDbHelper.update(cart);
+    }
+
+    private long createNotification(@NotNull View view, String productName) {
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(view.getContext());
+        Notification notification = new Notification(
+                user.getId(),
+                Notification.NOTIFY_CART,
+                Notification.NOTIFY_ORDER_PRODUCT + productName);
+        return notificationDbHelper.insert(notification);
     }
 
     private void setBackgroundImage() {

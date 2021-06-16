@@ -15,6 +15,9 @@ import hcmute.edu.vn.id18110377.entity.Notification;
 public class NotificationDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Notification";
     private static final String NOTIFY_ID = "id";
+    private static final String NOTIFY_USER_ID = "userId";
+    private static final String NOTIFY_TYPE = "type";
+    private static final String NOTIFY_MESSAGE = "message";
     private static final String NOTIFY_STATUS = "status";
 
     public NotificationDbHelper(@Nullable Context context) {
@@ -28,7 +31,7 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
                         "    id    INTEGER NOT NULL, " +
                         "    userId    INTEGER NOT NULL, " +
                         "    type    TEXT NOT NULL, " +
-                        "    detail    INTEGER, " +
+                        "    message    TEXT NOT NULL, " +
                         "    status    TEXT, " +
                         "    PRIMARY KEY(id), " +
                         "    FOREIGN KEY(userId) REFERENCES User(id) " +
@@ -72,5 +75,20 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
         contentValues.put(NOTIFY_STATUS, notification.getStatus());
         return db.update(TABLE_NAME, contentValues, NOTIFY_ID + " = ?",
                 new String[]{notification.getId().toString()});
+    }
+
+    private ContentValues createContentValues(Notification notification) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NOTIFY_USER_ID, notification.getUserId());
+        contentValues.put(NOTIFY_TYPE, notification.getType());
+        contentValues.put(NOTIFY_MESSAGE, notification.getMessage());
+        contentValues.put(NOTIFY_STATUS, notification.getStatus());
+        return contentValues;
+    }
+
+    public long insert(Notification notification) {
+        SQLiteDatabase db = getReadableDatabase();
+        ContentValues contentValues = createContentValues(notification);
+        return db.insert(TABLE_NAME, null, contentValues);
     }
 }

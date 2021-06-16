@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
@@ -23,6 +24,9 @@ import hcmute.edu.vn.id18110377.dbhelper.ProductDbHelper;
 import hcmute.edu.vn.id18110377.entity.Product;
 
 public class DiscountFragment extends Fragment {
+
+    @BindView(R.id.layoutSearchDiscount)
+    LinearLayout layoutSearchDiscount;
 
     @BindView(R.id.txtSearchDiscount)
     SearchView txtSearch;
@@ -77,6 +81,7 @@ public class DiscountFragment extends Fragment {
         getTopPromo();
 
         //txtSearch
+        layoutSearchDiscount.setVisibility(View.GONE);
         getSearchResult();
 
         return view;
@@ -96,16 +101,9 @@ public class DiscountFragment extends Fragment {
                 ProductDbHelper productDbHelper = new ProductDbHelper(getContext());
                 ArrayList<Product> products = productDbHelper.getDiscountProductByName(txtSearch.getQuery().toString());
                 if (products != null) {
-                    tvNumDiscount.setText(String.valueOf(products.size()));
-
-                    ProductAdapter adapter = new ProductAdapter(getContext(), products);
-                    gvSearchResult.setOnItemClickListener((parent, view1, position, id) -> {
-                        Intent intent = new Intent(getContext(), ProductDetail.class);
-                        intent.putExtra(ProductDetail.PRODUCT_ID, adapter.getItemId(position));
-                        startActivity(intent);
-                    });
-                    gvSearchResult.setAdapter(adapter);
-                }
+                    setSearchResult(products);
+                } else
+                    layoutSearchDiscount.setVisibility(View.GONE);
                 return true;
             }
 
@@ -114,5 +112,18 @@ public class DiscountFragment extends Fragment {
                 return false;
             }
         });
+    }
+
+    private void setSearchResult(ArrayList<Product> products) {
+        layoutSearchDiscount.setVisibility(View.VISIBLE);
+        tvNumDiscount.setText(String.valueOf(products.size()));
+
+        ProductAdapter adapter = new ProductAdapter(getContext(), products);
+        gvSearchResult.setOnItemClickListener((parent, view1, position, id) -> {
+            Intent intent = new Intent(getContext(), ProductDetail.class);
+            intent.putExtra(ProductDetail.PRODUCT_ID, adapter.getItemId(position));
+            startActivity(intent);
+        });
+        gvSearchResult.setAdapter(adapter);
     }
 }
