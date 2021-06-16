@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,6 +18,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
 
+import static hcmute.edu.vn.id18110377.MainActivity.mainResources;
+import static hcmute.edu.vn.id18110377.activity.FirebaseActivity.EMAIL;
+import static hcmute.edu.vn.id18110377.activity.FirebaseActivity.FORGOT_PASSWORD;
+import static hcmute.edu.vn.id18110377.activity.FirebaseActivity.FORGOT_PASSWORD_ACTION;
+import static hcmute.edu.vn.id18110377.activity.FirebaseActivity.FORGOT_PASSWORD_OK;
+
 public class ForgotPassword extends AppCompatActivity {
     @BindView(R.id.btnBack)
     ImageButton btnBack;
@@ -23,6 +31,11 @@ public class ForgotPassword extends AppCompatActivity {
     TextInputEditText txtEmail;
     @BindView(R.id.btnGetPassword)
     Button btnGetPassword;
+    private final static String message = mainResources.getString(R.string.message_forgot_password);
+    @BindView(R.id.txtLabel)
+    TextView txtLabel;
+    @BindView(R.id.layoutGetPassword)
+    LinearLayout layoutGetPassword;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +45,7 @@ public class ForgotPassword extends AppCompatActivity {
 
         btnBack.setOnClickListener(view -> finish());
         btnGetPassword.setOnClickListener(this::setGetPassword);
+        txtLabel.setVisibility(View.GONE);
     }
 
     private void setGetPassword(View view) {
@@ -41,18 +55,21 @@ public class ForgotPassword extends AppCompatActivity {
             return;
         }
         Intent intent = new Intent(this, FirebaseActivity.class);
-        intent.putExtra(FirebaseActivity.EMAIL, email);
-        intent.setAction(FirebaseActivity.FORGOT_PASSWORD_ACTION);
-        startActivityForResult(intent, FirebaseActivity.FORGOT_PASSWORD);
+        intent.putExtra(EMAIL, email);
+        intent.setAction(FORGOT_PASSWORD_ACTION);
+        startActivityForResult(intent, FORGOT_PASSWORD);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == FirebaseActivity.FORGOT_PASSWORD) {
-            if (resultCode == FirebaseActivity.FORGOT_PASSWORD_OK) {
-                Toast.makeText(this, "Vui lòng truy cập email để nhận lại mật khẩu.", Toast.LENGTH_SHORT).show();
+        if (requestCode == FORGOT_PASSWORD) {
+            if (resultCode == FORGOT_PASSWORD_OK) {
+                Toast.makeText(this, String.format(message, txtEmail.getText()), Toast.LENGTH_SHORT).show();
+                txtLabel.setText(String.format(message, txtEmail.getText()));
+                txtLabel.setVisibility(View.VISIBLE);
+                layoutGetPassword.setVisibility(View.GONE);
             }
         }
     }

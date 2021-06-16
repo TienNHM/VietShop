@@ -83,5 +83,6 @@
     <string name="time">Time</string>
     <string name="account_settings">Account Settings</string>
     <string name="email_verified">Email Verified</string>
+    <string name="message_forgot_password">Please visit email %s to create new password.</string>
 
 </resources>

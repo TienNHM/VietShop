@@ -69,5 +69,6 @@
     <string name="time">Thời gian</string>
     <string name="account_settings">Quản lý tài khoản</string>
     <string name="email_verified">Xác thực email</string>
+    <string name="message_forgot_password">Vui lòng truy cập email %s để đặt lại mật khẩu.</string>
 
 </resources>
