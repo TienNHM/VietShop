@@ -87,5 +87,6 @@
     <string name="update_account_information">Update account information</string>
     <string name="account_information">Account Information</string>
     <string name="update">Update</string>
+    <string name="cancel_order">Cancel</string>
 
 </resources>

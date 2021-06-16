@@ -1,9 +1,13 @@
 package hcmute.edu.vn.id18110377.entity;
 
 public class Notification {
-
+    public static final String NOTIFY_CART = "Cart";
+    public static final String NOTIFY_SALE = "Sale";
+    public static final String NOTIFY_GUIDE = "Guide";
+    public static final String NOTIFY_ACCOUNT = "Read";
     public static final String NOTIFY_UNREAD = "Unread";
     public static final String NOTIFY_READ = "Read";
+    public static final String NOTIFY_ORDER_PRODUCT = "Bạn đã đặt thành công đơn hàng cho sản phẩm ";
     private Integer id;
     private Integer userId;
     private String type;

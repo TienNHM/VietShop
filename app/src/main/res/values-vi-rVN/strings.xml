@@ -73,5 +73,6 @@
     <string name="update_account_information">Cập nhật thông tin tài khoản</string>
     <string name="account_information">Thông tin tài khoản</string>
     <string name="update">Cập nhật</string>
+    <string name="cancel_order">Loại bỏ</string>
 
 </resources>

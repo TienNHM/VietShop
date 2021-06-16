@@ -77,9 +77,9 @@ public class CartDbHelper extends SQLiteOpenHelper {
         return db.update(TABLE_NAME, values, CART_ID + " = ?", new String[]{String.valueOf(cart.getId())});
     }
 
-    public int delete(Cart cart) {
+    public int delete(Integer cartId) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.delete(TABLE_NAME, CART_ID + " = ?", new String[]{String.valueOf(cart.getId())});
+        return db.delete(TABLE_NAME, CART_ID + " = ?", new String[]{String.valueOf(cartId)});
     }
 
     private Cart cursorToCart(Cursor cursor) {
