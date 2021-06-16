@@ -2,7 +2,6 @@ package hcmute.edu.vn.id18110377.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,7 +15,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.utilities.AppUtilities;
 
 public class ForgotPassword extends AppCompatActivity {
     @BindView(R.id.btnBack)
@@ -38,11 +36,12 @@ public class ForgotPassword extends AppCompatActivity {
 
     private void setGetPassword(View view) {
         String email = txtEmail.getText().toString();
-        String newPassword = AppUtilities.generatePassword();
-        Log.i("===New Password===", newPassword);
+        if (!email.contains("@")) {
+            Toast.makeText(this, "Vui lòng nhập chính xác email.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Intent intent = new Intent(this, FirebaseActivity.class);
         intent.putExtra(FirebaseActivity.EMAIL, email);
-        intent.putExtra(FirebaseActivity.PASSWORD, newPassword);
         intent.setAction(FirebaseActivity.FORGOT_PASSWORD_ACTION);
         startActivityForResult(intent, FirebaseActivity.FORGOT_PASSWORD);
     }

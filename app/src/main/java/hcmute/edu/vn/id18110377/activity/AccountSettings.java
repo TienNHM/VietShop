@@ -24,6 +24,8 @@ public class AccountSettings extends AppCompatActivity {
     LinearLayout menuLogin;
     @BindView(R.id.menuEmailVerified)
     LinearLayout menuEmailVerified;
+    @BindView(R.id.menuForgotPassword)
+    LinearLayout menuForgotPassword;
     @BindView(R.id.menuLogout)
     LinearLayout menuLogout;
 
@@ -35,37 +37,34 @@ public class AccountSettings extends AppCompatActivity {
 
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
         menuEmailVerified.setOnClickListener(this::setCheckAccountVerified);
-        setLoginClick();
-        setLogoutClick();
+        menuLogin.setOnClickListener(this::setLoginClick);
+        menuLogout.setOnClickListener(this::setLogoutClick);
+        menuForgotPassword.setOnClickListener(this::setForgotPassword);
         updateUiIfLoggedIn();
     }
 
-    private void setLoginClick() {
-        menuLogin.setOnClickListener(view1 -> {
-            Intent intent = new Intent(this, LogIn.class);
-            this.startActivity(intent);
-            if (user != null) {
-                setLogoutVisible();
-                updateUiIfLoggedIn();
-            }
-        });
+    private void setLoginClick(View view) {
+        Intent intent = new Intent(this, LogIn.class);
+        this.startActivity(intent);
+        if (user != null) {
+            setLogoutVisible();
+            updateUiIfLoggedIn();
+        }
     }
 
-    private void setLogoutClick() {
-        menuLogout.setOnClickListener(view1 -> {
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle("Đăng xuất")
-                    .setMessage("Bạn có muốn đăng xuất khỏi ứng dụng?")
-                    .setPositiveButton("Có", (dialogInterface, i) -> {
-                        //AppUtilities.clearSession(view.getContext());
-                        logout();
-                        setLoginVisible();
-                        Toast.makeText(this, "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
-                    })
-                    .setNegativeButton("Không", null)
-                    .setIcon(R.drawable.shutdown)
-                    .show();
-        });
+    private void setLogoutClick(View view) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Đăng xuất")
+                .setMessage("Bạn có muốn đăng xuất khỏi ứng dụng?")
+                .setPositiveButton("Có", (dialogInterface, i) -> {
+                    //AppUtilities.clearSession(view.getContext());
+                    logout();
+                    setLoginVisible();
+                    Toast.makeText(this, "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Không", null)
+                .setIcon(R.drawable.shutdown)
+                .show();
     }
 
     private void setLogoutVisible() {
@@ -112,6 +111,11 @@ public class AccountSettings extends AppCompatActivity {
         }
     }
 
+    private void setForgotPassword(View view) {
+        Intent intent = new Intent(this, ForgotPassword.class);
+        startActivityForResult(intent, FirebaseActivity.FORGOT_PASSWORD);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -121,6 +125,12 @@ public class AccountSettings extends AppCompatActivity {
                 Toast.makeText(this, "Vui lòng kiểm tra email để xác thực tài khoản.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Đã có lỗi phát sinh trong quá trình gửi mail xác thực. Vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (requestCode == FirebaseActivity.FORGOT_PASSWORD) {
+            if (resultCode == FirebaseActivity.FORGOT_PASSWORD_OK) {
+                Toast.makeText(this, "Vui lòng truy cập email để đặt lại mật khẩu.", Toast.LENGTH_SHORT).show();
             }
         }
     }

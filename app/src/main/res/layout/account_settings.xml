@@ -102,6 +102,35 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/menuForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5sp"
+            android:background="@color/background_item"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/forgot_password" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="10"
+                android:gravity="center_vertical"
+                android:text="@string/txtForgotPassword"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/menuLogout"
             android:layout_width="match_parent"
