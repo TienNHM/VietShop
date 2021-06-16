@@ -28,7 +28,9 @@
         android:roundIcon="@drawable/plush"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-        <activity android:name=".activity.SearchResult"></activity>
+        <activity android:name=".activity.AccountInfoActivity"></activity>
+        <activity android:name=".activity.FirebaseActivity" />
+        <activity android:name=".activity.SearchResult" />
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan">
@@ -45,7 +47,7 @@
             android:name=".activity.LogIn"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.SettingsAccount"
+            android:name=".activity.AccountSettings"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.Help"
@@ -62,10 +64,14 @@
         <activity
             android:name=".activity.ProductDetail"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.ForgotPassword"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="hcmute.edu.vn.id18110377"

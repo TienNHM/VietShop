@@ -24,7 +24,6 @@
             android:background="@drawable/arrow_back" />
 
         <TextView
-            android:id="@+id/txtHelp"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_marginVertical="10dp"
@@ -36,7 +35,7 @@
             android:text="@string/btnLogin"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="2dp"
-            android:hint="@string/txtUsername"
+            android:hint="@string/txtEmail"
             app:endIconMode="clear_text"
             app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
             app:hintTextColor="@color/theme_color"
@@ -80,10 +79,10 @@
             app:startIconDrawable="@drawable/ic_account">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtUsername"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -154,6 +153,7 @@
                 android:text="@string/txtSignup"
                 android:textColor="#F44336"
                 android:textSize="16dp"
+                android:clickable="true"
                 android:textStyle="bold|italic" />
         </LinearLayout>
     </LinearLayout>

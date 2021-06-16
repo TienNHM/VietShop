@@ -81,6 +81,12 @@
     <string name="bill_history">Bill History</string>
     <string name="view_all_bills_history">View all bills history</string>
     <string name="time">Time</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="email_verified">Email Verified</string>
+    <string name="message_forgot_password">Please visit email %s to create new password.</string>
+    <string name="update_account_information">Update account information</string>
+    <string name="account_information">Account Information</string>
+    <string name="update">Update</string>
     <string name="cancel_order">Cancel</string>
 
 </resources>

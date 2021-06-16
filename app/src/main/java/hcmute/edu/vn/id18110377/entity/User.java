@@ -16,7 +16,6 @@ public class User {
     private Integer accountId;
     private String fullname;
     private String sex;
-    private String email;
     private String phone;
     private String address;
     private Bitmap avatar;
@@ -24,13 +23,12 @@ public class User {
     private String zalo;
     private String status;
 
-    public User(Integer id, Integer accountId, String fullname, String email, String sex,
-                String phone, String address, Bitmap avatar, String facebook, String zalo, String status) {
+    public User(Integer id, Integer accountId, String fullname, String sex, String phone,
+                String address, Bitmap avatar, String facebook, String zalo, String status) {
         this.id = id;
         this.accountId = accountId;
         this.fullname = fullname;
         this.sex = sex;
-        this.email = email;
         this.phone = phone;
         this.address = address;
         this.avatar = avatar;
@@ -39,18 +37,17 @@ public class User {
         this.status = status;
     }
 
-    public User(Integer accountId, String fullname, String email, String sex,
+    public User(Integer accountId, String fullname, String sex,
                 String phone, String address, Bitmap avatar) {
-        this(-1, accountId, fullname, email, sex, phone, address, avatar, null, null, null);
+        this(-1, accountId, fullname, sex, phone, address, avatar, null, null, null);
     }
 
-    public User(Integer id, Integer accountId, String fullname, String email, String sex,
+    public User(Integer id, Integer accountId, String fullname, String sex,
                 String phone, String address, String facebook, String zalo, String status) {
         this.id = id;
         this.accountId = accountId;
         this.fullname = fullname;
         this.sex = sex;
-        this.email = email;
         this.phone = phone;
         this.address = address;
         this.setAvatar(sex);
@@ -81,15 +78,6 @@ public class User {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        if (email.contains("@"))
-            this.email = email;
     }
 
     public String getPhone() {

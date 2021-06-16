@@ -23,7 +23,7 @@ import hcmute.edu.vn.id18110377.entity.Cart;
 import hcmute.edu.vn.id18110377.entity.Product;
 import hcmute.edu.vn.id18110377.entity.Store;
 
-import static hcmute.edu.vn.id18110377.MainActivity.user;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class ProductDetail extends AppCompatActivity {
 

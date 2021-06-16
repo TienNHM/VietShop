@@ -3,20 +3,22 @@ package hcmute.edu.vn.id18110377.entity;
 public class Account {
     private Integer id;
     private String username;
+    private String email;
     private String password;
     private Integer roleID;
     private String status;
 
-    public Account(Integer id, String username, String password, Integer roleID, String status) {
+    public Account(Integer id, String username, String email, String password, Integer roleID, String status) {
         this.setId(id);
         this.setUsername(username);
+        this.setEmail(email);
         this.setPassword(password);
         this.setRoleID(roleID);
         this.setStatus(status);
     }
 
-    public Account(String username, String password) {
-        this(-1, username, password, 2, null);
+    public Account(String username, String email, String password) {
+        this(-1, username, email, password, 2, null);
     }
 
     public Integer getId() {
@@ -33,6 +35,15 @@ public class Account {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        if (email.contains("@"))
+            this.email = email;
     }
 
     public String getPassword() {
@@ -59,9 +70,5 @@ public class Account {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void logout() {
-
     }
 }

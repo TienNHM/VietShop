@@ -1,8 +1,7 @@
 package hcmute.edu.vn.id18110377.entity;
 
+import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 import hcmute.edu.vn.id18110377.utilities.AppUtilities;
-
-import static hcmute.edu.vn.id18110377.MainActivity.user;
 
 public class Bill {
     public static final String BILL_UNPAID = "Unpaid";
@@ -29,7 +28,7 @@ public class Bill {
     }
 
     public Bill(Integer userId, Integer cartId) {
-        this(-1, userId, cartId, user.getAddress(), AppUtilities.getDateTimeNow(), BILL_UNPAID);
+        this(-1, userId, cartId, AccountSessionManager.user.getAddress(), AppUtilities.getDateTimeNow(), BILL_UNPAID);
     }
 
     public Integer getId() {
