@@ -19,7 +19,7 @@ import hcmute.edu.vn.id18110377.adapter.NotificationAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.NotificationDbHelper;
 import hcmute.edu.vn.id18110377.entity.Notification;
 
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class NotificationFragment extends Fragment {
 

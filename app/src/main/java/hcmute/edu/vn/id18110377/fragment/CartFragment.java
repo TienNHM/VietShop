@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.CartAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.CartDbHelper;
-import hcmute.edu.vn.id18110377.utilities.AccountSesionManager;
+import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 
 public class CartFragment extends Fragment {
 
@@ -61,7 +61,7 @@ public class CartFragment extends Fragment {
 
     private void getUnpaidCart(View view) {
         CartDbHelper cartDbHelper = new CartDbHelper(this.getContext());
-        CartAdapter adapter = new CartAdapter(cartDbHelper.getUnpaidCart(AccountSesionManager.user.getId()));
+        CartAdapter adapter = new CartAdapter(cartDbHelper.getUnpaidCart(AccountSessionManager.user.getId()));
         RecyclerView rvCart = view.findViewById(R.id.rvCart);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rvCart.setLayoutManager(layoutManager);

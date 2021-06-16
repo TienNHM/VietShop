@@ -11,15 +11,27 @@ import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
 import hcmute.edu.vn.id18110377.entity.User;
 
-public class AccountSesionManager {
+public class AccountSessionManager {
     public static FirebaseUser currentUser;
     public static FirebaseAuth mAuth;
     public static Account account;
     public static User user;
 
+    public static FirebaseUser getCurrentUser() {
+        if (currentUser == null)
+            currentUser = mAuth.getCurrentUser();
+        return currentUser;
+    }
+
+    public static FirebaseAuth getAuth() {
+        if (mAuth == null)
+            mAuth = FirebaseAuth.getInstance();
+        return mAuth;
+    }
+
     public static boolean checkLogin(Context context) {
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        mAuth = getAuth();
+        currentUser = getCurrentUser();
         if (currentUser != null) {
             String email = currentUser.getEmail();
             AccountDbHelper accountDbHelper = new AccountDbHelper(context);

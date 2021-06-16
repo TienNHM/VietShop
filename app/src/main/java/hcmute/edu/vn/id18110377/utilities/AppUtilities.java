@@ -3,12 +3,15 @@ package hcmute.edu.vn.id18110377.utilities;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.Random;
 
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
@@ -67,5 +70,15 @@ public class AppUtilities {
     public static LocalDateTime stringToTime(String str) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return LocalDateTime.parse(str, formatter);
+    }
+
+    @NotNull
+    @Contract(" -> new")
+    public static String generatePassword() {
+        byte[] array = new byte[5]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String str1 = new String(array, StandardCharsets.UTF_8);
+        String str2 = decode(getDateTimeNow());
+        return str1 + str2;
     }
 }

@@ -1,6 +1,6 @@
 package hcmute.edu.vn.id18110377.entity;
 
-import hcmute.edu.vn.id18110377.utilities.AccountSesionManager;
+import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 import hcmute.edu.vn.id18110377.utilities.AppUtilities;
 
 public class Bill {
@@ -28,7 +28,7 @@ public class Bill {
     }
 
     public Bill(Integer userId, Integer cartId) {
-        this(-1, userId, cartId, AccountSesionManager.user.getAddress(), AppUtilities.getDateTimeNow(), BILL_UNPAID);
+        this(-1, userId, cartId, AccountSessionManager.user.getAddress(), AppUtilities.getDateTimeNow(), BILL_UNPAID);
     }
 
     public Integer getId() {

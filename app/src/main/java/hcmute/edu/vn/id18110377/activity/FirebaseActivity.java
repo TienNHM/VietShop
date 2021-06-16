@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
@@ -15,10 +19,12 @@ import java.util.Objects;
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
 
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.account;
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.currentUser;
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.mAuth;
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.account;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.currentUser;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.getAuth;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.getCurrentUser;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.mAuth;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class FirebaseActivity extends Activity {
 
@@ -28,12 +34,21 @@ public class FirebaseActivity extends Activity {
     public static final String SIGN_IN_ACTION = "Sign in";
     public static final String CREATE_ACCOUNT_ACTION = "Create account";
     public static final String VERIFY_ACTION = "Verify";
+    public static final String CHANGE_EMAIL_ACTION = "Change email";
+    public static final String CHANGE_PASSWORD_ACTION = "Change password";
+    public static final String FORGOT_PASSWORD_ACTION = "Forgot password";
     public static final int SIGN_IN = 1;
     public static final int CREATE_ACCOUNT = 2;
     public static final int VERIFY = 3;
+    public static final int CHANGE_EMAIL = 4;
+    public static final int CHANGE_PASSWORD = 5;
+    public static final int FORGOT_PASSWORD = 6;
     public static final int SIGN_IN_OK = 100;
     public static final int CREATE_ACCOUNT_OK = 200;
     public static final int VERIFY_OK = 300;
+    public static final int CHANGE_EMAIL_OK = 400;
+    public static final int CHANGE_PASSWORD_OK = 500;
+    public static final int FORGOT_PASSWORD_OK = 600;
 
     private String email;
     private String password;
@@ -57,6 +72,7 @@ public class FirebaseActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        moveTaskToBack(true);
         // [START initialize_auth]
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -74,6 +90,10 @@ public class FirebaseActivity extends Activity {
             createAccount();
         } else if (action.equals(VERIFY_ACTION)) {
             sendEmailVerification();
+        } else if (action.equals(CHANGE_PASSWORD_ACTION)) {
+            updatePassword(this.password);
+        } else if (action.equals(FORGOT_PASSWORD_ACTION)) {
+            forgotPassword(this.email);
         }
     }
 
@@ -83,14 +103,13 @@ public class FirebaseActivity extends Activity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            reload();
-        }
+
     }
     // [END on_start_check_user]
 
     private void createAccount() {
         // [START create_user_with_email]
+        mAuth = getAuth();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -115,6 +134,7 @@ public class FirebaseActivity extends Activity {
     private void signIn() {
         // [START sign_in_with_email]
         // password has been encoded
+        mAuth = getAuth();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -138,7 +158,7 @@ public class FirebaseActivity extends Activity {
     private void sendEmailVerification() {
         // Send verification email
         // [START send_email_verification]
-        currentUser = (currentUser == null) ? mAuth.getCurrentUser() : currentUser;
+        currentUser = getCurrentUser();
         currentUser.sendEmailVerification()
                 .addOnCompleteListener(this, task -> {
                     Log.i(EMAIL, "Email sent.");
@@ -149,13 +169,40 @@ public class FirebaseActivity extends Activity {
         // [END send_email_verification]
     }
 
-    private void reload() {
+    private void updatePassword(String newPassword) {
+        currentUser = getCurrentUser();
+        currentUser.updatePassword(newPassword)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User password updated.");
+                            setResult(CHANGE_PASSWORD_OK);
+                            finish();
+                        }
+                    }
+                });
+    }
+
+    private void forgotPassword(String email) {
+        FirebaseAuth auth = getAuth();
+        auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
+                            setResult(FORGOT_PASSWORD_OK);
+                            finish();
+                        }
+                    }
+                });
     }
 
     private void updateAccountSession() {
-        currentUser = (currentUser == null) ? mAuth.getCurrentUser() : currentUser;
+        currentUser = getCurrentUser();
         AccountDbHelper accountDbHelper = new AccountDbHelper(this);
-        account = accountDbHelper.login(email, password);
+        account = accountDbHelper.getAccountByEmail(email);
         if (account != null) {
             UserDbHelper userDbHelper = new UserDbHelper(this);
             user = userDbHelper.getUserByAccountId(account.getId());
@@ -167,4 +214,5 @@ public class FirebaseActivity extends Activity {
             Toast.makeText(this, "Đăng nhập thất bại. Vui lòng đăng nhập lại.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

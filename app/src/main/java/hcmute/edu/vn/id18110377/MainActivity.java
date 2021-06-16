@@ -16,7 +16,7 @@ import hcmute.edu.vn.id18110377.fragment.DiscountFragment;
 import hcmute.edu.vn.id18110377.fragment.HomeFragment;
 import hcmute.edu.vn.id18110377.fragment.MenuFragment;
 import hcmute.edu.vn.id18110377.fragment.NotificationFragment;
-import hcmute.edu.vn.id18110377.utilities.AccountSesionManager;
+import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 
 public class MainActivity extends AppCompatActivity {
     public static Resources mainResources;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             navigationView.setSelectedItemId(R.id.menuHome);
         }
         mainResources = getResources();
-        AccountSesionManager.checkLogin(this);
+        AccountSessionManager.checkLogin(this);
     }
 
     @Override

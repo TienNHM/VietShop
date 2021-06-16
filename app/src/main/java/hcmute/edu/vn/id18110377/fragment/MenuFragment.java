@@ -23,8 +23,8 @@ import hcmute.edu.vn.id18110377.adapter.RecyleItemViewAdapter;
 import hcmute.edu.vn.id18110377.entity.MenuItem;
 import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.account;
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.account;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class MenuFragment extends Fragment {
     @BindView(R.id.menuAvatar)

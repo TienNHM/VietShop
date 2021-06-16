@@ -13,11 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
-import hcmute.edu.vn.id18110377.utilities.AccountSesionManager;
+import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.currentUser;
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.logout;
-import static hcmute.edu.vn.id18110377.utilities.AccountSesionManager.user;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.currentUser;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.logout;
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class AccountSettings extends AppCompatActivity {
     @BindView(R.id.menuLogin)
@@ -93,7 +93,7 @@ public class AccountSettings extends AppCompatActivity {
     }
 
     private void setCheckAccountVerified(View view) {
-        boolean isVerified = AccountSesionManager.isEmailVerified();
+        boolean isVerified = AccountSessionManager.isEmailVerified();
         if (!isVerified) {
             androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)
                     .setTitle("Thông báo")
