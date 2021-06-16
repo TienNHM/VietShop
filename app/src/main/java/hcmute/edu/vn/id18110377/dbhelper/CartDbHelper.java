@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.entity.Cart;
@@ -46,11 +48,12 @@ public class CartDbHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(@NotNull SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
-    private ContentValues createContentValues(Cart cart) {
+    @NotNull
+    private ContentValues createContentValues(@NotNull Cart cart) {
         ContentValues values = new ContentValues();
         values.put(CART_USER_ID, cart.getUserId());
         values.put(CART_PRODUCT_ID, cart.getProductId());
@@ -136,5 +139,23 @@ public class CartDbHelper extends SQLiteOpenHelper {
 
     public ArrayList<Cart> getUnpaidCart(Integer userId) {
         return getCartByStatus(userId, Cart.CART_UNPAID);
+    }
+
+    public Integer getCartIdByRowId(long rowId) {
+        return getCartByRowId(rowId).getId();
+    }
+
+    public Cart getCartByRowId(long rowID) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE rowid = ?",
+                new String[]{String.valueOf(rowID)});
+        Cart cart = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            cart = cursorToCart(cursor);
+        }
+        cursor.close();
+        return cart;
     }
 }

@@ -110,13 +110,13 @@ public class CartDetail extends AppCompatActivity {
         long result = billDbHelper.insert(bill);
         if (result > 0) {
             createCart(view);
-            long re = createNotification(view, product.getName());
+            createNotification(view, product.getName());
             Toast.makeText(view.getContext(), "Đã đặt hàng thành công.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
 
-    private void setCancelOrder(View view) {
+    private void setCancelOrder(@NotNull View view) {
         CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
         int re = cartDbHelper.delete(cart.getId());
         if (re > 0) {
@@ -130,6 +130,7 @@ public class CartDetail extends AppCompatActivity {
         CartDbHelper cartDbHelper = new CartDbHelper(view.getContext());
         cart.setCartOrdered();
         cart.setQuantity(quantity);
+        cart.setStatus(Cart.CART_ORDERED);
         cartDbHelper.update(cart);
     }
 

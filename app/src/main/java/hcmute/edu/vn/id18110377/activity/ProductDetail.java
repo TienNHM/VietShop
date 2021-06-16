@@ -93,10 +93,11 @@ public class ProductDetail extends AppCompatActivity {
                     user.getId(),
                     this.product.getId(),
                     this.quantity);
-            long re = cartDbHelper.insert(cart);
-            if (re > 0) {
+            long rowId = cartDbHelper.insert(cart);
+            if (rowId > 0) {
                 Toast.makeText(this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
                 this.cart = cart;
+                this.cart.setId(cartDbHelper.getCartIdByRowId(rowId));
                 btnAddCart.setVisibility(View.GONE);
                 btnViewCart.setVisibility(View.VISIBLE);
             } else
