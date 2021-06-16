@@ -95,6 +95,10 @@ public class AccountSettings extends AppCompatActivity {
     }
 
     private void setCheckAccountVerified(View view) {
+        checkVerify();
+    }
+
+    private void checkVerify() {
         boolean isVerified = AccountSessionManager.isEmailVerified();
         if (!isVerified) {
             androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)

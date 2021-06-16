@@ -74,7 +74,17 @@ public class AccountInfoActivity extends AppCompatActivity {
         btnTakePhoto.setOnClickListener(AppUtilities::setTakePhoto);
         btnChoosePhoto.setOnClickListener(AppUtilities::setChoosePhoto);
         btnUpdate.setOnClickListener(this::setUpdate);
+        setInfo();
         setAvatar();
+    }
+
+    private void setInfo() {
+        if (user != null) {
+            txtFullName.setText(user.getFullname());
+            txtAddress.setText(user.getAddress());
+            txtPhone.setText(user.getPhone());
+            txtEmail.setText(account.getEmail());
+        }
     }
 
     private void setAvatar() {

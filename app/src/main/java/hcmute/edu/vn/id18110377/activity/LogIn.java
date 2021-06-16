@@ -27,6 +27,8 @@ public class LogIn extends AppCompatActivity {
     TextInputEditText txtPassword;
     @BindView(R.id.txtSignUp)
     TextView txtSignUp;
+    @BindView(R.id.btnForgotPassword)
+    Button btnForgotPassword;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class LogIn extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
         btnLogin.setOnClickListener(this::setLogin);
         txtSignUp.setOnClickListener(this::setSignUp);
+        btnForgotPassword.setOnClickListener(this::setForgotPassword);
     }
 
     private void setLogin(View view) {
@@ -58,6 +61,11 @@ public class LogIn extends AppCompatActivity {
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
         finish();
+    }
+
+    private void setForgotPassword(View view) {
+        Intent intent = new Intent(this, ForgotPassword.class);
+        startActivityForResult(intent, FirebaseActivity.FORGOT_PASSWORD);
     }
 
     @Override
