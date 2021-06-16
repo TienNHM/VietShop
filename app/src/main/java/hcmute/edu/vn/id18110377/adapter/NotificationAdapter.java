@@ -71,6 +71,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, notifications.size());
             }
+
+
         });
     }
 

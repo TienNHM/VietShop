@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +26,8 @@ public class NotificationFragment extends Fragment {
 
     @BindView(R.id.rvNotifications)
     RecyclerView rvNotifications;
+    @BindView(R.id.noMoreNotifications)
+    LinearLayout noMoreNotifications;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -61,16 +64,41 @@ public class NotificationFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        List<Notification> notificationList = getAllNotifications();
-        NotificationAdapter adapter = new NotificationAdapter(notificationList);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
-        rvNotifications.setLayoutManager(manager);
-        rvNotifications.setAdapter(adapter);
+        ArrayList<Notification> notificationList = getAllNotifications();
+        if (notificationList.size() > 0) {
+            NotificationAdapter adapter = new NotificationAdapter(notificationList);
+            RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+            rvNotifications.setLayoutManager(manager);
+            rvNotifications.setAdapter(adapter);
+            noMoreNotifications.setVisibility(View.GONE);
+        } else {
+            rvNotifications.setVisibility(View.GONE);
+            noMoreNotifications.setVisibility(View.VISIBLE);
+        }
 
+        setOnChildAttachStateChange();
         return view;
     }
 
-    private List<Notification> getAllNotifications() {
+    private void setOnChildAttachStateChange() {
+        rvNotifications.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
+                LinearLayout notify = view.findViewById(R.id.notifyLayout);
+                if (notify == null) {
+                    rvNotifications.setVisibility(View.GONE);
+                    noMoreNotifications.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
+
+    private ArrayList<Notification> getAllNotifications() {
         ArrayList<Notification> notifications = new ArrayList<>();
         if (user == null) return notifications;
 

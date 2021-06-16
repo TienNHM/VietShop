@@ -55,5 +55,30 @@
                 android:layout_margin="10dp"
                 android:layoutAnimation="@anim/layout_animation_fall_down" />
         </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/noMoreNotifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/notification_100px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/no_more_notifications"
+                android:textColor="@color/theme_color"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
