@@ -120,7 +120,8 @@ public class AccountSettings extends AppCompatActivity {
     }
 
     private void updateAccountInfo(View view) {
-
+        Intent intent = new Intent(this, AccountInfoActivity.class);
+        startActivity(intent);
     }
 
     @Override

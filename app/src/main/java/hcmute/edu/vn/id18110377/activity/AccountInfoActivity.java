@@ -22,6 +22,7 @@ import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.dbhelper.UserDbHelper;
 import hcmute.edu.vn.id18110377.utilities.AppUtilities;
+import hcmute.edu.vn.id18110377.utilities.ImageConverter;
 
 import static hcmute.edu.vn.id18110377.activity.FirebaseActivity.CHANGE_EMAIL;
 import static hcmute.edu.vn.id18110377.activity.FirebaseActivity.CHANGE_EMAIL_ACTION;
@@ -73,6 +74,13 @@ public class AccountInfoActivity extends AppCompatActivity {
         btnTakePhoto.setOnClickListener(AppUtilities::setTakePhoto);
         btnChoosePhoto.setOnClickListener(AppUtilities::setChoosePhoto);
         btnUpdate.setOnClickListener(this::setUpdate);
+        setAvatar();
+    }
+
+    private void setAvatar() {
+        if (user != null) {
+            imgAvt.setImageBitmap(user.getAvatar());
+        }
     }
 
     private void setUpdate(View view) {
@@ -84,6 +92,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         if (account != null && user != null) {
             updateUserInfo(fullName, address, phone);
             updateEmail(email);
+            finish();
         }
     }
 
@@ -91,6 +100,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         user.setFullname(fullName);
         user.setAddress(address);
         user.setPhone(phone);
+        user.setAvatar(ImageConverter.drawable2Bitmap(imgAvt.getDrawable()));
         UserDbHelper userDbHelper = new UserDbHelper(this);
         int re = userDbHelper.update(user);
         if (re > 0) {
