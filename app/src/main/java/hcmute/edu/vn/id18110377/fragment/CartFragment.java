@@ -4,17 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.adapter.CartAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.CartDbHelper;
+import hcmute.edu.vn.id18110377.entity.Cart;
 import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 
 public class CartFragment extends Fragment {
+
+    @BindView(R.id.noMoreCarts)
+    LinearLayout noMoreCarts;
+    @BindView(R.id.cartList)
+    ScrollView cartList;
 
     private View view;
     private static final String ARG_PARAM1 = "param1";
@@ -49,6 +61,7 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_cart, container, false);
+        ButterKnife.bind(this, view);
         getUnpaidCart(view);
         return this.view;
     }
@@ -61,10 +74,18 @@ public class CartFragment extends Fragment {
 
     private void getUnpaidCart(View view) {
         CartDbHelper cartDbHelper = new CartDbHelper(this.getContext());
-        CartAdapter adapter = new CartAdapter(cartDbHelper.getUnpaidCart(AccountSessionManager.user.getId()));
-        RecyclerView rvCart = view.findViewById(R.id.rvCart);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        rvCart.setLayoutManager(layoutManager);
-        rvCart.setAdapter(adapter);
+        ArrayList<Cart> unpaidCarts = cartDbHelper.getUnpaidCart(AccountSessionManager.user.getId());
+        if (unpaidCarts.size() > 0) {
+            CartAdapter adapter = new CartAdapter(unpaidCarts);
+            RecyclerView rvCart = view.findViewById(R.id.rvCart);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            rvCart.setLayoutManager(layoutManager);
+            rvCart.setAdapter(adapter);
+            noMoreCarts.setVisibility(View.GONE);
+            cartList.setVisibility(View.VISIBLE);
+        } else {
+            noMoreCarts.setVisibility(View.VISIBLE);
+            cartList.setVisibility(View.GONE);
+        }
     }
 }

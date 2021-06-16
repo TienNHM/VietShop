@@ -89,5 +89,6 @@
     <string name="update">Update</string>
     <string name="cancel_order">Cancel</string>
     <string name="no_more_notifications">No more notifications</string>
+    <string name="no_more_carts">No more carts</string>
 
 </resources>

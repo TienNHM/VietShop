@@ -33,9 +33,9 @@
         </LinearLayout>
 
         <ScrollView
+            android:id="@+id/cartList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
             android:fillViewport="true">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -45,6 +45,33 @@
                 android:layout_margin="10dp"
                 android:layoutAnimation="@anim/layout_animation_fall_down" />
         </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/noMoreCarts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/add_shopping_cart_100px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="80dp"
+                android:text="@string/no_more_carts"
+                android:textAlignment="center"
+                android:textColor="@color/theme_color"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

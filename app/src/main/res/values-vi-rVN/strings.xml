@@ -75,5 +75,6 @@
     <string name="update">Cập nhật</string>
     <string name="cancel_order">Loại bỏ</string>
     <string name="no_more_notifications">Không có thông báo mới</string>
+    <string name="no_more_carts">Bạn chưa thêm sản phẩm nào vào giỏ hảng.</string>
 
 </resources>
