@@ -94,6 +94,8 @@ public class FirebaseActivity extends Activity {
             updatePassword(this.password);
         } else if (action.equals(FORGOT_PASSWORD_ACTION)) {
             forgotPassword(this.email);
+        } else if (action.equals(CHANGE_EMAIL_ACTION)) {
+            updateEmail();
         }
     }
 
@@ -215,4 +217,18 @@ public class FirebaseActivity extends Activity {
         }
     }
 
+    private void updateEmail() {
+        currentUser = getCurrentUser();
+        currentUser.updateEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User email address updated.");
+                            setResult(CHANGE_EMAIL_OK);
+                            finish();
+                        }
+                    }
+                });
+    }
 }

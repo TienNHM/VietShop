@@ -28,7 +28,8 @@
         android:roundIcon="@drawable/plush"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-        <activity android:name=".activity.FirebaseActivity"></activity>
+        <activity android:name=".activity.AccountInfoActivity"></activity>
+        <activity android:name=".activity.FirebaseActivity" />
         <activity android:name=".activity.SearchResult" />
         <activity
             android:name=".MainActivity"

@@ -1,22 +1,46 @@
 package hcmute.edu.vn.id18110377.utilities;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Random;
 
 import hcmute.edu.vn.id18110377.dbhelper.AccountDbHelper;
 import hcmute.edu.vn.id18110377.entity.Account;
 
 public class AppUtilities {
+    public static final int PERMISSION_REQUEST_CODE = 100;
+    public static final int SELECT_PICTURE = 200;
+    public static final int TAKE_PICTURE = 300;
+    public static String currentPhotoPath;
+
     private static final String PREFERENCES = "hcmute.edu.vn.id18110377";
     private static final String EMAIL = "email";
     private static final String PASSWORD = "password";
@@ -80,5 +104,100 @@ public class AppUtilities {
         String str1 = new String(array, StandardCharsets.UTF_8);
         String str2 = decode(getDateTimeNow());
         return str1 + str2;
+    }
+
+    public static boolean checkPermission(Context context) {
+        int result = ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public static void requestPermission(Activity activity) {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(activity,
+                    "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    public static void setTakePhoto(View view) {
+        try {
+            dispatchTakePictureIntent(view.getContext(), TAKE_PICTURE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void dispatchTakePictureIntent(Context context, int requestCode) throws IOException {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = createImageFile(context);
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(context,
+                        "hcmute.edu.vn.id18110377",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                Activity activity = (Activity) context;
+                activity.startActivityForResult(takePictureIntent, requestCode);
+            }
+        }
+    }
+
+    @NotNull
+    private static File createImageFile(Context context) throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",   /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    public static void setChoosePhoto(View view) {
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        Activity activity = (Activity) view.getContext();
+        activity.startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
+
+    public static void setPic(ImageView imgAvt) {
+        // Get the dimensions of the View
+        int targetW = imgAvt.getWidth();
+        int targetH = imgAvt.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+
+        BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.max(1, Math.min(photoW / targetW, photoH / targetH));
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+        imgAvt.setImageBitmap(bitmap);
     }
 }

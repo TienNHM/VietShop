@@ -26,6 +26,8 @@ public class AccountSettings extends AppCompatActivity {
     LinearLayout menuEmailVerified;
     @BindView(R.id.menuForgotPassword)
     LinearLayout menuForgotPassword;
+    @BindView(R.id.menuUpdateAccount)
+    LinearLayout menuUpdateAccount;
     @BindView(R.id.menuLogout)
     LinearLayout menuLogout;
 
@@ -40,6 +42,7 @@ public class AccountSettings extends AppCompatActivity {
         menuLogin.setOnClickListener(this::setLoginClick);
         menuLogout.setOnClickListener(this::setLogoutClick);
         menuForgotPassword.setOnClickListener(this::setForgotPassword);
+        menuUpdateAccount.setOnClickListener(this::updateAccountInfo);
         updateUiIfLoggedIn();
     }
 
@@ -114,6 +117,10 @@ public class AccountSettings extends AppCompatActivity {
     private void setForgotPassword(View view) {
         Intent intent = new Intent(this, ForgotPassword.class);
         startActivityForResult(intent, FirebaseActivity.FORGOT_PASSWORD);
+    }
+
+    private void updateAccountInfo(View view) {
+
     }
 
     @Override

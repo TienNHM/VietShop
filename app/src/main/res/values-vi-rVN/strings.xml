@@ -70,5 +70,8 @@
     <string name="account_settings">Quản lý tài khoản</string>
     <string name="email_verified">Xác thực email</string>
     <string name="message_forgot_password">Vui lòng truy cập email %s để đặt lại mật khẩu.</string>
+    <string name="update_account_information">Cập nhật thông tin tài khoản</string>
+    <string name="account_information">Thông tin tài khoản</string>
+    <string name="update">Cập nhật</string>
 
 </resources>
