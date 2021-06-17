@@ -1,7 +1,8 @@
 package hcmute.edu.vn.id18110377.entity;
 
-import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 import hcmute.edu.vn.id18110377.utilities.AppUtilities;
+
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class Bill {
     public static final String BILL_UNPAID = "Unpaid";
@@ -9,26 +10,32 @@ public class Bill {
     private Integer id;
     private Integer userId;
     private Integer cartId;
+    private String phone;
     private String address;
     private String date;
     private String status;
     private Cart cart;
 
-    public Bill(Integer id, Integer userId, Integer cartId, String address, String date, String status) {
+    public Bill(Integer id, Integer userId, Integer cartId, String phone, String address, String date, String status) {
         this.setId(id);
         this.setUserId(userId);
         this.setCartId(cartId);
+        this.setPhone(phone);
         this.setAddress(address);
         this.setDate(date);
         this.setStatus(status);
     }
 
+    public Bill(Integer userId, Integer cartId, String phone, String address) {
+        this(-1, userId, cartId, phone, address, AppUtilities.getDateTimeNow(), BILL_UNPAID);
+    }
+
     public Bill(Integer userId, Integer cartId, String address) {
-        this(-1, userId, cartId, address, AppUtilities.getDateTimeNow(), BILL_UNPAID);
+        this(-1, userId, cartId, user.getPhone(), address, AppUtilities.getDateTimeNow(), BILL_UNPAID);
     }
 
     public Bill(Integer userId, Integer cartId) {
-        this(-1, userId, cartId, AccountSessionManager.user.getAddress(), AppUtilities.getDateTimeNow(), BILL_UNPAID);
+        this(-1, userId, cartId, user.getPhone(), user.getAddress(), AppUtilities.getDateTimeNow(), BILL_UNPAID);
     }
 
     public Integer getId() {
@@ -53,6 +60,14 @@ public class Bill {
 
     public void setCartId(Integer cartId) {
         this.cartId = cartId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {

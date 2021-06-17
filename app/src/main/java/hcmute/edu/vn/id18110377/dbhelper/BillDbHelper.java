@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.entity.Bill;
@@ -18,6 +20,7 @@ public class BillDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Bill";
     private static final String BILL_ID = "id";
     private static final String BILL_USER_ID = "userId";
+    private static final String BILL_PHONE = "phone";
     private static final String BILL_ADDRESS = "address";
     private static final String BILL_CART_ID = "cartId";
     private static final String BILL_DATE = "date";
@@ -36,6 +39,7 @@ public class BillDbHelper extends SQLiteOpenHelper {
                         "    id    INTEGER NOT NULL, " +
                         "    userId    INTEGER NOT NULL, " +
                         "    cartId    INTEGER NOT NULL, " +
+                        "    phone    TEXT NOT NULL, " +
                         "    address    TEXT NOT NULL, " +
                         "    date    TEXT, " +
                         "    status    TEXT, " +
@@ -58,7 +62,8 @@ public class BillDbHelper extends SQLiteOpenHelper {
                 cursor.getInt(2),
                 cursor.getString(3),
                 cursor.getString(4),
-                cursor.getString(5)
+                cursor.getString(5),
+                cursor.getString(6)
         );
     }
 
@@ -66,6 +71,7 @@ public class BillDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(BILL_USER_ID, bill.getUserId());
         values.put(BILL_CART_ID, bill.getCartId());
+        values.put(BILL_PHONE, bill.getPhone());
         values.put(BILL_ADDRESS, bill.getAddress());
         values.put(BILL_DATE, bill.getDate());
         values.put(BILL_STATUS, bill.getStatus());
@@ -86,7 +92,7 @@ public class BillDbHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(bill.getId())});
     }
 
-    public int delete(Bill bill) {
+    public int delete(@NotNull Bill bill) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(TABLE_NAME, BILL_ID + " = ?",
                 new String[]{String.valueOf(bill.getId())});
