@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.activity.LogIn;
 import hcmute.edu.vn.id18110377.adapter.CartAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.CartDbHelper;
 import hcmute.edu.vn.id18110377.entity.Cart;
-import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
+
+import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class CartFragment extends Fragment {
 
@@ -67,19 +70,28 @@ public class CartFragment extends Fragment {
         this.view = inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this, view);
 
-        getUnpaidCart(view);
+        if (user == null) {
+            login();
+        } else getUnpaidCart(view);
         return this.view;
+    }
+
+    private void login() {
+        Intent intent = new Intent(this.getContext(), LogIn.class);
+        startActivity(intent);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getUnpaidCart(this.view);
+        if (user == null) {
+            login();
+        } else getUnpaidCart(this.view);
     }
 
     private void getUnpaidCart(View view) {
         CartDbHelper cartDbHelper = new CartDbHelper(this.getContext());
-        ArrayList<Cart> unpaidCarts = cartDbHelper.getUnpaidCart(AccountSessionManager.user.getId());
+        ArrayList<Cart> unpaidCarts = cartDbHelper.getUnpaidCart(user.getId());
         if (unpaidCarts.size() > 0) {
             CartAdapter adapter = new CartAdapter(unpaidCarts);
             RecyclerView rvCart = view.findViewById(R.id.rvCart);
