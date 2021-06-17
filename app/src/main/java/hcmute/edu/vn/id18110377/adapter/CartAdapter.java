@@ -17,8 +17,6 @@ import hcmute.edu.vn.id18110377.activity.CartDetail;
 import hcmute.edu.vn.id18110377.entity.Cart;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    public static final String PARAM_CART = "hcmute.edu.vn.id18110377.adapter.Cart";
-
     public ArrayList<Cart> carts;
 
     public CartAdapter(ArrayList<Cart> carts) {

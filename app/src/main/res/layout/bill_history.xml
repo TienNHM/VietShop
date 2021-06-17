@@ -47,6 +47,7 @@
         android:text="@string/view_all_bills_history"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:checked="true"
         app:thumbTint="@color/theme_color"
         app:trackTint="@color/background_item" />
 
@@ -62,5 +63,30 @@
             android:layout_height="wrap_content"
             android:layoutAnimation="@anim/layout_animation_fall_down" />
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/noMoreBills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bill_100px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_more_bills_history"
+            android:textColor="@color/theme_color"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

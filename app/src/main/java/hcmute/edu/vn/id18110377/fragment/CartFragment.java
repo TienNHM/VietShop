@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,7 @@ public class CartFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @NotNull
     public static CartFragment newInstance(String param1, String param2) {
         CartFragment fragment = new CartFragment();
         Bundle args = new Bundle();
@@ -58,10 +62,11 @@ public class CartFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this, view);
+
         getUnpaidCart(view);
         return this.view;
     }
@@ -83,6 +88,21 @@ public class CartFragment extends Fragment {
             rvCart.setAdapter(adapter);
             noMoreCarts.setVisibility(View.GONE);
             cartList.setVisibility(View.VISIBLE);
+
+            rvCart.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+                @Override
+                public void onChildViewAttachedToWindow(@NonNull View view) {
+
+                }
+
+                @Override
+                public void onChildViewDetachedFromWindow(@NonNull View view) {
+                    if (adapter.getItemCount() == 0) {
+                        noMoreCarts.setVisibility(View.VISIBLE);
+                        cartList.setVisibility(View.GONE);
+                    }
+                }
+            });
         } else {
             noMoreCarts.setVisibility(View.VISIBLE);
             cartList.setVisibility(View.GONE);

@@ -43,10 +43,14 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         holder.productImage.setImageBitmap(product.getImage());
         holder.productName.setText(product.getName());
         holder.productPrice.setText(product.getPrice().toString());
-        holder.billQuantity.setText(cart.getQuantity());
+        holder.billQuantity.setText(cart.getQuantity().toString());
         holder.billTotalPrice.setText(cart.getTotalPrice().toString());
-        holder.billStatus.setText(bill.getStatus());
+        holder.billDeliveryAddress.setText(bill.getAddress());
         holder.billTime.setText(bill.getDate());
+        String status = bill.getStatus();
+        if (status.equals(Bill.BILL_UNPAID))
+            holder.billStatus.setText("Chưa thanh toán");
+        else holder.billStatus.setText("Đã thanh toán");
     }
 
     @Override
@@ -68,6 +72,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         TextView productPrice;
         TextView billQuantity;
         TextView billTotalPrice;
+        TextView billDeliveryAddress;
         TextView billStatus;
         TextView billTime;
 
@@ -79,6 +84,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
             productPrice = itemView.findViewById(R.id.productPrice);
             billQuantity = itemView.findViewById(R.id.billQuantity);
             billTotalPrice = itemView.findViewById(R.id.billTotalPrice);
+            billDeliveryAddress = itemView.findViewById(R.id.billDeliveryAddress);
             billStatus = itemView.findViewById(R.id.billStatus);
             billTime = itemView.findViewById(R.id.billTime);
         }

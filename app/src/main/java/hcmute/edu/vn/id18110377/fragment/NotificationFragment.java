@@ -63,7 +63,17 @@ public class NotificationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
         ButterKnife.bind(this, view);
+        getUnreadNotifications();
+        return view;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUnreadNotifications();
+    }
+
+    private void getUnreadNotifications() {
         ArrayList<Notification> notificationList = getAllNotifications();
         if (notificationList.size() > 0) {
             NotificationAdapter adapter = new NotificationAdapter(notificationList);
@@ -71,31 +81,24 @@ public class NotificationFragment extends Fragment {
             rvNotifications.setLayoutManager(manager);
             rvNotifications.setAdapter(adapter);
             noMoreNotifications.setVisibility(View.GONE);
+            rvNotifications.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+                @Override
+                public void onChildViewAttachedToWindow(@NonNull View view) {
+
+                }
+
+                @Override
+                public void onChildViewDetachedFromWindow(@NonNull View view) {
+                    if (adapter.getItemCount() == 0) {
+                        rvNotifications.setVisibility(View.GONE);
+                        noMoreNotifications.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
         } else {
             rvNotifications.setVisibility(View.GONE);
             noMoreNotifications.setVisibility(View.VISIBLE);
         }
-
-        setOnChildAttachStateChange();
-        return view;
-    }
-
-    private void setOnChildAttachStateChange() {
-        rvNotifications.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
-            @Override
-            public void onChildViewAttachedToWindow(@NonNull View view) {
-
-            }
-
-            @Override
-            public void onChildViewDetachedFromWindow(@NonNull View view) {
-                LinearLayout notify = view.findViewById(R.id.notifyLayout);
-                if (notify == null) {
-                    rvNotifications.setVisibility(View.GONE);
-                    noMoreNotifications.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
 
     private ArrayList<Notification> getAllNotifications() {

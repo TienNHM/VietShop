@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 import hcmute.edu.vn.id18110377.entity.Bill;
+import hcmute.edu.vn.id18110377.entity.Cart;
+import hcmute.edu.vn.id18110377.entity.Product;
 
 public class BillDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Bill";
@@ -21,8 +23,10 @@ public class BillDbHelper extends SQLiteOpenHelper {
     private static final String BILL_DATE = "date";
     private static final String BILL_STATUS = "status";
 
+    private final Context context;
     public BillDbHelper(@Nullable Context context) {
         super(context, DbHelper.DATABASE_NAME, null, DbHelper.DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -92,11 +96,23 @@ public class BillDbHelper extends SQLiteOpenHelper {
         ArrayList<Bill> bills = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM " + TABLE_NAME + " WHERE " + BILL_USER_ID + " = ?",
+                "SELECT * FROM Bill INNER JOIN Cart ON Bill.cartId = Cart.id WHERE Bill.userId = ?",
                 new String[]{String.valueOf(userId)});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            bills.add(cursorToBill(cursor));
+            Bill bill = cursorToBill(cursor);
+            Cart cart = new Cart(
+                    cursor.getInt(6),
+                    cursor.getInt(7),
+                    cursor.getInt(8),
+                    cursor.getInt(9),
+                    cursor.getString(10)
+            );
+            ProductDbHelper productDbHelper = new ProductDbHelper(this.context);
+            Product product = productDbHelper.getProductById(cart.getProductId());
+            cart.setProduct(product);
+            bill.setCart(cart);
+            bills.add(bill);
             cursor.moveToNext();
         }
         cursor.close();

@@ -3,9 +3,11 @@ package hcmute.edu.vn.id18110377.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
+import hcmute.edu.vn.id18110377.adapter.BillAdapter;
 import hcmute.edu.vn.id18110377.dbhelper.BillDbHelper;
 import hcmute.edu.vn.id18110377.entity.Bill;
 
@@ -29,6 +32,8 @@ public class BillHistory extends AppCompatActivity {
     SwitchMaterial swViewAll;
     @BindView(R.id.rvBillHistory)
     RecyclerView rvBillHistory;
+    @BindView(R.id.noMoreBills)
+    LinearLayout noMoreBills;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,16 +42,27 @@ public class BillHistory extends AppCompatActivity {
         ButterKnife.bind(this);
 
         btnBack.setOnClickListener(view -> finish());
-        swViewAll.setOnClickListener(this::setViewAll);
+        swViewAll.setOnClickListener(view -> setBillSDisplay());
+        setBillSDisplay();
     }
 
-    private void setViewAll(View view) {
+    private void setBillSDisplay() {
         BillDbHelper billDbHelper = new BillDbHelper(this);
         ArrayList<Bill> bills = new ArrayList<>();
         if (swViewAll.isChecked())
             bills = billDbHelper.getAllBills(user.getId());
         else
             bills = billDbHelper.getUnpaidBills(user.getId());
-
+        if (bills.size() > 0) {
+            BillAdapter adapter = new BillAdapter(bills);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            rvBillHistory.setLayoutManager(layoutManager);
+            rvBillHistory.setAdapter(adapter);
+            rvBillHistory.setVisibility(View.VISIBLE);
+            noMoreBills.setVisibility(View.GONE);
+        } else {
+            rvBillHistory.setVisibility(View.GONE);
+            noMoreBills.setVisibility(View.VISIBLE);
+        }
     }
 }

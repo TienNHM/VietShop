@@ -90,5 +90,7 @@
     <string name="cancel_order">Cancel</string>
     <string name="no_more_notifications">No more notifications</string>
     <string name="no_more_carts">No more carts</string>
+    <string name="no_more_bills_history">No more bills history</string>
+    <string name="bill_status">Bill status</string>
 
 </resources>
