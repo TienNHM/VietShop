@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.activity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
@@ -158,6 +159,7 @@ public class CartDetail extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setQuantity() {
         this.quantity = cart.getQuantity();
         txtQuantity.setText(cart.getQuantity().toString());

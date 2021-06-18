@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,8 +30,10 @@ import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
 
 public class CartFragment extends Fragment {
 
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.noMoreCarts)
     LinearLayout noMoreCarts;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.cartList)
     ScrollView cartList;
 

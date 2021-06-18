@@ -17,6 +17,7 @@ import java.util.List;
 
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.entity.MenuItem;
+import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
 
 public class RecyleItemViewAdapter extends RecyclerView.Adapter<RecyleItemViewAdapter.ViewHolder> {
     private List<MenuItem> lstRecycleItem;
@@ -39,6 +40,9 @@ public class RecyleItemViewAdapter extends RecyclerView.Adapter<RecyleItemViewAd
         MenuItem recycleItem = lstRecycleItem.get(position);
         holder.item_title.setText(recycleItem.getTitle());
         holder.item_img.setImageResource(recycleItem.getDiscountImageID());
+        if (AccountSessionManager.user == null && position == 3) {
+            holder.itemView.setVisibility(View.GONE);
+        }
     }
 
     @NonNull
@@ -66,6 +70,7 @@ public class RecyleItemViewAdapter extends RecyclerView.Adapter<RecyleItemViewAd
 
             item_img = itemView.findViewById(R.id.menu_item_img);
             item_title = itemView.findViewById(R.id.menu_item_title);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

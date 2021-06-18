@@ -20,13 +20,13 @@ public class MenuItem {
     public static List<Integer> menuItemImage;
 
     static {
-        menuItemTitle = Arrays.asList(MENU_ACCOUNT_SETTINGS, MENU_BILL_HISTORY, MENU_LANGUAGE, MENU_HELP);
-        menuItemClass = Arrays.asList(AccountSettings.class, BillHistory.class, ChangeLanguage.class, Help.class);
+        menuItemTitle = Arrays.asList(MENU_ACCOUNT_SETTINGS, MENU_LANGUAGE, MENU_HELP, MENU_BILL_HISTORY);
+        menuItemClass = Arrays.asList(AccountSettings.class, ChangeLanguage.class, Help.class, BillHistory.class);
         menuItemImage = Arrays.asList(
-                R.drawable.settings,
                 R.drawable.history,
                 R.drawable.translation,
-                R.drawable.messaging
+                R.drawable.messaging,
+                R.drawable.settings
         );
     }
 

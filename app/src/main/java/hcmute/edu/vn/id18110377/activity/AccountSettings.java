@@ -44,6 +44,10 @@ public class AccountSettings extends AppCompatActivity {
         menuForgotPassword.setOnClickListener(this::setForgotPassword);
         menuUpdateAccount.setOnClickListener(this::updateAccountInfo);
         updateUiIfLoggedIn();
+        if (user == null) {
+            menuEmailVerified.setVisibility(View.GONE);
+            menuUpdateAccount.setVisibility(View.GONE);
+        }
     }
 
     private void setLoginClick(View view) {

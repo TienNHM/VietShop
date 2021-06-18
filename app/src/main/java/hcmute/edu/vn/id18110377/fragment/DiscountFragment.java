@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class DiscountFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @NotNull
     public static DiscountFragment newInstance(String param1, String param2) {
         DiscountFragment fragment = new DiscountFragment();
         Bundle args = new Bundle();
@@ -69,7 +72,7 @@ public class DiscountFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
@@ -114,7 +117,7 @@ public class DiscountFragment extends Fragment {
         });
     }
 
-    private void setSearchResult(ArrayList<Product> products) {
+    private void setSearchResult(@NotNull ArrayList<Product> products) {
         layoutSearchDiscount.setVisibility(View.VISIBLE);
         tvNumDiscount.setText(String.valueOf(products.size()));
 

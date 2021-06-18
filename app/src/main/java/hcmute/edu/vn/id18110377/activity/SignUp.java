@@ -1,5 +1,6 @@
 package hcmute.edu.vn.id18110377.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -80,7 +81,7 @@ public class SignUp extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (Build.VERSION.SDK_INT >= 23) {
-            if (AppUtilities.checkPermission(this) == false)
+            if (!AppUtilities.checkPermission(this))
                 requestPermission(this);
         }
 
@@ -144,7 +145,7 @@ public class SignUp extends AppCompatActivity {
         String confirmPassword = txtConfirmPassword.getText().toString();
         Bitmap avatar = ImageConverter.drawable2Bitmap(imgAvt.getDrawable());
 
-        if (validate(fullName, email, phone, address, username, password, confirmPassword) == false) {
+        if (!validate(fullName, email, phone, address, username, password, confirmPassword)) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin cá nhân!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -179,6 +180,7 @@ public class SignUp extends AppCompatActivity {
         startActivityForResult(intent, FirebaseActivity.CREATE_ACCOUNT);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @NotNull
     private String getSex() {
         int selected = chipGroupSex.getCheckedChipId();
@@ -200,14 +202,12 @@ public class SignUp extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.e("value", "Permission Granted, Now you can use local drive .");
-                } else {
-                    Log.e("value", "Permission Denied, You cannot use local drive .");
-                }
-                break;
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.e("value", "Permission Granted, Now you can use local drive .");
+            } else {
+                Log.e("value", "Permission Denied, You cannot use local drive .");
+            }
         }
     }
 
