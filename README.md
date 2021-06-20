@@ -17,7 +17,7 @@
 
 ## Report
 ### Document
-[File report (PDF)](./BaoCao_18110377.pdf)
+[File report (PDF)](./Report/BaoCao_18110377.pdf)
 ### Video presentation
 <a href="https://drive.google.com/file/d/14kYP4jxZJ2verUmICFSzUm9oQOFPj9YP/view?usp=sharing">
   <img src="./Report/images/video.png" alt="VietShop" width="200px">
