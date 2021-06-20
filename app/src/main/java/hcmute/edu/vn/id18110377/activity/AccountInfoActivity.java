@@ -66,7 +66,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (Build.VERSION.SDK_INT >= 23) {
-            if (AppUtilities.checkPermission(this) == false)
+            if (!AppUtilities.checkPermission(this))
                 requestPermission(this);
         }
 
@@ -102,6 +102,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         if (account != null && user != null) {
             updateUserInfo(fullName, address, phone);
             updateEmail(email);
+            Toast.makeText(this, "Đã cập nhật thông tin thành công.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

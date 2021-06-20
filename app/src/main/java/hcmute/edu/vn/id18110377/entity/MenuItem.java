@@ -1,5 +1,7 @@
 package hcmute.edu.vn.id18110377.entity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +46,7 @@ public class MenuItem {
         this(title, discountImageID, null);
     }
 
+    @NotNull
     public static List<MenuItem> createListMenuItem() {
         List<MenuItem> menu = new ArrayList<MenuItem>();
         int num = menuItemClass.size();

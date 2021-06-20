@@ -25,7 +25,6 @@ import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.getAuth;
 import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.getCurrentUser;
 import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.mAuth;
 import static hcmute.edu.vn.id18110377.utilities.AccountSessionManager.user;
-import static hcmute.edu.vn.id18110377.utilities.AppUtilities.decode;
 
 public class FirebaseActivity extends Activity {
 
@@ -52,7 +51,7 @@ public class FirebaseActivity extends Activity {
     public static final int FORGOT_PASSWORD_OK = 600;
 
     private String email;
-    private String password;
+    private String password; //encoded
 
     public String getEmail() {
         return email;
@@ -137,7 +136,7 @@ public class FirebaseActivity extends Activity {
         // [START sign_in_with_email]
         // password has been encoded
         mAuth = getAuth();
-        mAuth.signInWithEmailAndPassword(email, decode(password))
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information

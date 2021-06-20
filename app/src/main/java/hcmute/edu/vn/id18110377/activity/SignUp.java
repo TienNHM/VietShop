@@ -56,7 +56,7 @@ public class SignUp extends AppCompatActivity {
     TextInputEditText txtUsername;
     @BindView(R.id.txtPassword)
     TextInputEditText txtPassword;
-    @BindView(R.id.txtComfirmPassword)
+    @BindView(R.id.txtConfirmPassword)
     TextInputEditText txtConfirmPassword;
     @BindView(R.id.layoutConfirmPassword)
     TextInputLayout layoutConfirmPassword;
@@ -132,7 +132,9 @@ public class SignUp extends AppCompatActivity {
         if (address.equals("")) return false;
         if (username.equals("")) return false;
         if (password.equals("")) return false;
-        return !confirmPassword.equals("");
+        if (confirmPassword.equals("")) return false;
+        if (!password.equals(confirmPassword)) return false;
+        return password.length() >= 6;
     }
 
     private void setSignUp(View view) {
@@ -165,7 +167,7 @@ public class SignUp extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             } else {
                 //AppUtilities.saveSession(this, username, password);
-                createFirebaseUser(account.getEmail(), account.getPassword());
+                createFirebaseUser(email, password);
                 Toast.makeText(this, "Đã đăng ký thành công! Vui lòng xác thực email để sử dụng đầy đủ các chức năng.", Toast.LENGTH_SHORT).show();
                 finish();
             }

@@ -29,18 +29,16 @@ public class DiscountFragment extends Fragment {
 
     @BindView(R.id.layoutSearchDiscount)
     LinearLayout layoutSearchDiscount;
-
     @BindView(R.id.txtSearchDiscount)
     SearchView txtSearch;
-
     @BindView(R.id.gvSponsor)
     GridView gvSponsor;
-
     @BindView(R.id.gvSearchResult)
     GridView gvSearchResult;
-
     @BindView(R.id.tvNumDiscount)
     TextView tvNumDiscount;
+    @BindView(R.id.layoutSponsor)
+    LinearLayout layoutSponsor;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -105,6 +103,7 @@ public class DiscountFragment extends Fragment {
                 ArrayList<Product> products = productDbHelper.getDiscountProductByName(txtSearch.getQuery().toString());
                 if (products != null) {
                     setSearchResult(products);
+                    layoutSponsor.setVisibility(View.GONE);
                 } else
                     layoutSearchDiscount.setVisibility(View.GONE);
                 return true;

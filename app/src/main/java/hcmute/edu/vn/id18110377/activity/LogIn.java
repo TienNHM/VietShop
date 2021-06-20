@@ -16,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import hcmute.edu.vn.id18110377.R;
 import hcmute.edu.vn.id18110377.utilities.AccountSessionManager;
-import hcmute.edu.vn.id18110377.utilities.AppUtilities;
 
 public class LogIn extends AppCompatActivity {
     @BindView(R.id.btnLogIn)
@@ -47,7 +46,7 @@ public class LogIn extends AppCompatActivity {
         String password = txtPassword.getText().toString();
         Intent intent = new Intent(this, FirebaseActivity.class);
         intent.putExtra(FirebaseActivity.EMAIL, email);
-        intent.putExtra(FirebaseActivity.PASSWORD, AppUtilities.encode(password));
+        intent.putExtra(FirebaseActivity.PASSWORD, password);
         intent.setAction(FirebaseActivity.SIGN_IN_ACTION);
         startActivityForResult(intent, FirebaseActivity.SIGN_IN);
 

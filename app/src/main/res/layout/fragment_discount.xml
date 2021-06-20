@@ -109,7 +109,7 @@
                 </com.google.android.material.chip.ChipGroup>
 
                 <LinearLayout
-                    android:id="@+id/layoutSearchDiscount"
+                    android:id="@+id/layoutSponsor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -118,57 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Kết quả tìm kiếm"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/tvNumDiscount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:paddingVertical="10dp"
-                            android:paddingLeft="10dp"
-                            android:text="0"
-                            android:textColor="#D32F2F"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:paddingVertical="10dp"
-                            android:paddingLeft="10dp"
-                            android:text="@string/product_s_were_found"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <GridView
-                        android:id="@+id/gvSearchResult"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:numColumns="4">
-
-                    </GridView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="10dp"
-                        android:paddingLeft="10dp"
+                        android:paddingStart="10dp"
                         android:text="Đề xuất"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -183,6 +133,62 @@
                     </GridView>
                 </LinearLayout>
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:fillViewport="true"
+                    android:fitsSystemWindows="true">
+
+                    <LinearLayout
+                        android:id="@+id/layoutSearchDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="10dp"
+                            android:paddingStart="10dp"
+                            android:text="Kết quả tìm kiếm"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/tvNumDiscount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingVertical="10dp"
+                                android:paddingStart="10dp"
+                                android:text="0"
+                                android:textColor="#D32F2F"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingVertical="10dp"
+                                android:paddingStart="10dp"
+                                android:text="@string/product_s_were_found"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <GridView
+                            android:id="@+id/gvSearchResult"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:numColumns="4"></GridView>
+                    </LinearLayout>
+                </ScrollView>
             </LinearLayout>
         </ScrollView>
 

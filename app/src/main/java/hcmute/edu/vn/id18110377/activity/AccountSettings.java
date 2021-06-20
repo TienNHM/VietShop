@@ -31,6 +31,8 @@ public class AccountSettings extends AppCompatActivity {
     @BindView(R.id.menuLogout)
     LinearLayout menuLogout;
 
+    private boolean checkVerifyClicked = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,7 @@ public class AccountSettings extends AppCompatActivity {
                     logout();
                     setLoginVisible();
                     Toast.makeText(this, "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
+                    updateUiIfLoggedIn();
                 })
                 .setNegativeButton("Không", null)
                 .setIcon(R.drawable.shutdown)
@@ -76,14 +79,16 @@ public class AccountSettings extends AppCompatActivity {
 
     private void setLogoutVisible() {
         menuLogin.setVisibility(View.GONE);
-        menuLogin.setVisibility(View.GONE);
         menuLogout.setVisibility(View.VISIBLE);
+        menuUpdateAccount.setVisibility(View.VISIBLE);
+        menuEmailVerified.setVisibility(View.GONE);
+        if (checkVerifyClicked == false) checkVerify();
     }
 
     private void setLoginVisible() {
         menuLogout.setVisibility(View.GONE);
-        menuLogout.setVisibility(View.GONE);
         menuLogin.setVisibility(View.VISIBLE);
+        menuUpdateAccount.setVisibility(View.GONE);
     }
 
     @Override
@@ -105,6 +110,7 @@ public class AccountSettings extends AppCompatActivity {
     private void checkVerify() {
         boolean isVerified = AccountSessionManager.isEmailVerified();
         if (!isVerified) {
+            menuEmailVerified.setVisibility(View.VISIBLE);
             androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)
                     .setTitle("Thông báo")
                     .setMessage("Tài khoản của bạn chưa được xác minh. Vùi lòng truy cập email đã được dùng đăng ký tài khoản để xác nhận.")
@@ -116,8 +122,8 @@ public class AccountSettings extends AppCompatActivity {
                         this.startActivityForResult(intent, FirebaseActivity.VERIFY);
                     })
                     .show();
+            checkVerifyClicked = true;
         } else {
-            Toast.makeText(this, "Đã xác thực", Toast.LENGTH_SHORT).show();
             menuEmailVerified.setVisibility(View.GONE);
         }
     }
